@@ -289,6 +289,13 @@ body.dark-mode .navbar {
     animation: fadeInUp 0.8s ease-out;
 }
 
+@media (max-width: 767px) {
+    .hero-content {
+        text-align: center;
+        width: 100%;
+    }
+}
+
 .hero-title {
     font-size: var(--font-size-5xl);
     font-weight: var(--font-weight-semibold);
@@ -301,6 +308,7 @@ body.dark-mode .navbar {
     .hero-title {
         font-size: var(--font-size-4xl);
         margin-bottom: var(--spacing-md);
+        text-align: center;
     }
 }
 
@@ -308,6 +316,7 @@ body.dark-mode .navbar {
     .hero-title {
         font-size: var(--font-size-3xl);
         margin-bottom: var(--spacing-sm);
+        text-align: center;
     }
 }
 
@@ -330,6 +339,15 @@ body.dark-mode .navbar {
     border-right: 3px solid var(--accent-primary);
     width: fit-content;
     animation: typing 2s steps(12, end), blink 0.75s step-end infinite;
+    display: inline-block;
+}
+
+@media (max-width: 767px) {
+    .typing-heading {
+        display: block;
+        margin: 0 auto;
+        text-align: center;
+    }
 }
 
 @keyframes typing {
