@@ -280,15 +280,15 @@ body.dark-mode .navbar {
     
     .hero-title {
         text-align: center !important;
-        white-space: nowrap !important;
         display: flex !important;
+        flex-direction: column !important;
         justify-content: center !important;
-        flex-wrap: nowrap !important;
+        align-items: center !important;
     }
     
     .greeting, .name {
-        display: inline !important;
-        white-space: nowrap !important;
+        display: block !important;
+        text-align: center !important;
     }
 }
 
@@ -334,24 +334,20 @@ body.dark-mode .navbar {
         font-size: var(--font-size-3xl);
         margin-bottom: var(--spacing-sm);
         text-align: center !important;
-        white-space: nowrap !important;
         display: flex !important;
+        flex-direction: column !important;
         justify-content: center !important;
         align-items: center !important;
-        flex-wrap: nowrap !important;
-        overflow: hidden !important;
     }
     
     .greeting {
-        display: inline !important;
-        white-space: nowrap !important;
-        flex-shrink: 0 !important;
+        display: block !important;
+        text-align: center !important;
     }
     
     .name {
-        display: inline !important;
-        white-space: nowrap !important;
-        flex-shrink: 0 !important;
+        display: block !important;
+        text-align: center !important;
     }
     
     .typing-heading {
@@ -364,50 +360,48 @@ body.dark-mode .navbar {
 @media (max-width: 360px) {
     .hero-title {
         font-size: var(--font-size-2xl);
-        white-space: nowrap !important;
         text-align: center !important;
         display: flex !important;
+        flex-direction: column !important;
         justify-content: center !important;
         align-items: center !important;
-        flex-wrap: nowrap !important;
-        overflow: hidden !important;
     }
     
     .greeting {
         font-size: var(--font-size-xl);
-        display: inline !important;
-        white-space: nowrap !important;
-        flex-shrink: 0 !important;
+        display: block !important;
+        text-align: center !important;
     }
     
     .name {
         font-size: var(--font-size-2xl);
-        display: inline !important;
-        white-space: nowrap !important;
-        flex-shrink: 0 !important;
+        display: block !important;
+        text-align: center !important;
     }
 }
 
 .greeting {
-    display: inline;
+    display: block;
     color: var(--text-secondary);
     font-weight: var(--font-weight-normal);
     font-size: var(--font-size-2xl);
 }
 
 .name {
-    display: inline;
+    display: block;
     color: var(--text-primary);
     font-weight: var(--font-weight-bold);
 }
 
 @media (max-width: 767px) {
     .greeting {
-        display: inline;
+        display: block;
+        text-align: center;
     }
     
     .name {
-        display: inline;
+        display: block;
+        text-align: center;
     }
 }
 
@@ -1109,7 +1103,7 @@ body.dark-mode .gallery-btn:hover {
 
 /* AI Chat Project Card Styling */
 .ai-chat-project {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: var(--bg-secondary);
     position: relative;
     overflow: hidden;
     transition: transform var(--transition-normal);
@@ -1118,18 +1112,30 @@ body.dark-mode .gallery-btn:hover {
     justify-content: center;
 }
 
+.ai-chat-logo {
+    width: 100%;
+    height: auto;
+    opacity: 0.7;
+    transition: opacity var(--transition-normal);
+}
+
 .ai-chat-project:hover {
     transform: scale(1.05);
+    background: var(--bg-secondary);
+}
+
+.ai-chat-project:hover .ai-chat-logo {
+    opacity: 1;
 }
 
 .ai-chat-project .project-overlay {
-    background: rgba(0, 0, 0, 0.3);
-    opacity: 1;
-    transition: background-color var(--transition-normal);
+    background: rgba(0, 0, 0, 0.7);
+    opacity: 0;
+    transition: opacity var(--transition-normal);
 }
 
 .ai-chat-project:hover .project-overlay {
-    background: rgba(0, 0, 0, 0.5);
+    opacity: 1;
 }
 
 .ai-chat-project h4 {

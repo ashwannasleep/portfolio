@@ -1,0 +1,40 @@
+<svg width="300" height="300" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="chatGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#f8f9ff;stop-opacity:0.8" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="300" height="300" fill="url(#bgGradient)" rx="20"/>
+  
+  <!-- Chat bubble 1 (User) -->
+  <ellipse cx="80" cy="120" rx="60" ry="35" fill="url(#chatGradient)" opacity="0.9"/>
+  <text x="80" y="125" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="500" fill="#4a5568">Hello AI!</text>
+  
+  <!-- Chat bubble 2 (AI) -->
+  <ellipse cx="220" cy="180" rx="70" ry="40" fill="url(#chatGradient)" opacity="0.9"/>
+  <text x="220" y="185" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="500" fill="#4a5568">How can I help?</text>
+  
+  <!-- AI Icon -->
+  <circle cx="150" cy="80" r="25" fill="url(#chatGradient)" opacity="0.9"/>
+  <circle cx="150" cy="80" r="20" fill="#667eea"/>
+  <text x="150" y="87" text-anchor="middle" font-family="Inter, sans-serif" font-size="18" font-weight="600" fill="white">AI</text>
+  
+  <!-- Decorative elements -->
+  <circle cx="50" cy="50" r="3" fill="white" opacity="0.3"/>
+  <circle cx="250" cy="60" r="2" fill="white" opacity="0.4"/>
+  <circle cx="70" cy="250" r="2" fill="white" opacity="0.3"/>
+  <circle cx="230" cy="240" r="3" fill="white" opacity="0.4"/>
+  
+  <!-- Connection lines -->
+  <path d="M 80 120 Q 150 140 220 180" stroke="white" stroke-width="2" fill="none" opacity="0.3"/>
+  <path d="M 150 80 Q 150 100 80 120" stroke="white" stroke-width="1" fill="none" opacity="0.2"/>
+  <path d="M 150 80 Q 150 100 220 180" stroke="white" stroke-width="1" fill="none" opacity="0.2"/>
+</svg>
