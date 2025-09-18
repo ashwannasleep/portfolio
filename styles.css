@@ -321,6 +321,42 @@ body.dark-mode .navbar {
         font-size: var(--font-size-3xl);
         margin-bottom: var(--spacing-sm);
         text-align: center !important;
+        white-space: nowrap;
+    }
+    
+    .greeting {
+        display: inline !important;
+        white-space: nowrap;
+    }
+    
+    .name {
+        display: inline !important;
+        white-space: nowrap;
+    }
+    
+    .typing-heading {
+        display: inline-block !important;
+        white-space: nowrap;
+    }
+}
+
+@media (max-width: 360px) {
+    .hero-title {
+        font-size: var(--font-size-2xl);
+        white-space: nowrap;
+        text-align: center !important;
+    }
+    
+    .greeting {
+        font-size: var(--font-size-xl);
+        display: inline !important;
+        white-space: nowrap;
+    }
+    
+    .name {
+        font-size: var(--font-size-2xl);
+        display: inline !important;
+        white-space: nowrap;
     }
 }
 
