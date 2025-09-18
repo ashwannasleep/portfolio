@@ -277,6 +277,19 @@ body.dark-mode .navbar {
         text-align: center !important;
         align-items: center;
     }
+    
+    .hero-title {
+        text-align: center !important;
+        white-space: nowrap !important;
+        display: flex !important;
+        justify-content: center !important;
+        flex-wrap: nowrap !important;
+    }
+    
+    .greeting, .name {
+        display: inline !important;
+        white-space: nowrap !important;
+    }
 }
 
 @media (max-width: 480px) {
@@ -321,42 +334,57 @@ body.dark-mode .navbar {
         font-size: var(--font-size-3xl);
         margin-bottom: var(--spacing-sm);
         text-align: center !important;
-        white-space: nowrap;
+        white-space: nowrap !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        flex-wrap: nowrap !important;
+        overflow: hidden !important;
     }
     
     .greeting {
         display: inline !important;
-        white-space: nowrap;
+        white-space: nowrap !important;
+        flex-shrink: 0 !important;
     }
     
     .name {
         display: inline !important;
-        white-space: nowrap;
+        white-space: nowrap !important;
+        flex-shrink: 0 !important;
     }
     
     .typing-heading {
         display: inline-block !important;
-        white-space: nowrap;
+        white-space: nowrap !important;
+        flex-shrink: 0 !important;
     }
 }
 
 @media (max-width: 360px) {
     .hero-title {
         font-size: var(--font-size-2xl);
-        white-space: nowrap;
+        white-space: nowrap !important;
         text-align: center !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        flex-wrap: nowrap !important;
+        overflow: hidden !important;
     }
     
     .greeting {
         font-size: var(--font-size-xl);
         display: inline !important;
-        white-space: nowrap;
+        white-space: nowrap !important;
+        flex-shrink: 0 !important;
     }
     
     .name {
         font-size: var(--font-size-2xl);
         display: inline !important;
-        white-space: nowrap;
+        white-space: nowrap !important;
+        flex-shrink: 0 !important;
     }
 }
 
