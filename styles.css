@@ -325,16 +325,26 @@ body.dark-mode .navbar {
 }
 
 .greeting {
-    display: block;
+    display: inline;
     color: var(--text-secondary);
     font-weight: var(--font-weight-normal);
     font-size: var(--font-size-2xl);
 }
 
 .name {
-    display: block;
+    display: inline;
     color: var(--text-primary);
     font-weight: var(--font-weight-bold);
+}
+
+@media (max-width: 767px) {
+    .greeting {
+        display: inline;
+    }
+    
+    .name {
+        display: inline;
+    }
 }
 
 .typing-heading {
@@ -348,8 +358,7 @@ body.dark-mode .navbar {
 
 @media (max-width: 767px) {
     .typing-heading {
-        display: block;
-        margin: 0 auto;
+        display: inline-block;
         text-align: center !important;
     }
 }
