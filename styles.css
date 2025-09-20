@@ -1103,14 +1103,11 @@ body.dark-mode .gallery-btn:hover {
     position: relative;
     overflow: hidden;
     transition: transform var(--transition-normal);
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .ai-chat-project:hover {
-    transform: scale(1.05);
-    background: var(--bg-secondary);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px var(--shadow-medium);
 }
 
 .ai-chat-placeholder {
@@ -1122,6 +1119,11 @@ body.dark-mode .gallery-btn:hover {
     color: var(--text-primary);
     font-size: var(--font-size-lg);
     font-weight: 600;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-primary);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
 }
 
 .ai-chat-placeholder i {
@@ -1133,27 +1135,6 @@ body.dark-mode .gallery-btn:hover {
     font-size: var(--font-size-lg);
 }
 
-.ai-chat-project .project-overlay {
-    background: rgba(0, 0, 0, 0.7);
-    opacity: 0;
-    transition: opacity var(--transition-normal);
-}
-
-.ai-chat-project:hover .project-overlay {
-    opacity: 1;
-}
-
-.ai-chat-project h4 {
-    color: white;
-    font-size: var(--font-size-xl);
-    font-weight: 600;
-    margin-bottom: var(--spacing-sm);
-}
-
-.ai-chat-project p {
-    color: rgba(255, 255, 255, 0.9);
-    font-size: var(--font-size-sm);
-}
 
 .project-overlay h4 {
     font-size: var(--font-size-xl);
