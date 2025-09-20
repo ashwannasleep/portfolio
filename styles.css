@@ -848,6 +848,7 @@ body.dark-mode .gallery-btn:hover {
     box-shadow: 0 1px 3px var(--shadow-light);
     transition: all var(--transition-normal);
     border: 1px solid var(--border-color);
+    animation: fadeInUp 0.6s ease-out;
 }
 
 .skill-card:hover {
@@ -926,7 +927,8 @@ body.dark-mode .gallery-btn:hover {
     display: flex;
     gap: var(--spacing-lg);
     align-items: center;
-    transition: transform var(--transition-normal);
+    transition: all var(--transition-normal);
+    animation: slideInFromLeft 0.6s ease-out;
 }
 
 .cert-card:hover {
@@ -1039,12 +1041,16 @@ body.dark-mode .gallery-btn:hover {
     border-radius: var(--radius-xl);
     overflow: hidden;
     text-decoration: none;
-    transition: transform var(--transition-normal);
-    background: #E5E5E5;
+    transition: all var(--transition-normal);
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
 }
 
 .project-card:hover {
-    transform: scale(1.05);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px var(--shadow-medium);
 }
 
 .project-overlay {
@@ -1152,6 +1158,109 @@ body.dark-mode .gallery-btn:hover {
 .project-overlay p {
     font-size: var(--font-size-base);
     opacity: 0.9;
+}
+
+/* New Project Card Structure */
+.project-link {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-lg);
+    text-decoration: none;
+    transition: all var(--transition-normal);
+}
+
+.project-link:hover {
+    transform: scale(1.02);
+}
+
+.project-info {
+    padding: var(--spacing-lg);
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border-color);
+}
+
+.project-info h4 {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    margin-bottom: var(--spacing-xs);
+    color: var(--text-primary);
+}
+
+.project-tagline {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-md);
+}
+
+.project-description {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-bottom: var(--spacing-sm);
+}
+
+.project-details-btn {
+    background: none;
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-sm);
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    width: 100%;
+    justify-content: center;
+}
+
+.project-details-btn:hover {
+    background-color: var(--border-color);
+    transform: translateY(-1px);
+}
+
+.project-details-btn i {
+    transition: transform var(--transition-normal);
+}
+
+.project-details-btn.active i {
+    transform: rotate(180deg);
+}
+
+.project-details {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height var(--transition-normal);
+    margin-top: var(--spacing-md);
+}
+
+.project-details.active {
+    max-height: 200px;
+}
+
+.project-details p {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-bottom: var(--spacing-md);
+}
+
+.project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
+}
+
+.tech-tag {
+    background-color: var(--accent-primary);
+    color: white;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-xs);
+    font-weight: 500;
 }
 
 /* Contact Section */
@@ -1312,6 +1421,39 @@ body.dark-mode .footer-emoji {
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+@keyframes slideInFromLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInFromRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
     }
 }
 

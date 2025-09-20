@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initGallery();
     initSmoothScrolling();
     initSpotifyIntegration();
+    initProjectDetails();
 });
 
 // Navigation functionality
@@ -239,5 +240,50 @@ if ('serviceWorker' in navigator) {
         // navigator.serviceWorker.register('/sw.js')
         //     .then(registration => console.log('SW registered'))
         //     .catch(error => console.log('SW registration failed'));
+    });
+}
+
+// Project Details functionality
+function initProjectDetails() {
+    const detailButtons = document.querySelectorAll('.project-details-btn');
+    
+    detailButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const projectId = button.getAttribute('data-project');
+            const details = document.getElementById(`${projectId}-details`);
+            
+            if (details) {
+                const isActive = details.classList.contains('active');
+                
+                // Close all other details
+                document.querySelectorAll('.project-details').forEach(detail => {
+                    detail.classList.remove('active');
+                });
+                document.querySelectorAll('.project-details-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                
+                // Toggle current details
+                if (!isActive) {
+                    details.classList.add('active');
+                    button.classList.add('active');
+                }
+            }
+        });
+    });
+    
+    // Close details when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.project-card')) {
+            document.querySelectorAll('.project-details').forEach(detail => {
+                detail.classList.remove('active');
+            });
+            document.querySelectorAll('.project-details-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+        }
     });
 }
