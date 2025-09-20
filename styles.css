@@ -1229,6 +1229,21 @@ body.dark-mode .contact-link:hover .contact-icon img {
     font-size: var(--font-size-base);
 }
 
+/* Resume Download Button */
+.resume-download .contact-icon {
+    background-color: var(--accent-primary);
+    color: white;
+}
+
+.resume-download .contact-icon i {
+    font-size: var(--font-size-lg);
+}
+
+.resume-download:hover .contact-icon {
+    background-color: var(--accent-secondary);
+    transform: scale(1.1);
+}
+
 /* Footer */
 .footer {
     background-color: var(--bg-secondary);
