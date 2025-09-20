@@ -205,6 +205,24 @@ body.dark-mode .navbar {
     width: 100%;
 }
 
+/* Resume Nav Link */
+.resume-nav {
+    background-color: var(--accent-primary);
+    color: white !important;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-md);
+    font-weight: 600;
+}
+
+.resume-nav:hover {
+    background-color: var(--accent-secondary);
+    transform: translateY(-1px);
+}
+
+.resume-nav::after {
+    display: none;
+}
+
 .theme-toggle {
     background: none;
     border: none;
