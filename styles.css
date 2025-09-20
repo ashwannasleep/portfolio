@@ -1011,17 +1011,15 @@ body.dark-mode .gallery-btn:hover {
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
     gap: var(--spacing-lg);
-    max-width: 600px;
+    max-width: 800px;
     margin: 0 auto;
 }
 
 @media (max-width: 768px) {
     .projects-grid {
         grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(2, 1fr);
-        max-width: 500px;
+        max-width: 600px;
         gap: var(--spacing-md);
     }
 }
@@ -1029,15 +1027,14 @@ body.dark-mode .gallery-btn:hover {
 @media (max-width: 480px) {
     .projects-grid {
         grid-template-columns: 1fr;
-        grid-template-rows: repeat(4, 1fr);
-        max-width: 300px;
-        gap: var(--spacing-sm);
+        max-width: 400px;
+        gap: var(--spacing-md);
     }
 }
 
 .project-card {
     position: relative;
-    aspect-ratio: 1;
+    min-height: 300px;
     border-radius: var(--radius-xl);
     overflow: hidden;
     text-decoration: none;
@@ -1162,7 +1159,7 @@ body.dark-mode .gallery-btn:hover {
 
 /* New Project Card Structure */
 .project-link {
-    flex: 1;
+    flex: 0 0 200px;
     display: flex;
     align-items: center;
     justify-content: center;
