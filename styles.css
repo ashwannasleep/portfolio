@@ -1136,6 +1136,30 @@ body.dark-mode .gallery-btn:hover {
     opacity: 1;
 }
 
+/* Ashpire Project Card Styling */
+.ashpire-project {
+    background: var(--bg-secondary);
+    position: relative;
+    overflow: hidden;
+    transition: transform var(--transition-normal);
+}
+
+.ashpire-logo {
+    width: 100%;
+    height: auto;
+    opacity: 0.7;
+    transition: opacity var(--transition-normal);
+}
+
+.ashpire-project:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px var(--shadow-medium);
+}
+
+.ashpire-project:hover .ashpire-logo {
+    opacity: 1;
+}
+
 
 .project-overlay h4 {
     font-size: var(--font-size-xl);
