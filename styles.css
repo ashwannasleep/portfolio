@@ -1338,11 +1338,11 @@ body.dark-mode .gallery-btn:hover {
 
 /* Dark mode icon visibility */
 body.dark-mode .contact-icon img {
-    filter: grayscale(100%) brightness(2);
+    filter: grayscale(100%) brightness(0) invert(1);
 }
 
 body.dark-mode .contact-link:hover .contact-icon img {
-    filter: grayscale(0%) brightness(1);
+    filter: grayscale(0%) brightness(0) invert(1);
 }
 
 .contact-link span {
@@ -1752,3 +1752,4 @@ body.dark-mode .footer-emoji {
         margin: 0 auto var(--spacing-md);
     }
 }
+
