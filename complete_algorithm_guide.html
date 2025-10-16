@@ -1,0 +1,920 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    <title>Complete Algorithm Guide - Everything You Need to Know</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        .code-block {
+            background: #1e293b;
+            color: #e2e8f0;
+            border-radius: 8px;
+            padding: 1rem;
+            overflow-x: auto;
+        }
+        .interactive-button {
+            transition: all 0.3s ease;
+        }
+        .interactive-button:hover {
+            transform: scale(1.05);
+        }
+        .section-divider {
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #667eea);
+            margin: 2rem 0;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <!-- Header -->
+    <header class="gradient-bg text-white py-16">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-5xl font-bold mb-4">Complete Algorithm Guide</h1>
+            <p class="text-xl mb-8">Everything You Need to Know About Algorithms - From Zero to Hero</p>
+            <div class="flex justify-center space-x-4">
+                <button onclick="scrollToSection('basics')" class="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">Start Learning</button>
+                <button onclick="scrollToSection('roadmap')" class="border-2 border-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition">View Roadmap</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-center space-x-8 py-4">
+                <a href="#basics" class="text-blue-600 hover:text-blue-800 font-medium">Basics</a>
+                <a href="#big-o" class="text-blue-600 hover:text-blue-800 font-medium">Big O</a>
+                <a href="#data-structures" class="text-blue-600 hover:text-blue-800 font-medium">Data Structures</a>
+                <a href="#algorithms" class="text-blue-600 hover:text-blue-800 font-medium">Algorithms</a>
+                <a href="#patterns" class="text-blue-600 hover:text-blue-800 font-medium">Patterns</a>
+                <a href="#roadmap" class="text-blue-600 hover:text-blue-800 font-medium">Roadmap</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-8">
+        <!-- What is an Algorithm Section -->
+        <section id="basics" class="mb-16">
+            <h2 class="text-4xl font-bold text-center mb-8 text-gray-800">What is an Algorithm?</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <div class="bg-white rounded-lg shadow-lg p-8 card-hover">
+                    <h3 class="text-2xl font-bold mb-4 text-blue-600">Simple Definition</h3>
+                    <p class="text-lg mb-4">An <strong>algorithm</strong> is just a step-by-step set of instructions to solve a problem or complete a task.</p>
+                    <p class="text-gray-600">Think of it like a recipe in cooking: it tells you exactly what to do, in what order, to get the result you want.</p>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-lg p-8 card-hover">
+                    <h3 class="text-2xl font-bold mb-4 text-green-600">Key Components</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-center"><span class="w-3 h-3 bg-blue-500 rounded-full mr-3"></span><strong>Input:</strong> What you start with</li>
+                        <li class="flex items-center"><span class="w-3 h-3 bg-green-500 rounded-full mr-3"></span><strong>Process:</strong> The steps you follow</li>
+                        <li class="flex items-center"><span class="w-3 h-3 bg-purple-500 rounded-full mr-3"></span><strong>Output:</strong> The result you get</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Why Learn Algorithms -->
+            <div class="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-8 mb-8">
+                <h3 class="text-3xl font-bold mb-6 text-center">Why Learn Algorithms?</h3>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-white text-2xl">🏗️</span>
+                        </div>
+                        <h4 class="font-bold mb-2">Foundation of Software</h4>
+                        <p class="text-sm text-gray-600">Used in GPS, Search Engines, AI ChatBots, Gaming Apps, Databases, Web Applications</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-white text-2xl">💼</span>
+                        </div>
+                        <h4 class="font-bold mb-2">Career Opportunities</h4>
+                        <p class="text-sm text-gray-600">Top companies like Google, Microsoft, Amazon, Apple, Meta focus heavily on algorithms in interviews</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-white text-2xl">🧠</span>
+                        </div>
+                        <h4 class="font-bold mb-2">Problem-Solving Skills</h4>
+                        <p class="text-sm text-gray-600">Boosts your problem-solving abilities and makes you a stronger programmer</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Simple Example -->
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <h3 class="text-2xl font-bold mb-4 text-orange-600">Simple Example: Finding the Largest Number</h3>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="font-bold mb-3">Algorithm Steps:</h4>
+                        <ol class="space-y-2">
+                            <li class="flex items-center"><span class="w-6 h-6 bg-blue-500 text-white rounded-full flex items-center justify-center text-sm mr-3">1</span>Look at the first number, remember it as biggest</li>
+                            <li class="flex items-center"><span class="w-6 h-6 bg-blue-500 text-white rounded-full flex items-center justify-center text-sm mr-3">2</span>Look at the next number; if it's bigger, remember that</li>
+                            <li class="flex items-center"><span class="w-6 h-6 bg-blue-500 text-white rounded-full flex items-center justify-center text-sm mr-3">3</span>Repeat until you check all numbers</li>
+                            <li class="flex items-center"><span class="w-6 h-6 bg-green-500 text-white rounded-full flex items-center justify-center text-sm mr-3">✓</span>The remembered one is the largest</li>
+                        </ol>
+                    </div>
+                    <div>
+                        <h4 class="font-bold mb-3">Interactive Demo:</h4>
+                        <div class="space-y-3">
+                            <div class="flex space-x-2">
+                                <div class="w-12 h-12 bg-blue-100 border-2 border-blue-300 rounded flex items-center justify-center font-bold">5</div>
+                                <div class="w-12 h-12 bg-gray-100 border-2 border-gray-300 rounded flex items-center justify-center">12</div>
+                                <div class="w-12 h-12 bg-gray-100 border-2 border-gray-300 rounded flex items-center justify-center">3</div>
+                                <div class="w-12 h-12 bg-gray-100 border-2 border-gray-300 rounded flex items-center justify-center">18</div>
+                                <div class="w-12 h-12 bg-gray-100 border-2 border-gray-300 rounded flex items-center justify-center">7</div>
+                            </div>
+                            <button onclick="demonstrateMaxFinding()" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition interactive-button">Start Demo</button>
+                            <div id="maxResult" class="text-lg font-bold text-green-600"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Big O Notation Section -->
+        <section id="big-o" class="mb-16">
+            <h2 class="text-4xl font-bold text-center mb-8 text-gray-800">Big O Notation - Algorithm Efficiency</h2>
+            
+            <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                <h3 class="text-2xl font-bold mb-4 text-blue-600">What is Big O?</h3>
+                <p class="text-lg mb-4">Big O notation is a way to measure how fast an algorithm runs as the input size grows. It helps us compare different algorithms and predict their performance.</p>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="font-bold mb-3">Key Points:</h4>
+                        <ul class="space-y-2">
+                            <li class="flex items-center"><span class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span>Describes the upper bound of complexity</li>
+                            <li class="flex items-center"><span class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span>Focuses on worst-case scenario</li>
+                            <li class="flex items-center"><span class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span>Ignores constants and lower-order terms</li>
+                            <li class="flex items-center"><span class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span>Helps choose the right algorithm</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold mb-3">Common Complexities (Best to Worst):</h4>
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-center bg-green-100 px-3 py-2 rounded">
+                                <span class="font-mono">O(1)</span>
+                                <span class="text-sm">Constant</span>
+                            </div>
+                            <div class="flex justify-between items-center bg-green-50 px-3 py-2 rounded">
+                                <span class="font-mono">O(log n)</span>
+                                <span class="text-sm">Logarithmic</span>
+                            </div>
+                            <div class="flex justify-between items-center bg-yellow-50 px-3 py-2 rounded">
+                                <span class="font-mono">O(n)</span>
+                                <span class="text-sm">Linear</span>
+                            </div>
+                            <div class="flex justify-between items-center bg-orange-50 px-3 py-2 rounded">
+                                <span class="font-mono">O(n log n)</span>
+                                <span class="text-sm">Linearithmic</span>
+                            </div>
+                            <div class="flex justify-between items-center bg-red-100 px-3 py-2 rounded">
+                                <span class="font-mono">O(n²)</span>
+                                <span class="text-sm">Quadratic</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Big O Visualization -->
+            <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                <h3 class="text-2xl font-bold mb-4 text-center">Big O Complexity Comparison</h3>
+                <div class="flex justify-center">
+                    <img src="https://skyagent-artifacts.skywork.ai/image/1978684170278576128/00600013-2d3e-492b-9692-75b8723f041a/cell_0_img_1.png" alt="Big O Complexity Chart" class="max-w-full h-auto rounded-lg shadow-md">
+                </div>
+                <p class="text-center text-gray-600 mt-4">Interactive visualization showing how different complexities grow with input size</p>
+            </div>
+
+            <!-- Interactive Big O Calculator -->
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <h3 class="text-2xl font-bold mb-4 text-purple-600">Interactive Big O Calculator</h3>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <label class="block text-sm font-bold mb-2">Input Size (n):</label>
+                        <input type="range" id="inputSize" min="1" max="1000" value="100" class="w-full mb-4" oninput="calculateComplexity()">
+                        <span id="inputValue" class="text-lg font-bold">100</span>
+                    </div>
+                    <div>
+                        <h4 class="font-bold mb-3">Operations for n = <span id="nValue">100</span>:</h4>
+                        <div id="complexityResults" class="space-y-2"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Data Structures Section -->
+        <section id="data-structures" class="mb-16">
+            <h2 class="text-4xl font-bold text-center mb-8 text-gray-800">Essential Data Structures</h2>
+            
+            <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                <h3 class="text-2xl font-bold mb-4 text-center">Data Structures Visualization</h3>
+                <div class="flex justify-center">
+                    <img src="https://skyagent-artifacts.skywork.ai/image/1978684170278576128/76e0a049-91ca-4051-ae60-c4b58366e130/cell_1_img_1.png" alt="Data Structures Visualization" class="max-w-full h-auto rounded-lg shadow-md">
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Array -->
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover">
+                    <h3 class="text-xl font-bold mb-3 text-blue-600">Array</h3>
+                    <p class="text-gray-600 mb-4">Linear data structure with elements in contiguous memory locations.</p>
+                    <div class="space-y-2">
+                        <div class="flex justify-between"><span>Access:</span><span class="font-mono text-green-600">O(1)</span></div>
+                        <div class="flex justify-between"><span>Search:</span><span class="font-mono text-yellow-600">O(n)</span></div>
+                        <div class="flex justify-between"><span>Insert:</span><span class="font-mono text-red-600">O(n)</span></div>
+                        <div class="flex justify-between"><span>Delete:</span><span class="font-mono text-red-600">O(n)</span></div>
+                    </div>
+                </div>
+
+                <!-- Linked List -->
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover">
+                    <h3 class="text-xl font-bold mb-3 text-green-600">Linked List</h3>
+                    <p class="text-gray-600 mb-4">Linear data structure where elements are stored in nodes connected by pointers.</p>
+                    <div class="space-y-2">
+                        <div class="flex justify-between"><span>Access:</span><span class="font-mono text-yellow-600">O(n)</span></div>
+                        <div class="flex justify-between"><span>Search:</span><span class="font-mono text-yellow-600">O(n)</span></div>
+                        <div class="flex justify-between"><span>Insert:</span><span class="font-mono text-green-600">O(1)</span></div>
+                        <div class="flex justify-between"><span>Delete:</span><span class="font-mono text-green-600">O(1)</span></div>
+                    </div>
+                </div>
+
+                <!-- Stack -->
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover">
+                    <h3 class="text-xl font-bold mb-3 text-purple-600">Stack</h3>
+                    <p class="text-gray-600 mb-4">LIFO (Last In, First Out) data structure. Like a stack of plates.</p>
+                    <div class="space-y-2">
+                        <div class="flex justify-between"><span>Push:</span><span class="font-mono text-green-600">O(1)</span></div>
+                        <div class="flex justify-between"><span>Pop:</span><span class="font-mono text-green-600">O(1)</span></div>
+                        <div class="flex justify-between"><span>Peek:</span><span class="font-mono text-green-600">O(1)</span></div>
+                        <div class="flex justify-between"><span>Search:</span><span class="font-mono text-yellow-600">O(n)</span></div>
+                    </div>
+                </div>
+
+                <!-- Queue -->
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover">
+                    <h3 class="text-xl font-bold mb-3 text-orange-600">Queue</h3>
+                    <p class="text-gray-600 mb-4">FIFO (First In, First Out) data structure. Like a line of people.</p>
+                    <div class="space-y-2">
+                        <div class="flex justify-between"><span>Enqueue:</span><span class="font-mono text-green-600">O(1)</span></div>
+                        <div class="flex justify-between"><span>Dequeue:</span><span class="font-mono text-green-600">O(1)</span></div>
+                        <div class="flex justify-between"><span>Front:</span><span class="font-mono text-green-600">O(1)</span></div>
+                        <div class="flex justify-between"><span>Search:</span><span class="font-mono text-yellow-600">O(n)</span></div>
+                    </div>
+                </div>
+
+                <!-- Tree -->
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover">
+                    <h3 class="text-xl font-bold mb-3 text-red-600">Binary Tree</h3>
+                    <p class="text-gray-600 mb-4">Hierarchical data structure with nodes connected by edges.</p>
+                    <div class="space-y-2">
+                        <div class="flex justify-between"><span>Search:</span><span class="font-mono text-yellow-600">O(log n)</span></div>
+                        <div class="flex justify-between"><span>Insert:</span><span class="font-mono text-yellow-600">O(log n)</span></div>
+                        <div class="flex justify-between"><span>Delete:</span><span class="font-mono text-yellow-600">O(log n)</span></div>
+                        <div class="flex justify-between"><span>Traversal:</span><span class="font-mono text-yellow-600">O(n)</span></div>
+                    </div>
+                </div>
+
+                <!-- Hash Table -->
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover">
+                    <h3 class="text-xl font-bold mb-3 text-indigo-600">Hash Table</h3>
+                    <p class="text-gray-600 mb-4">Key-value pairs with fast access using hash functions.</p>
+                    <div class="space-y-2">
+                        <div class="flex justify-between"><span>Access:</span><span class="font-mono text-green-600">O(1)</span></div>
+                        <div class="flex justify-between"><span>Search:</span><span class="font-mono text-green-600">O(1)</span></div>
+                        <div class="flex justify-between"><span>Insert:</span><span class="font-mono text-green-600">O(1)</span></div>
+                        <div class="flex justify-between"><span>Delete:</span><span class="font-mono text-green-600">O(1)</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Algorithms Section -->
+        <section id="algorithms" class="mb-16">
+            <h2 class="text-4xl font-bold text-center mb-8 text-gray-800">Essential Algorithms</h2>
+
+            <!-- Searching Algorithms -->
+            <div class="mb-12">
+                <h3 class="text-3xl font-bold mb-6 text-blue-600">Searching Algorithms</h3>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-white rounded-lg shadow-lg p-8 card-hover">
+                        <h4 class="text-xl font-bold mb-4 text-green-600">Linear Search</h4>
+                        <p class="text-gray-600 mb-4">Checks each element one by one until the target is found.</p>
+                        <div class="code-block mb-4">
+                            <pre><code>def linear_search(arr, target):
+    for i in range(len(arr)):
+        if arr[i] == target:
+            return i
+    return -1</code></pre>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="flex justify-between"><span>Time Complexity:</span><span class="font-mono text-yellow-600">O(n)</span></div>
+                            <div class="flex justify-between"><span>Space Complexity:</span><span class="font-mono text-green-600">O(1)</span></div>
+                            <div class="flex justify-between"><span>Works on:</span><span class="text-sm">Any array</span></div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-lg p-8 card-hover">
+                        <h4 class="text-xl font-bold mb-4 text-blue-600">Binary Search</h4>
+                        <p class="text-gray-600 mb-4">Divides sorted array in half repeatedly to find target.</p>
+                        <div class="code-block mb-4">
+                            <pre><code>def binary_search(arr, target):
+    left, right = 0, len(arr) - 1
+    while left <= right:
+        mid = (left + right) // 2
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] < target:
+            left = mid + 1
+        else:
+            right = mid - 1
+    return -1</code></pre>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="flex justify-between"><span>Time Complexity:</span><span class="font-mono text-green-600">O(log n)</span></div>
+                            <div class="flex justify-between"><span>Space Complexity:</span><span class="font-mono text-green-600">O(1)</span></div>
+                            <div class="flex justify-between"><span>Works on:</span><span class="text-sm">Sorted arrays only</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sorting Algorithms -->
+            <div class="mb-12">
+                <h3 class="text-3xl font-bold mb-6 text-purple-600">Sorting Algorithms</h3>
+                
+                <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                    <h4 class="text-2xl font-bold mb-4 text-center">Sorting Algorithms Comparison</h4>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="bg-gray-100">
+                                    <th class="px-4 py-2 text-left">Algorithm</th>
+                                    <th class="px-4 py-2 text-center">Best Case</th>
+                                    <th class="px-4 py-2 text-center">Average Case</th>
+                                    <th class="px-4 py-2 text-center">Worst Case</th>
+                                    <th class="px-4 py-2 text-center">Space</th>
+                                    <th class="px-4 py-2 text-center">Stable</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b">
+                                    <td class="px-4 py-2 font-bold">Bubble Sort</td>
+                                    <td class="px-4 py-2 text-center font-mono text-green-600">O(n)</td>
+                                    <td class="px-4 py-2 text-center font-mono text-red-600">O(n²)</td>
+                                    <td class="px-4 py-2 text-center font-mono text-red-600">O(n²)</td>
+                                    <td class="px-4 py-2 text-center font-mono text-green-600">O(1)</td>
+                                    <td class="px-4 py-2 text-center">✅</td>
+                                </tr>
+                                <tr class="border-b bg-gray-50">
+                                    <td class="px-4 py-2 font-bold">Selection Sort</td>
+                                    <td class="px-4 py-2 text-center font-mono text-red-600">O(n²)</td>
+                                    <td class="px-4 py-2 text-center font-mono text-red-600">O(n²)</td>
+                                    <td class="px-4 py-2 text-center font-mono text-red-600">O(n²)</td>
+                                    <td class="px-4 py-2 text-center font-mono text-green-600">O(1)</td>
+                                    <td class="px-4 py-2 text-center">❌</td>
+                                </tr>
+                                <tr class="border-b">
+                                    <td class="px-4 py-2 font-bold">Insertion Sort</td>
+                                    <td class="px-4 py-2 text-center font-mono text-green-600">O(n)</td>
+                                    <td class="px-4 py-2 text-center font-mono text-red-600">O(n²)</td>
+                                    <td class="px-4 py-2 text-center font-mono text-red-600">O(n²)</td>
+                                    <td class="px-4 py-2 text-center font-mono text-green-600">O(1)</td>
+                                    <td class="px-4 py-2 text-center">✅</td>
+                                </tr>
+                                <tr class="border-b bg-gray-50">
+                                    <td class="px-4 py-2 font-bold">Merge Sort</td>
+                                    <td class="px-4 py-2 text-center font-mono text-yellow-600">O(n log n)</td>
+                                    <td class="px-4 py-2 text-center font-mono text-yellow-600">O(n log n)</td>
+                                    <td class="px-4 py-2 text-center font-mono text-yellow-600">O(n log n)</td>
+                                    <td class="px-4 py-2 text-center font-mono text-yellow-600">O(n)</td>
+                                    <td class="px-4 py-2 text-center">✅</td>
+                                </tr>
+                                <tr class="border-b">
+                                    <td class="px-4 py-2 font-bold">Quick Sort</td>
+                                    <td class="px-4 py-2 text-center font-mono text-yellow-600">O(n log n)</td>
+                                    <td class="px-4 py-2 text-center font-mono text-yellow-600">O(n log n)</td>
+                                    <td class="px-4 py-2 text-center font-mono text-red-600">O(n²)</td>
+                                    <td class="px-4 py-2 text-center font-mono text-green-600">O(log n)</td>
+                                    <td class="px-4 py-2 text-center">❌</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Interactive Sorting Demo -->
+                <div class="bg-white rounded-lg shadow-lg p-8">
+                    <h4 class="text-xl font-bold mb-4 text-center">Interactive Sorting Demo</h4>
+                    <div class="text-center mb-4">
+                        <button onclick="generateRandomArray()" class="bg-blue-500 text-white px-4 py-2 rounded mr-2 hover:bg-blue-600 transition interactive-button">Generate Random Array</button>
+                        <button onclick="bubbleSort()" class="bg-green-500 text-white px-4 py-2 rounded mr-2 hover:bg-green-600 transition interactive-button">Bubble Sort</button>
+                        <button onclick="quickSortDemo()" class="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600 transition interactive-button">Quick Sort</button>
+                    </div>
+                    <div id="sortingArray" class="flex justify-center space-x-2 mb-4"></div>
+                    <div id="sortingStatus" class="text-center text-lg font-bold"></div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Algorithm Patterns Section -->
+        <section id="patterns" class="mb-16">
+            <h2 class="text-4xl font-bold text-center mb-8 text-gray-800">Algorithm Design Patterns</h2>
+            
+            <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                <h3 class="text-2xl font-bold mb-4 text-center">Algorithm Patterns & Problem-Solving</h3>
+                <div class="flex justify-center">
+                    <img src="https://skyagent-artifacts.skywork.ai/image/1978684170278576128/00827c42-1ed4-4a9b-91bc-667d9041871e/cell_2_img_1.png" alt="Algorithm Patterns Visualization" class="max-w-full h-auto rounded-lg shadow-md">
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Divide and Conquer -->
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover">
+                    <h3 class="text-xl font-bold mb-3 text-red-600">Divide & Conquer</h3>
+                    <p class="text-gray-600 mb-4">Break problem into smaller subproblems, solve them, then combine results.</p>
+                    <div class="space-y-2">
+                        <div class="text-sm"><strong>Examples:</strong> Merge Sort, Quick Sort, Binary Search</div>
+                        <div class="text-sm"><strong>When to use:</strong> Problem can be divided into similar subproblems</div>
+                        <div class="text-sm"><strong>Time:</strong> Often O(n log n)</div>
+                    </div>
+                </div>
+
+                <!-- Greedy -->
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover">
+                    <h3 class="text-xl font-bold mb-3 text-green-600">Greedy</h3>
+                    <p class="text-gray-600 mb-4">Make the locally optimal choice at each step.</p>
+                    <div class="space-y-2">
+                        <div class="text-sm"><strong>Examples:</strong> Coin Change, Activity Selection</div>
+                        <div class="text-sm"><strong>When to use:</strong> Local optimum leads to global optimum</div>
+                        <div class="text-sm"><strong>Time:</strong> Usually O(n) or O(n log n)</div>
+                    </div>
+                </div>
+
+                <!-- Dynamic Programming -->
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover">
+                    <h3 class="text-xl font-bold mb-3 text-blue-600">Dynamic Programming</h3>
+                    <p class="text-gray-600 mb-4">Solve complex problems by breaking them into overlapping subproblems.</p>
+                    <div class="space-y-2">
+                        <div class="text-sm"><strong>Examples:</strong> Fibonacci, Knapsack Problem</div>
+                        <div class="text-sm"><strong>When to use:</strong> Overlapping subproblems exist</div>
+                        <div class="text-sm"><strong>Time:</strong> Often O(n²) or O(n³)</div>
+                    </div>
+                </div>
+
+                <!-- Backtracking -->
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover">
+                    <h3 class="text-xl font-bold mb-3 text-purple-600">Backtracking</h3>
+                    <p class="text-gray-600 mb-4">Try all possibilities and backtrack when a solution path fails.</p>
+                    <div class="space-y-2">
+                        <div class="text-sm"><strong>Examples:</strong> N-Queens, Sudoku Solver</div>
+                        <div class="text-sm"><strong>When to use:</strong> Need to explore all possibilities</div>
+                        <div class="text-sm"><strong>Time:</strong> Often exponential</div>
+                    </div>
+                </div>
+
+                <!-- Two Pointers -->
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover">
+                    <h3 class="text-xl font-bold mb-3 text-orange-600">Two Pointers</h3>
+                    <p class="text-gray-600 mb-4">Use two pointers to traverse data structure efficiently.</p>
+                    <div class="space-y-2">
+                        <div class="text-sm"><strong>Examples:</strong> Two Sum, Palindrome Check</div>
+                        <div class="text-sm"><strong>When to use:</strong> Sorted arrays or linked lists</div>
+                        <div class="text-sm"><strong>Time:</strong> Usually O(n)</div>
+                    </div>
+                </div>
+
+                <!-- Sliding Window -->
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover">
+                    <h3 class="text-xl font-bold mb-3 text-indigo-600">Sliding Window</h3>
+                    <p class="text-gray-600 mb-4">Maintain a window of elements and slide it through the data.</p>
+                    <div class="space-y-2">
+                        <div class="text-sm"><strong>Examples:</strong> Maximum Subarray, Longest Substring</div>
+                        <div class="text-sm"><strong>When to use:</strong> Contiguous sequence problems</div>
+                        <div class="text-sm"><strong>Time:</strong> Usually O(n)</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Learning Roadmap Section -->
+        <section id="roadmap" class="mb-16">
+            <h2 class="text-4xl font-bold text-center mb-8 text-gray-800">Complete Learning Roadmap</h2>
+            
+            <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                <h3 class="text-2xl font-bold mb-4 text-center">Your Journey from Beginner to Expert</h3>
+                <div class="flex justify-center">
+                    <img src="https://skyagent-artifacts.skywork.ai/image/1978684170278576128/85ac6812-50da-4360-844d-156bd31f5ab1/cell_3_img_1.png" alt="Algorithm Learning Roadmap" class="max-w-full h-auto rounded-lg shadow-md">
+                </div>
+            </div>
+
+            <!-- Detailed Roadmap -->
+            <div class="space-y-8">
+                <!-- Beginner Level -->
+                <div class="bg-gradient-to-r from-green-50 to-green-100 rounded-lg p-6">
+                    <h3 class="text-2xl font-bold mb-4 text-green-700">🌱 Beginner Level (2-4 weeks)</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-bold mb-2">What to Learn:</h4>
+                            <ul class="space-y-1 text-sm">
+                                <li>• Basic programming concepts</li>
+                                <li>• Arrays and strings</li>
+                                <li>• Simple loops and conditions</li>
+                                <li>• Basic input/output</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-bold mb-2">Practice Problems:</h4>
+                            <ul class="space-y-1 text-sm">
+                                <li>• Find maximum in array</li>
+                                <li>• Reverse a string</li>
+                                <li>• Count vowels</li>
+                                <li>• Simple calculator</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fundamental Level -->
+                <div class="bg-gradient-to-r from-blue-50 to-blue-100 rounded-lg p-6">
+                    <h3 class="text-2xl font-bold mb-4 text-blue-700">📚 Fundamental Level (4-6 weeks)</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-bold mb-2">What to Learn:</h4>
+                            <ul class="space-y-1 text-sm">
+                                <li>• Big O notation basics</li>
+                                <li>• Linear search algorithm</li>
+                                <li>• Bubble sort algorithm</li>
+                                <li>• Basic recursion</li>
+                                <li>• Stack and queue concepts</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-bold mb-2">Practice Problems:</h4>
+                            <ul class="space-y-1 text-sm">
+                                <li>• Implement linear search</li>
+                                <li>• Implement bubble sort</li>
+                                <li>• Calculate factorial recursively</li>
+                                <li>• Balanced parentheses</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Intermediate Level -->
+                <div class="bg-gradient-to-r from-orange-50 to-orange-100 rounded-lg p-6">
+                    <h3 class="text-2xl font-bold mb-4 text-orange-700">🚀 Intermediate Level (6-8 weeks)</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-bold mb-2">What to Learn:</h4>
+                            <ul class="space-y-1 text-sm">
+                                <li>• Binary search algorithm</li>
+                                <li>• Merge sort and quick sort</li>
+                                <li>• Hash tables/maps</li>
+                                <li>• Linked lists</li>
+                                <li>• Two pointers technique</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-bold mb-2">Practice Problems:</h4>
+                            <ul class="space-y-1 text-sm">
+                                <li>• Two sum problem</li>
+                                <li>• Merge two sorted arrays</li>
+                                <li>• Remove duplicates</li>
+                                <li>• Implement hash table</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Advanced Level -->
+                <div class="bg-gradient-to-r from-purple-50 to-purple-100 rounded-lg p-6">
+                    <h3 class="text-2xl font-bold mb-4 text-purple-700">🎯 Advanced Level (8-12 weeks)</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-bold mb-2">What to Learn:</h4>
+                            <ul class="space-y-1 text-sm">
+                                <li>• Trees and binary search trees</li>
+                                <li>• Graph algorithms (BFS, DFS)</li>
+                                <li>• Dynamic programming</li>
+                                <li>• Greedy algorithms</li>
+                                <li>• Backtracking</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-bold mb-2">Practice Problems:</h4>
+                            <ul class="space-y-1 text-sm">
+                                <li>• Tree traversals</li>
+                                <li>• Shortest path problems</li>
+                                <li>• Knapsack problem</li>
+                                <li>• N-Queens problem</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Expert Level -->
+                <div class="bg-gradient-to-r from-red-50 to-red-100 rounded-lg p-6">
+                    <h3 class="text-2xl font-bold mb-4 text-red-700">🏆 Expert Level (12+ weeks)</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-bold mb-2">What to Learn:</h4>
+                            <ul class="space-y-1 text-sm">
+                                <li>• Advanced graph algorithms</li>
+                                <li>• Complex dynamic programming</li>
+                                <li>• String algorithms</li>
+                                <li>• Computational geometry</li>
+                                <li>• Network flows</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-bold mb-2">Practice Problems:</h4>
+                            <ul class="space-y-1 text-sm">
+                                <li>• Minimum spanning tree</li>
+                                <li>• Longest common subsequence</li>
+                                <li>• String matching algorithms</li>
+                                <li>• Convex hull problems</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Resources Section -->
+        <section class="mb-16">
+            <h2 class="text-4xl font-bold text-center mb-8 text-gray-800">Learning Resources & Practice</h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Online Platforms -->
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover">
+                    <h3 class="text-xl font-bold mb-4 text-blue-600">🌐 Online Platforms</h3>
+                    <ul class="space-y-2">
+                        <li><a href="https://leetcode.com" class="text-blue-500 hover:underline">LeetCode</a> - Coding interview practice</li>
+                        <li><a href="https://www.hackerrank.com" class="text-blue-500 hover:underline">HackerRank</a> - Programming challenges</li>
+                        <li><a href="https://codeforces.com" class="text-blue-500 hover:underline">Codeforces</a> - Competitive programming</li>
+                        <li><a href="https://www.codechef.com" class="text-blue-500 hover:underline">CodeChef</a> - Programming contests</li>
+                    </ul>
+                </div>
+
+                <!-- Visualization Tools -->
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover">
+                    <h3 class="text-xl font-bold mb-4 text-green-600">🎨 Visualization Tools</h3>
+                    <ul class="space-y-2">
+                        <li><a href="https://visualgo.net" class="text-blue-500 hover:underline">VisuAlgo</a> - Algorithm animations</li>
+                        <li><a href="https://algorithm-visualizer.org" class="text-blue-500 hover:underline">Algorithm Visualizer</a> - Interactive visualizations</li>
+                        <li><a href="https://www.cs.usfca.edu/galles/visualization/Algorithms.html" class="text-blue-500 hover:underline">USF Visualizations</a> - Data structure animations</li>
+                    </ul>
+                </div>
+
+                <!-- Books & Courses -->
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover">
+                    <h3 class="text-xl font-bold mb-4 text-purple-600">📚 Books & Courses</h3>
+                    <ul class="space-y-2">
+                        <li><strong>Grokking Algorithms</strong> - Beginner-friendly</li>
+                        <li><strong>Introduction to Algorithms</strong> - Comprehensive</li>
+                        <li><strong>Cracking the Coding Interview</strong> - Interview prep</li>
+                        <li><a href="https://www.khanacademy.org/computing/computer-science/algorithms" class="text-blue-500 hover:underline">Khan Academy</a> - Free courses</li>
+                    </ul>
+                </div>
+
+                <!-- Programming Languages -->
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover">
+                    <h3 class="text-xl font-bold mb-4 text-orange-600">💻 Recommended Languages</h3>
+                    <ul class="space-y-2">
+                        <li><strong>Python</strong> - Beginner-friendly, clean syntax</li>
+                        <li><strong>Java</strong> - Industry standard, object-oriented</li>
+                        <li><strong>C++</strong> - Performance-oriented, competitive programming</li>
+                        <li><strong>JavaScript</strong> - Web development, versatile</li>
+                    </ul>
+                </div>
+
+                <!-- Study Tips -->
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover">
+                    <h3 class="text-xl font-bold mb-4 text-red-600">💡 Study Tips</h3>
+                    <ul class="space-y-2">
+                        <li>• Practice coding problems daily</li>
+                        <li>• Understand concepts before memorizing</li>
+                        <li>• Use visualization tools</li>
+                        <li>• Join coding communities</li>
+                        <li>• Build projects to apply knowledge</li>
+                    </ul>
+                </div>
+
+                <!-- Interview Preparation -->
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover">
+                    <h3 class="text-xl font-bold mb-4 text-indigo-600">🎯 Interview Prep</h3>
+                    <ul class="space-y-2">
+                        <li>• Master Big O analysis</li>
+                        <li>• Practice whiteboard coding</li>
+                        <li>• Learn to explain your thinking</li>
+                        <li>• Study system design basics</li>
+                        <li>• Mock interviews with peers</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-gray-800 text-white py-8 mt-16">
+            <div class="container mx-auto px-4 text-center">
+                <h3 class="text-2xl font-bold mb-4">Ready to Start Your Algorithm Journey?</h3>
+                <p class="text-gray-300 mb-6">Remember: Every expert was once a beginner. Start with the basics, practice consistently, and don't give up!</p>
+                <div class="flex justify-center space-x-4">
+                    <button onclick="scrollToSection('basics')" class="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition">Start Learning</button>
+                    <button onclick="window.print()" class="border-2 border-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-gray-800 transition">Save as PDF</button>
+                </div>
+                <p class="text-gray-400 mt-6 text-sm">Sources: GeeksforGeeks, FreeCodeCamp, Khan Academy, and other credible educational platforms</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Smooth scrolling function
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        // Max finding demonstration
+        function demonstrateMaxFinding() {
+            const numbers = [5, 12, 3, 18, 7];
+            const resultDiv = document.getElementById('maxResult');
+            let currentMax = numbers[0];
+            let step = 0;
+            
+            const interval = setInterval(() => {
+                if (step < numbers.length) {
+                    if (numbers[step] > currentMax) {
+                        currentMax = numbers[step];
+                    }
+                    resultDiv.innerHTML = `Step ${step + 1}: Current max = ${currentMax}`;
+                    step++;
+                } else {
+                    resultDiv.innerHTML = `✅ Final result: Maximum = ${currentMax}`;
+                    clearInterval(interval);
+                }
+            }, 1000);
+        }
+
+        // Big O complexity calculator
+        function calculateComplexity() {
+            const n = document.getElementById('inputSize').value;
+            document.getElementById('inputValue').textContent = n;
+            document.getElementById('nValue').textContent = n;
+            
+            const results = {
+                'O(1)': 1,
+                'O(log n)': Math.ceil(Math.log2(n)),
+                'O(n)': n,
+                'O(n log n)': Math.ceil(n * Math.log2(n)),
+                'O(n²)': n * n
+            };
+            
+            let html = '';
+            for (const [complexity, operations] of Object.entries(results)) {
+                const color = operations <= 100 ? 'text-green-600' : operations <= 10000 ? 'text-yellow-600' : 'text-red-600';
+                html += `<div class="flex justify-between"><span>${complexity}:</span><span class="font-mono ${color}">${operations.toLocaleString()}</span></div>`;
+            }
+            
+            document.getElementById('complexityResults').innerHTML = html;
+        }
+
+        // Initialize complexity calculator
+        calculateComplexity();
+
+        // Sorting demonstration
+        let currentArray = [64, 34, 25, 12, 22, 11, 90];
+
+        function generateRandomArray() {
+            currentArray = Array.from({length: 8}, () => Math.floor(Math.random() * 100) + 1);
+            displayArray();
+            document.getElementById('sortingStatus').textContent = 'New random array generated!';
+        }
+
+        function displayArray() {
+            const container = document.getElementById('sortingArray');
+            container.innerHTML = '';
+            currentArray.forEach((num, index) => {
+                const bar = document.createElement('div');
+                bar.className = 'bg-blue-500 text-white text-center py-2 px-3 rounded';
+                bar.style.height = `${num + 20}px`;
+                bar.textContent = num;
+                container.appendChild(bar);
+            });
+        }
+
+        function bubbleSort() {
+            const arr = [...currentArray];
+            const container = document.getElementById('sortingArray');
+            const status = document.getElementById('sortingStatus');
+            let i = 0, j = 0;
+            
+            status.textContent = 'Bubble Sort in progress...';
+            
+            const interval = setInterval(() => {
+                if (i < arr.length - 1) {
+                    if (j < arr.length - i - 1) {
+                        // Highlight comparison
+                        const bars = container.children;
+                        bars[j].className = 'bg-red-500 text-white text-center py-2 px-3 rounded';
+                        bars[j + 1].className = 'bg-red-500 text-white text-center py-2 px-3 rounded';
+                        
+                        if (arr[j] > arr[j + 1]) {
+                            // Swap
+                            [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
+                            bars[j].textContent = arr[j];
+                            bars[j + 1].textContent = arr[j + 1];
+                        }
+                        
+                        setTimeout(() => {
+                            bars[j].className = 'bg-blue-500 text-white text-center py-2 px-3 rounded';
+                            bars[j + 1].className = 'bg-blue-500 text-white text-center py-2 px-3 rounded';
+                        }, 300);
+                        
+                        j++;
+                    } else {
+                        i++;
+                        j = 0;
+                    }
+                } else {
+                    clearInterval(interval);
+                    status.textContent = '✅ Bubble Sort completed!';
+                    currentArray = arr;
+                }
+            }, 500);
+        }
+
+        function quickSortDemo() {
+            const arr = [...currentArray];
+            document.getElementById('sortingStatus').textContent = 'Quick Sort completed instantly!';
+            arr.sort((a, b) => a - b);
+            currentArray = arr;
+            displayArray();
+        }
+
+        // Initialize array display
+        displayArray();
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+
+    <!-- Copyright Footer -->
+    <footer class="bg-gray-100 border-t border-gray-200 py-8 mt-16">
+        <div class="container mx-auto px-4 text-center">
+            <div class="max-w-2xl mx-auto">
+                <h3 class="text-lg font-semibold text-gray-800 mb-2">Complete Algorithm Guide</h3>
+                <p class="text-gray-600 mb-4">A comprehensive resource for learning algorithms and data structures</p>
+                <div class="border-t border-gray-300 pt-4">
+                    <p class="text-sm text-gray-500">
+                        © 2025 Ashley Chang. All rights reserved.
+                    </p>
+                    <p class="text-xs text-gray-400 mt-2">
+                        This guide is created for educational purposes. Feel free to use it for learning, but please don't redistribute or claim as your own work.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
