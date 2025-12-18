@@ -1403,6 +1403,126 @@ body.dark-mode .gallery-btn:hover {
     opacity: 1;
 }
 
+/* MONU Screenshots in Project Details */
+.monu-screenshots {
+    margin: var(--spacing-xl) 0;
+    padding: var(--spacing-lg);
+    background: linear-gradient(135deg, #FAFAFA 0%, #F5F5F5 100%);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+body.dark-mode .monu-screenshots {
+    background: linear-gradient(135deg, #1A1A1A 0%, #0F0F0F 100%);
+}
+
+.screenshot-gallery {
+    display: flex;
+    gap: var(--spacing-md);
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    perspective: 1000px;
+    flex-wrap: wrap;
+}
+
+.screenshot-item {
+    flex: 1;
+    min-width: 150px;
+    max-width: 200px;
+    height: 350px;
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    transition: all var(--transition-normal);
+    transform-style: preserve-3d;
+}
+
+.screenshot-item:nth-child(1) {
+    transform: rotateY(-3deg);
+}
+
+.screenshot-item:nth-child(2) {
+    transform: rotateY(0deg) translateZ(10px);
+    max-width: 220px;
+    height: 370px;
+}
+
+.screenshot-item:nth-child(3) {
+    transform: rotateY(3deg);
+}
+
+.screenshot-item:hover {
+    transform: translateY(-8px) scale(1.05) !important;
+    z-index: 10 !important;
+    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.2);
+}
+
+.monu-screenshot {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+}
+
+/* Responsive adjustments for MONU screenshots */
+@media (max-width: 768px) {
+    .monu-screenshots {
+        padding: var(--spacing-md);
+    }
+    
+    .screenshot-gallery {
+        gap: var(--spacing-sm);
+    }
+    
+    .screenshot-item {
+        max-width: 140px;
+        height: 280px;
+        border-radius: 16px;
+    }
+    
+    .screenshot-item:nth-child(2) {
+        max-width: 160px;
+        height: 300px;
+    }
+    
+    .screenshot-item:nth-child(1),
+    .screenshot-item:nth-child(3) {
+        transform: rotateY(0deg);
+    }
+}
+
+@media (max-width: 480px) {
+    .monu-screenshots {
+        padding: var(--spacing-sm);
+    }
+    
+    .screenshot-gallery {
+        gap: var(--spacing-xs);
+        flex-direction: column;
+    }
+    
+    .screenshot-item {
+        max-width: 180px;
+        width: 100%;
+        height: 320px;
+        border-radius: 16px;
+    }
+    
+    .screenshot-item:nth-child(2) {
+        max-width: 180px;
+        height: 320px;
+    }
+    
+    .screenshot-item:nth-child(1),
+    .screenshot-item:nth-child(2),
+    .screenshot-item:nth-child(3) {
+        transform: none;
+    }
+}
+
 /* AI Chat Project Card Styling */
 .ai-chat-project {
     background: var(--bg-secondary);
