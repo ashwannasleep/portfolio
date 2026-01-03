@@ -27,10 +27,14 @@ class AppleMusicIntegration {
         // Set up automatic refresh
         this.startAutoRefresh();
         
-        // Refresh when page becomes visible
+        // Refresh when page becomes visible (only if cache expired)
         document.addEventListener('visibilitychange', () => {
             if (!document.hidden) {
-                this.loadPlaylistData();
+                // Only refresh if cache is expired (saves API calls)
+                const now = Date.now();
+                if (!this.cachedData || !this.cacheTimestamp || (now - this.cacheTimestamp) >= this.cacheExpiry) {
+                    this.loadPlaylistData();
+                }
             }
         });
     }
