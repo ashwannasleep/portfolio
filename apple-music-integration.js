@@ -8,8 +8,11 @@ class AppleMusicIntegration {
         this.apiBase = '/.netlify/functions/apple-music-data'; // Netlify function endpoint
         this.playlistId = 'pl.u-8aAVZ6qho0lEWVJ'; // Ashley's personal Apple Music playlist ID (hardcoded)
         this.storefront = 'us'; // United States storefront
-        this.refreshInterval = 5 * 60 * 1000; // Refresh every 5 minutes
+        this.refreshInterval = 10 * 60 * 1000; // Refresh every 10 minutes (reduced frequency to save API calls)
         this.refreshTimer = null;
+        this.cacheExpiry = 10 * 60 * 1000; // Cache data for 10 minutes
+        this.cachedData = null;
+        this.cacheTimestamp = null;
         
         // Ensure we never use any user input or visitor data
         this.isOwnerOnly = true; // Flag to ensure only owner's data is shown
@@ -51,6 +54,15 @@ class AppleMusicIntegration {
 
     async loadPlaylistData() {
         try {
+            // Check cache first to avoid unnecessary API calls
+            const now = Date.now();
+            if (this.cachedData && this.cacheTimestamp && (now - this.cacheTimestamp) < this.cacheExpiry) {
+                console.log('Using cached data to save API calls');
+                this.displayPlaylistPlayer(this.cachedData.playlistInfo);
+                this.displayPlaylistTracks(this.cachedData.playlistData);
+                return;
+            }
+            
             // Fetch playlist tracks first to get the count
             let trackCount = 0;
             let playlistData = null;
@@ -74,8 +86,9 @@ class AppleMusicIntegration {
             }
             
             // Fetch playlist info for the player (with track count)
+            let playlistInfo = null;
             try {
-                const playlistInfo = await this.fetchPlaylistInfo();
+                playlistInfo = await this.fetchPlaylistInfo();
                 if (playlistInfo && playlistInfo.data) {
                     // Update track count if we have it from tracks endpoint
                     if (trackCount > 0) {
@@ -90,6 +103,16 @@ class AppleMusicIntegration {
             } catch (error) {
                 console.error('Error fetching playlist info:', error);
                 this.showPlaceholderPlayer();
+            }
+            
+            // Cache the data to reduce future API calls
+            if (playlistData && playlistInfo) {
+                this.cachedData = {
+                    playlistData: playlistData,
+                    playlistInfo: playlistInfo.data
+                };
+                this.cacheTimestamp = now;
+                console.log('Data cached for', this.cacheExpiry / 1000 / 60, 'minutes');
             }
         } catch (error) {
             console.error('Error loading Apple Music data:', error);
