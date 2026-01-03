@@ -71,18 +71,23 @@
             <h2 class="section-title">🎵 What I'm Listening To</h2>
             <p class="section-subtitle">Ashley's current music rotation</p>
             
-            <div class="spotify-player">
-                <iframe style="border-radius:12px"
-                    src="https://open.spotify.com/embed/playlist/4sGj59LB1O1KCquyZLTjts?utm_source=generator&theme=0"
-                    width="100%" height="80" frameBorder="0" allowfullscreen=""
-                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                    loading="lazy">
-                </iframe>
+            <div class="spotify-player" id="apple-music-player-container">
+                <!-- Apple Music playlist player will be loaded here -->
+                <div id="apple-music-player" style="border-radius:12px; background: var(--bg-secondary); padding: var(--spacing-lg); border: 1px solid var(--border-color); min-height: 100px;">
+                    <div style="display: flex; align-items: center; gap: var(--spacing-lg);">
+                        <div style="width: 80px; height: 80px; border-radius: 12px; background: linear-gradient(90deg, var(--border-color) 25%, rgba(255,255,255,0.5) 50%, var(--border-color) 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; flex-shrink: 0;"></div>
+                        <div style="flex: 1; min-width: 0;">
+                            <div style="height: 16px; background: var(--border-color); border-radius: 4px; margin-bottom: 12px; width: 40%; animation: shimmer 1.5s infinite;"></div>
+                            <div style="height: 20px; background: var(--border-color); border-radius: 4px; margin-bottom: 8px; width: 60%; animation: shimmer 1.5s infinite;"></div>
+                            <div style="height: 14px; background: var(--border-color); border-radius: 4px; width: 30%; animation: shimmer 1.5s infinite;"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
             
-            <h3 class="recent-tracks-title">Recently Played</h3>
+            <h3 class="recent-tracks-title">From My Playlist</h3>
             <div class="tracks-grid" id="tracks-container">
-                <!-- Spotify tracks will be loaded here -->
+                <!-- Apple Music playlist tracks will be loaded here -->
             </div>
         </div>
     </section>
@@ -598,7 +603,8 @@
         <i class="fas fa-arrow-up"></i>
     </button>
 
-    <script src="spotify-integration.js"></script>
+    <!-- Apple Music Integration -->
+    <script src="apple-music-integration.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

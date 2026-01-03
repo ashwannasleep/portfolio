@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initScrollEffects();
     initGallery();
     initSmoothScrolling();
-    initSpotifyIntegration();
+    // Apple Music integration is initialized in apple-music-integration.js
     initProjectDetails();
 });
 
@@ -198,16 +198,8 @@ function initSmoothScrolling() {
     });
 }
 
-// Spotify integration - Initialize the real Spotify functionality
-function initSpotifyIntegration() {
-    // Initialize the Spotify integration from the separate file
-    if (typeof SpotifyIntegration !== 'undefined') {
-        new SpotifyIntegration();
-    } else {
-        // Fallback if SpotifyIntegration class isn't loaded
-        console.log('Spotify integration will be loaded from spotify-integration.js');
-    }
-}
+// Apple Music integration is handled in apple-music-integration.js
+// The AppleMusicIntegration class initializes automatically when the script loads
 
 // Utility functions
 function debounce(func, wait) {
