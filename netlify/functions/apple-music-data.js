@@ -54,16 +54,46 @@ exports.handler = async (event, context) => {
     // Handle private key format - Netlify stores it with escaped newlines
     let formattedPrivateKey = privateKey;
     
-    // Replace escaped newlines with actual newlines
+    // Remove any leading/trailing whitespace
+    formattedPrivateKey = formattedPrivateKey.trim();
+    
+    // Replace escaped newlines with actual newlines (handle both \\n and \n)
     formattedPrivateKey = formattedPrivateKey.replace(/\\n/g, '\n');
     
-    // Ensure the key has proper BEGIN/END markers
+    // If the key doesn't have BEGIN/END markers, add them
     if (!formattedPrivateKey.includes('BEGIN PRIVATE KEY')) {
-      formattedPrivateKey = `-----BEGIN PRIVATE KEY-----\n${formattedPrivateKey.replace(/-----BEGIN PRIVATE KEY-----/g, '').replace(/-----END PRIVATE KEY-----/g, '').trim()}\n-----END PRIVATE KEY-----`;
+      // Remove any existing markers and clean up
+      const keyContent = formattedPrivateKey
+        .replace(/-----BEGIN PRIVATE KEY-----/g, '')
+        .replace(/-----END PRIVATE KEY-----/g, '')
+        .replace(/\s+/g, '')
+        .trim();
+      
+      // Reconstruct with proper formatting (64 chars per line for base64)
+      const lines = [];
+      for (let i = 0; i < keyContent.length; i += 64) {
+        lines.push(keyContent.substring(i, i + 64));
+      }
+      
+      formattedPrivateKey = `-----BEGIN PRIVATE KEY-----\n${lines.join('\n')}\n-----END PRIVATE KEY-----`;
     }
     
-    // Remove any extra whitespace
-    formattedPrivateKey = formattedPrivateKey.trim();
+    // Ensure proper line breaks (should have \n, not spaces)
+    formattedPrivateKey = formattedPrivateKey.replace(/\r\n/g, '\n');
+    
+    // Validate the key format
+    if (!formattedPrivateKey.includes('-----BEGIN PRIVATE KEY-----') || 
+        !formattedPrivateKey.includes('-----END PRIVATE KEY-----')) {
+      throw new Error('Invalid private key format: missing BEGIN/END markers');
+    }
+    
+    // Log first/last few chars for debugging (don't log full key)
+    console.log('Key format check:', {
+      startsWith: formattedPrivateKey.substring(0, 30),
+      endsWith: formattedPrivateKey.substring(formattedPrivateKey.length - 30),
+      hasNewlines: formattedPrivateKey.includes('\n'),
+      length: formattedPrivateKey.length
+    });
     
     const token = jwt.sign(
       {
