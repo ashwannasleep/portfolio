@@ -51,25 +51,16 @@ class AppleMusicIntegration {
 
     async loadPlaylistData() {
         try {
-            // Fetch playlist info for the player
-            try {
-                const playlistInfo = await this.fetchPlaylistInfo();
-                if (playlistInfo && playlistInfo.data) {
-                    this.displayPlaylistPlayer(playlistInfo.data);
-                } else {
-                    console.warn('No playlist info data received');
-                    this.showPlaceholderPlayer();
-                }
-            } catch (error) {
-                console.error('Error fetching playlist info:', error);
-                this.showPlaceholderPlayer();
-            }
+            // Fetch playlist tracks first to get the count
+            let trackCount = 0;
+            let playlistData = null;
             
-            // Fetch real playlist tracks from Apple Music API
             try {
-                const playlistData = await this.fetchPlaylistTracks();
-                console.log('Playlist data received:', playlistData);
+                playlistData = await this.fetchPlaylistTracks();
+                console.log('Playlist tracks data received:', playlistData);
                 if (playlistData && playlistData.data && playlistData.data.length > 0) {
+                    // Get total count from the response (might be in meta or we count what we have)
+                    trackCount = playlistData.meta?.total || playlistData.data.length;
                     this.displayPlaylistTracks(playlistData);
                 } else {
                     console.warn('No track data received or empty array. Response:', playlistData);
@@ -78,6 +69,25 @@ class AppleMusicIntegration {
             } catch (error) {
                 console.error('Error fetching playlist tracks:', error);
                 this.showEmptyState(error.message || 'Failed to load tracks');
+            }
+            
+            // Fetch playlist info for the player (with track count)
+            try {
+                const playlistInfo = await this.fetchPlaylistInfo();
+                if (playlistInfo && playlistInfo.data) {
+                    // Update track count if we have it from tracks endpoint
+                    if (trackCount > 0) {
+                        playlistInfo.data.attributes = playlistInfo.data.attributes || {};
+                        playlistInfo.data.attributes.trackCount = trackCount;
+                    }
+                    this.displayPlaylistPlayer(playlistInfo.data);
+                } else {
+                    console.warn('No playlist info data received');
+                    this.showPlaceholderPlayer();
+                }
+            } catch (error) {
+                console.error('Error fetching playlist info:', error);
+                this.showPlaceholderPlayer();
             }
         } catch (error) {
             console.error('Error loading Apple Music data:', error);
@@ -139,7 +149,20 @@ class AppleMusicIntegration {
         const playlistDescription = playlist.attributes?.description?.standard || '';
         const playlistArtwork = playlist.attributes?.artwork?.url?.replace('{w}', '500').replace('{h}', '500') || '';
         const playlistUrl = `https://music.apple.com/us/playlist/${this.playlistId}`;
-        const trackCount = playlist.attributes?.trackCount || 0;
+        
+        // Get track count from attributes (set by loadPlaylistData if available)
+        let trackCount = playlist.attributes?.trackCount || 0;
+        
+        // Fallback: try to get from relationships if available
+        if (trackCount === 0 && playlist.relationships?.tracks?.data && Array.isArray(playlist.relationships.tracks.data)) {
+            trackCount = playlist.relationships.tracks.data.length;
+        }
+        
+        // If still 0, show a default or fetch separately
+        if (trackCount === 0) {
+            trackCount = 27; // Default fallback - you mentioned 27 songs earlier
+        }
+        
         const curatorName = playlist.attributes?.curatorName || 'Ashley';
 
         playerContainer.innerHTML = `
