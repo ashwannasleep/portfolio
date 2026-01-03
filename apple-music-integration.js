@@ -288,14 +288,14 @@ class AppleMusicIntegration {
                     <h4 class="track-name">${trackName}</h4>
                     <p class="track-artist">${artist}</p>
                     <span class="played-time">Track ${index + 1} from your playlist</span>
-                    <a href="${appleMusicUrl}" target="_blank" class="spotify-link">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="display: inline-block; vertical-align: middle;">
-                            <path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.96-3.24-1.44-1.88-.96-2.91-2.07-3.24-3.24-.28-1.02-.04-2.05.4-3.08.44-1.03 1.03-2.05 1.64-3.08.78-1.34 1.34-2.05 1.64-2.12.3-.08.61-.1.91-.1.3 0 .6.02.91.1.3.07.86.78 1.64 2.12.61 1.03 1.2 2.05 1.64 3.08.44 1.03.68 2.06.4 3.08-.33 1.17-1.36 2.28-3.24 3.24-1.16.48-2.15.94-3.24 1.44-1.03.48-2.1.55-3.08.4-.98-.15-1.93-.5-2.84-1.05-.91-.55-1.67-1.19-2.28-1.92-.61-.73-1.05-1.5-1.32-2.3-.27-.8-.35-1.62-.24-2.44.11-.82.4-1.62.87-2.38.47-.76 1.11-1.45 1.92-2.05.81-.6 1.76-1.08 2.84-1.44 1.08-.36 2.27-.54 3.56-.54s2.48.18 3.56.54c1.08.36 2.03.84 2.84 1.44.81.6 1.45 1.29 1.92 2.05.47.76.76 1.56.87 2.38.11.82.03 1.64-.24 2.44-.27.8-.71 1.57-1.32 2.3-.61.73-1.37 1.37-2.28 1.92z"/>
-                        </svg>
-                        Listen on Apple Music
-                    </a>
                 </div>
             `;
+            
+            // Make the entire card clickable
+            trackCard.style.cursor = 'pointer';
+            trackCard.addEventListener('click', () => {
+                window.open(appleMusicUrl, '_blank');
+            });
             
             tracksContainer.appendChild(trackCard);
         });
