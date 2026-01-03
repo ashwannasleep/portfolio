@@ -45,6 +45,16 @@ A career development platform for organizing job searches and applications.
 
 ---
 
+## Writing
+
+### How I Re-Engineered My Life with MONU Planner
+
+A first-person reflection on why I built MONU Planner, how personal pain points shaped product decisions, and what I learned about building tools that support focus and consistency.
+
+https://medium.com/@wunjingchang.work/how-i-re-engineered-my-life-with-monu-planner-9228a8940427
+
+---
+
 ## Design Philosophy
 
 Across projects, my focus is on:
