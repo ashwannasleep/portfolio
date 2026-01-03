@@ -51,7 +51,7 @@ exports.handler = async (event, context) => {
 
   try {
     // Generate JWT token for Apple Music API
-    // Handle private key format - Netlify stores it with escaped newlines
+    // Handle private key format - Netlify may store it with or without newlines
     let formattedPrivateKey = privateKey;
     
     // Remove any leading/trailing whitespace
@@ -59,6 +59,32 @@ exports.handler = async (event, context) => {
     
     // Replace escaped newlines with actual newlines (handle both \\n and \n)
     formattedPrivateKey = formattedPrivateKey.replace(/\\n/g, '\n');
+    
+    // If the key is all on one line (common when pasting into Netlify), reformat it
+    if (!formattedPrivateKey.includes('\n') && formattedPrivateKey.includes('BEGIN PRIVATE KEY')) {
+      // Extract the base64 content between markers
+      const beginMarker = '-----BEGIN PRIVATE KEY-----';
+      const endMarker = '-----END PRIVATE KEY-----';
+      const beginIndex = formattedPrivateKey.indexOf(beginMarker);
+      const endIndex = formattedPrivateKey.indexOf(endMarker);
+      
+      if (beginIndex !== -1 && endIndex !== -1) {
+        // Extract the base64 content (remove markers and whitespace)
+        let keyContent = formattedPrivateKey.substring(
+          beginIndex + beginMarker.length,
+          endIndex
+        ).replace(/\s+/g, ''); // Remove all whitespace
+        
+        // Split into 64-character lines (standard PEM format)
+        const lines = [];
+        for (let i = 0; i < keyContent.length; i += 64) {
+          lines.push(keyContent.substring(i, i + 64));
+        }
+        
+        // Reconstruct with proper formatting
+        formattedPrivateKey = `${beginMarker}\n${lines.join('\n')}\n${endMarker}`;
+      }
+    }
     
     // If the key doesn't have BEGIN/END markers, add them
     if (!formattedPrivateKey.includes('BEGIN PRIVATE KEY')) {
@@ -69,7 +95,7 @@ exports.handler = async (event, context) => {
         .replace(/\s+/g, '')
         .trim();
       
-      // Reconstruct with proper formatting (64 chars per line for base64)
+      // Split into 64-character lines
       const lines = [];
       for (let i = 0; i < keyContent.length; i += 64) {
         lines.push(keyContent.substring(i, i + 64));
@@ -92,6 +118,7 @@ exports.handler = async (event, context) => {
       startsWith: formattedPrivateKey.substring(0, 30),
       endsWith: formattedPrivateKey.substring(formattedPrivateKey.length - 30),
       hasNewlines: formattedPrivateKey.includes('\n'),
+      lineCount: formattedPrivateKey.split('\n').length,
       length: formattedPrivateKey.length
     });
     
