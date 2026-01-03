@@ -51,13 +51,27 @@ exports.handler = async (event, context) => {
 
   try {
     // Generate JWT token for Apple Music API
+    // Handle private key format - Netlify stores it with escaped newlines
+    let formattedPrivateKey = privateKey;
+    
+    // Replace escaped newlines with actual newlines
+    formattedPrivateKey = formattedPrivateKey.replace(/\\n/g, '\n');
+    
+    // Ensure the key has proper BEGIN/END markers
+    if (!formattedPrivateKey.includes('BEGIN PRIVATE KEY')) {
+      formattedPrivateKey = `-----BEGIN PRIVATE KEY-----\n${formattedPrivateKey.replace(/-----BEGIN PRIVATE KEY-----/g, '').replace(/-----END PRIVATE KEY-----/g, '').trim()}\n-----END PRIVATE KEY-----`;
+    }
+    
+    // Remove any extra whitespace
+    formattedPrivateKey = formattedPrivateKey.trim();
+    
     const token = jwt.sign(
       {
         iss: teamId,
         iat: Math.floor(Date.now() / 1000),
         exp: Math.floor(Date.now() / 1000) + 60 * 60 // 1 hour expiration
       },
-      privateKey.replace(/\\n/g, '\n'),
+      formattedPrivateKey,
       {
         algorithm: 'ES256',
         header: {
