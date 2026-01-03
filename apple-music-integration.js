@@ -245,8 +245,8 @@ class AppleMusicIntegration {
             }
             
             // Apple Music API endpoint format: catalog/{storefront}/playlists/{playlistId}/tracks
-            // First fetch with limit=1 to get total count from meta, then fetch limit=3 for display
-            const endpoint = encodeURIComponent(`catalog/${this.storefront}/playlists/${this.playlistId}/tracks?limit=3`);
+            // Fetch all tracks first, then we can randomize or select specific ones
+            const endpoint = encodeURIComponent(`catalog/${this.storefront}/playlists/${this.playlistId}/tracks?limit=100`);
             const apiUrl = `${this.apiBase}?endpoint=${endpoint}`;
             console.log('Fetching tracks from:', apiUrl);
             
@@ -289,7 +289,19 @@ class AppleMusicIntegration {
 
         tracksContainer.innerHTML = '';
         
-        playlistData.data.forEach((item, index) => {
+        // Get tracks and randomize them, then take first 3
+        let tracks = [...playlistData.data];
+        
+        // Randomize the tracks array
+        for (let i = tracks.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [tracks[i], tracks[j]] = [tracks[j], tracks[i]];
+        }
+        
+        // Take first 3 randomized tracks
+        const displayTracks = tracks.slice(0, 3);
+        
+        displayTracks.forEach((item, index) => {
             const track = item.attributes;
             const trackCard = document.createElement('div');
             trackCard.className = 'track-card';
