@@ -1,0 +1,7 @@
+name = "apple-music-data"
+main = "apple-music-data.js"
+compatibility_date = "2024-01-01"
+
+[env.production]
+vars = { }
+

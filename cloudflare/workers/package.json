@@ -1,0 +1,7 @@
+{
+  "name": "apple-music-worker",
+  "version": "1.0.0",
+  "description": "Cloudflare Worker for Apple Music API",
+  "main": "apple-music-data.js"
+}
+
