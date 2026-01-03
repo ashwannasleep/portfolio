@@ -8,9 +8,11 @@ class AppleMusicIntegration {
         this.apiBase = '/.netlify/functions/apple-music-data'; // Netlify function endpoint
         this.playlistId = 'pl.u-8aAVZ6qho0lEWVJ'; // Ashley's personal Apple Music playlist ID (hardcoded)
         this.storefront = 'us'; // United States storefront
-        this.refreshInterval = 10 * 60 * 1000; // Refresh every 10 minutes (reduced frequency to save API calls)
+        // DISABLED auto-refresh to prevent exceeding free tier limits
+        // Data will only load once per page visit, cached for 1 hour
+        this.refreshInterval = null; // Disabled
         this.refreshTimer = null;
-        this.cacheExpiry = 10 * 60 * 1000; // Cache data for 10 minutes
+        this.cacheExpiry = 60 * 60 * 1000; // Cache data for 1 hour (very conservative)
         this.cachedData = null;
         this.cacheTimestamp = null;
         
@@ -21,22 +23,14 @@ class AppleMusicIntegration {
     }
 
     init() {
-        // Load data immediately on page load
+        // Load data immediately on page load (only once per page visit)
         this.loadPlaylistData();
         
-        // Set up automatic refresh
-        this.startAutoRefresh();
+        // DISABLED: Auto-refresh disabled to prevent exceeding free tier limits
+        // this.startAutoRefresh();
         
-        // Refresh when page becomes visible (only if cache expired)
-        document.addEventListener('visibilitychange', () => {
-            if (!document.hidden) {
-                // Only refresh if cache is expired (saves API calls)
-                const now = Date.now();
-                if (!this.cachedData || !this.cacheTimestamp || (now - this.cacheTimestamp) >= this.cacheExpiry) {
-                    this.loadPlaylistData();
-                }
-            }
-        });
+        // DISABLED: Visibility change refresh disabled to save API calls
+        // Data will only refresh on full page reload
     }
 
     startAutoRefresh() {
