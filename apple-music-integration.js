@@ -98,18 +98,33 @@ class AppleMusicIntegration {
             }
             
             const endpoint = encodeURIComponent(`catalog/${this.storefront}/playlists/${this.playlistId}`);
-            const response = await fetch(`${this.apiBase}?endpoint=${endpoint}`, {
+            const apiUrl = `${this.apiBase}?endpoint=${endpoint}`;
+            console.log('Fetching playlist info from:', apiUrl);
+            
+            const response = await fetch(apiUrl, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json'
                 }
             });
 
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+            // Check if response is actually JSON
+            const contentType = response.headers.get('content-type');
+            if (!contentType || !contentType.includes('application/json')) {
+                const text = await response.text();
+                console.error('Non-JSON response received:', text.substring(0, 500));
+                throw new Error(`Expected JSON but got ${contentType}. Response: ${text.substring(0, 200)}`);
             }
 
-            return await response.json();
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.error('API Error Response:', errorText);
+                throw new Error(`HTTP error! status: ${response.status}, message: ${errorText.substring(0, 200)}`);
+            }
+
+            const data = await response.json();
+            console.log('Playlist info response:', data);
+            return data;
         } catch (error) {
             console.error('Error fetching playlist info:', error);
             throw error;
@@ -197,10 +212,18 @@ class AppleMusicIntegration {
                 }
             });
 
+            // Check if response is actually JSON
+            const contentType = response.headers.get('content-type');
+            if (!contentType || !contentType.includes('application/json')) {
+                const text = await response.text();
+                console.error('Non-JSON response received:', text.substring(0, 500));
+                throw new Error(`Expected JSON but got ${contentType}. Response: ${text.substring(0, 200)}`);
+            }
+
             if (!response.ok) {
                 const errorText = await response.text();
                 console.error('API Error Response:', errorText);
-                throw new Error(`HTTP error! status: ${response.status}, message: ${errorText}`);
+                throw new Error(`HTTP error! status: ${response.status}, message: ${errorText.substring(0, 200)}`);
             }
 
             const data = await response.json();
