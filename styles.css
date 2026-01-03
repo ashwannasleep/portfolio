@@ -88,6 +88,7 @@ body.dark-mode {
 html {
     scroll-behavior: smooth;
     font-size: clamp(16px, 2.5vw, 18px);
+    color-scheme: light dark;
 }
 
 body {
@@ -1155,10 +1156,15 @@ body.dark-mode .gallery-btn:hover {
 }
 
 .cert-logo-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    object-position: center;
     border-radius: var(--radius-md);
+    filter: none !important;
+    mix-blend-mode: normal;
 }
 
 .cert-info {
