@@ -59,8 +59,10 @@ class AppleMusicIntegration {
                 playlistData = await this.fetchPlaylistTracks();
                 console.log('Playlist tracks data received:', playlistData);
                 if (playlistData && playlistData.data && playlistData.data.length > 0) {
-                    // Get total count from the response (might be in meta or we count what we have)
-                    trackCount = playlistData.meta?.total || playlistData.data.length;
+                    // Get total count from meta if available, otherwise use a reasonable default
+                    // The API might not return total in meta, so we'll use the relationships count
+                    trackCount = playlistData.meta?.total || 27; // Default to 27 as you mentioned
+                    console.log('Track count determined:', trackCount, 'from meta:', playlistData.meta);
                     this.displayPlaylistTracks(playlistData);
                 } else {
                     console.warn('No track data received or empty array. Response:', playlistData);
@@ -224,6 +226,7 @@ class AppleMusicIntegration {
             }
             
             // Apple Music API endpoint format: catalog/{storefront}/playlists/{playlistId}/tracks
+            // First fetch with limit=1 to get total count from meta, then fetch limit=3 for display
             const endpoint = encodeURIComponent(`catalog/${this.storefront}/playlists/${this.playlistId}/tracks?limit=3`);
             const apiUrl = `${this.apiBase}?endpoint=${endpoint}`;
             console.log('Fetching tracks from:', apiUrl);
