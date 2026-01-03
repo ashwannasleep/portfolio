@@ -149,7 +149,16 @@ class AppleMusicIntegration {
 
         const playlistName = playlist.attributes?.name || 'My Playlist';
         const playlistDescription = playlist.attributes?.description?.standard || '';
-        const playlistArtwork = playlist.attributes?.artwork?.url?.replace('{w}', '500').replace('{h}', '500') || '';
+        
+        // Get artwork URL and format it properly
+        let playlistArtwork = '';
+        if (playlist.attributes?.artwork?.url) {
+            playlistArtwork = playlist.attributes.artwork.url
+                .replace('{w}', '500')
+                .replace('{h}', '500')
+                .replace('{f}', 'jpg');
+        }
+        
         const playlistUrl = `https://music.apple.com/us/playlist/${this.playlistId}`;
         
         // Get track count from attributes (set by loadPlaylistData if available)
@@ -170,9 +179,19 @@ class AppleMusicIntegration {
         playerContainer.innerHTML = `
             <div style="display: flex; align-items: center; gap: var(--spacing-lg); padding: var(--spacing-md);">
                 <div style="flex-shrink: 0;">
-                    <img src="${playlistArtwork}" alt="${playlistName}" 
-                         style="width: 80px; height: 80px; border-radius: 8px; object-fit: cover;"
-                         onerror="this.style.display='none'">
+                    ${playlistArtwork ? `
+                        <img src="${playlistArtwork}" alt="${playlistName}" 
+                             style="width: 80px; height: 80px; border-radius: 12px; object-fit: cover; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);"
+                             onerror="this.onerror=null; this.src=''; this.style.display='none';">
+                    ` : `
+                        <div style="width: 80px; height: 80px; border-radius: 12px; background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M9 18V5l12-2v13"></path>
+                                <circle cx="6" cy="18" r="3"></circle>
+                                <circle cx="18" cy="16" r="3"></circle>
+                            </svg>
+                        </div>
+                    `}
                 </div>
                 <div style="flex: 1; min-width: 0;">
                     <div style="display: flex; align-items: center; gap: var(--spacing-sm); margin-bottom: var(--spacing-xs);">
