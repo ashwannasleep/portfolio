@@ -106,6 +106,19 @@ async function generateJWT(teamId, keyId, privateKey) {
 
 export default {
   async fetch(request, env) {
+    // Handle CORS preflight requests
+    if (request.method === 'OPTIONS') {
+      return new Response(null, {
+        status: 204,
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET, OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type',
+          'Access-Control-Max-Age': '86400'
+        }
+      });
+    }
+    
     // Only allow GET requests
     if (request.method !== 'GET') {
       return new Response(
@@ -114,7 +127,8 @@ export default {
           status: 405,
           headers: {
             'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*'
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET, OPTIONS'
           }
         }
       );
