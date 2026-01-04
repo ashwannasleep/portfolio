@@ -5,9 +5,11 @@ compatibility_flags = ["nodejs_compat"]
 
 # Custom domain route for ashwannasleep.com
 # Use path routing on main domain
-# After deployment, add this route in Cloudflare Dashboard:
-# Routes: ashwannasleep.com/api/apple-music/*
-routes = ["ashwannasleep.com/api/apple-music/*"]
+# Note: Routes need to be configured in Cloudflare Dashboard after deployment
+# Go to: Workers & Pages > apple-music-data > Triggers > Routes
+# Add route: ashwannasleep.com/api/apple-music/*
+# For now, routes are commented out - configure in Dashboard instead
+# routes = ["ashwannasleep.com/api/apple-music/*"]
 
 [env.production]
 vars = { }

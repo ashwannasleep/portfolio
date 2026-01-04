@@ -5,8 +5,9 @@ class AppleMusicIntegration {
         // Hardcoded configuration - Ashley's personal playlist only
         // This ensures we ONLY show Ashley's music, never visitor data
         this.mediaIdentifier = 'media.ashwannasleep.music'; // Ashley's Apple Music Media Identifier
-        // Using path on main domain: ashwannasleep.com/api/apple-music
-        this.apiBase = '/api/apple-music'; // Cloudflare Worker on same domain (relative path)
+        // Using Cloudflare Workers dev URL for now
+        // After setting up custom route in Dashboard, change to: '/api/apple-music'
+        this.apiBase = 'https://apple-music-data.wunjingchang-work.workers.dev'; // Cloudflare Worker URL
         this.playlistId = 'pl.u-8aAVZ6qho0lEWVJ'; // Ashley's personal Apple Music playlist ID (hardcoded)
         this.storefront = 'us'; // United States storefront
         // DISABLED auto-refresh to prevent exceeding free tier limits
