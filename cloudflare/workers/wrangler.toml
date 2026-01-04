@@ -3,6 +3,10 @@ main = "apple-music-data.js"
 compatibility_date = "2024-01-01"
 compatibility_flags = ["nodejs_compat"]
 
+# Custom domain route for ashwannasleep.com
+# Uncomment after setting up custom domain in Cloudflare Dashboard:
+# routes = ["api.ashwannasleep.com/*"]
+
 [env.production]
 vars = { }
 
