@@ -2,11 +2,7 @@
   "name": "portfolio-v3",
   "version": "1.0.0",
   "description": "Ashley Chang's Portfolio with Apple Music Integration",
-  "dependencies": {
-    "jsonwebtoken": "^9.0.2"
-  },
   "engines": {
     "node": ">=18.0.0"
   }
 }
-

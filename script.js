@@ -201,39 +201,10 @@ function initSmoothScrolling() {
 // Apple Music integration is handled in apple-music-integration.js
 // The AppleMusicIntegration class initializes automatically when the script loads
 
-// Utility functions
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-}
-
-// Performance optimization
-const debouncedScrollHandler = debounce(() => {
-    // Handle scroll events efficiently
-}, 10);
-
-window.addEventListener('scroll', debouncedScrollHandler);
-
 // Error handling
 window.addEventListener('error', (e) => {
     console.error('Portfolio error:', e.error);
 });
-
-// Service Worker registration (for future PWA features)
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        // navigator.serviceWorker.register('/sw.js')
-        //     .then(registration => console.log('SW registered'))
-        //     .catch(error => console.log('SW registration failed'));
-    });
-}
 
 // Project Details functionality
 function initProjectDetails() {

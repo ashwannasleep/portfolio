@@ -57,7 +57,6 @@ class AppleMusicIntegration {
             // Check cache first to avoid unnecessary API calls
             const now = Date.now();
             if (this.cachedData && this.cacheTimestamp && (now - this.cacheTimestamp) < this.cacheExpiry) {
-                console.log('Using cached data to save API calls');
                 this.displayPlaylistPlayer(this.cachedData.playlistInfo);
                 this.displayPlaylistTracks(this.cachedData.playlistData);
                 return;
@@ -69,15 +68,12 @@ class AppleMusicIntegration {
             
             try {
                 playlistData = await this.fetchPlaylistTracks();
-                console.log('Playlist tracks data received:', playlistData);
                 if (playlistData && playlistData.data && playlistData.data.length > 0) {
                     // Get total count from meta if available, otherwise use a reasonable default
                     // The API might not return total in meta, so we'll use the relationships count
                     trackCount = playlistData.meta?.total || 27; // Default to 27 as you mentioned
-                    console.log('Track count determined:', trackCount, 'from meta:', playlistData.meta);
                     this.displayPlaylistTracks(playlistData);
                 } else {
-                    console.warn('No track data received or empty array. Response:', playlistData);
                     this.showEmptyState('No tracks found in playlist');
                 }
             } catch (error) {
@@ -97,7 +93,6 @@ class AppleMusicIntegration {
                     }
                     this.displayPlaylistPlayer(playlistInfo.data);
                 } else {
-                    console.warn('No playlist info data received');
                     this.showPlaceholderPlayer();
                 }
             } catch (error) {
@@ -112,7 +107,6 @@ class AppleMusicIntegration {
                     playlistInfo: playlistInfo.data
                 };
                 this.cacheTimestamp = now;
-                console.log('Data cached for', this.cacheExpiry / 1000 / 60, 'minutes');
             }
         } catch (error) {
             console.error('Error loading Apple Music data:', error);
@@ -134,8 +128,6 @@ class AppleMusicIntegration {
             
             const endpoint = encodeURIComponent(`catalog/${this.storefront}/playlists/${this.playlistId}`);
             const apiUrl = `${this.apiBase}?endpoint=${endpoint}`;
-            console.log('Fetching playlist info from:', apiUrl);
-            
             const response = await fetch(apiUrl, {
                 method: 'GET',
                 headers: {
@@ -147,18 +139,15 @@ class AppleMusicIntegration {
             const contentType = response.headers.get('content-type');
             if (!contentType || !contentType.includes('application/json')) {
                 const text = await response.text();
-                console.error('Non-JSON response received:', text.substring(0, 500));
                 throw new Error(`Expected JSON but got ${contentType}. Response: ${text.substring(0, 200)}`);
             }
 
             if (!response.ok) {
                 const errorText = await response.text();
-                console.error('API Error Response:', errorText);
                 throw new Error(`HTTP error! status: ${response.status}, message: ${errorText.substring(0, 200)}`);
             }
 
             const data = await response.json();
-            console.log('Playlist info response:', data);
             return data;
         } catch (error) {
             console.error('Error fetching playlist info:', error);
@@ -271,8 +260,6 @@ class AppleMusicIntegration {
             // Fetch all tracks first, then we can randomize or select specific ones
             const endpoint = encodeURIComponent(`catalog/${this.storefront}/playlists/${this.playlistId}/tracks?limit=100`);
             const apiUrl = `${this.apiBase}?endpoint=${endpoint}`;
-            console.log('Fetching tracks from:', apiUrl);
-            
             const response = await fetch(apiUrl, {
                 method: 'GET',
                 headers: {
@@ -284,18 +271,15 @@ class AppleMusicIntegration {
             const contentType = response.headers.get('content-type');
             if (!contentType || !contentType.includes('application/json')) {
                 const text = await response.text();
-                console.error('Non-JSON response received:', text.substring(0, 500));
                 throw new Error(`Expected JSON but got ${contentType}. Response: ${text.substring(0, 200)}`);
             }
 
             if (!response.ok) {
                 const errorText = await response.text();
-                console.error('API Error Response:', errorText);
                 throw new Error(`HTTP error! status: ${response.status}, message: ${errorText.substring(0, 200)}`);
             }
 
             const data = await response.json();
-            console.log('API Response:', data);
             return data;
         } catch (error) {
             console.error('Error fetching playlist tracks:', error);
@@ -360,10 +344,6 @@ class AppleMusicIntegration {
         if (!tracksContainer) return;
 
         // If there's an error, show it briefly, otherwise show skeleton
-        if (errorMessage) {
-            console.error('Showing error state:', errorMessage);
-        }
-
         // Show a subtle loading state that matches the track card design
         tracksContainer.innerHTML = '';
         
@@ -393,4 +373,3 @@ if (document.readyState === 'loading') {
 } else {
     new AppleMusicIntegration();
 }
-
