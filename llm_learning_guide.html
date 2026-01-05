@@ -103,9 +103,7 @@
         </button>
       </div>
 
-      <p class="mt-6 text-white/80 text-sm">
-        Tip: Use <span class="kbd">Ctrl</span> + <span class="kbd">F</span> (or <span class="kbd">Cmd</span> + <span class="kbd">F</span>) to search quickly.
-      </p>
+      
     </div>
   </header>
 
@@ -122,7 +120,6 @@
         <a href="#inference" class="text-sky-700">Inference</a>
         <a href="#eval" class="text-sky-700">Eval</a>
         <a href="#safety" class="text-sky-700">Safety</a>
-        <a href="#course" class="text-sky-700">Playlist</a>
         <a href="#roadmap" class="text-sky-700">Roadmap</a>
       </div>
     </div>
@@ -424,55 +421,49 @@
             </div>
           </div>
 
-          <div class="bg-white">
-            <h3 class="text-2xl font-bold mb-4 text-emerald-700">Decoding Playground (Toy Sampling)</h3>
-            <p class="text-sm text-gray-700 mb-6">
-              This is a simplified sampling simulator that shows how <strong>temperature</strong> and <strong>top-p</strong> change randomness.
-              (Not a real model — just intuition.)
-            </p>
-
-            <div class="grid md:grid-cols-3 gap-6">
-              <div class="md:col-span-1 bg-gray-50 border border-gray-200 rounded-lg p-5">
-                <div class="space-y-4">
-                  <div>
-                    <label class="block text-sm font-bold mb-2" for="temp">Temperature</label>
-                    <input id="temp" type="range" min="0" max="2" step="0.05" value="0.7" oninput="updateSampling()"
-                      class="w-full" />
-                    <div class="text-sm text-gray-700 mt-1">T = <span class="mono font-bold" id="tempVal">0.70</span></div>
-                  </div>
-
-                  <div>
-                    <label class="block text-sm font-bold mb-2" for="topP">Top-p (nucleus)</label>
-                    <input id="topP" type="range" min="0.1" max="1" step="0.05" value="0.9" oninput="updateSampling()"
-                      class="w-full" />
-                    <div class="text-sm text-gray-700 mt-1">p = <span class="mono font-bold" id="topPVal">0.90</span></div>
-                  </div>
-
-                  <div class="flex flex-wrap gap-2 pt-1">
-                    <button class="bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700 transition interactive-button"
-                      onclick="sampleOne()">Sample 1 token</button>
-                    <button class="bg-white"
-                      onclick="resetSampling()">Reset</button>
-                  </div>
-
-                  <div class="bg-white border border-gray-200 rounded-lg p-4">
-                    <div class="text-sm text-gray-600">Generated (toy) continuation:</div>
-                    <div class="mono font-bold mt-1" id="toyOutput">—</div>
-                  </div>
-
-                  <div class="bg-sky-50 border-l-4 border-sky-400 p-4 rounded">
-                    <p class="text-sm text-gray-700">
-                      <strong>Rule:</strong> Lower temperature = more deterministic. Higher temperature = more variety (and more errors).
-                    </p>
-                  </div>
+          <div class="bg-gradient-to-r from-sky-50 to-violet-50 rounded-xl p-8 shadow-sm border border-gray-100">
+            <h3 class="text-2xl font-extrabold mb-6 text-center">Interactive: Token + Cost Estimator</h3>
+            <div class="grid md:grid-cols-2 gap-8">
+              <div>
+                <label class="block font-bold mb-2">Paste text (we'll approximate tokens):</label>
+                <textarea id="tokenText" class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-sky-300"
+                  rows="6" placeholder="Paste a paragraph here..."></textarea>
+                <div class="mt-3 text-sm text-gray-600">
+                  Note: tokenization varies by model. This uses a simple approximation for planning.
                 </div>
               </div>
 
-              <div class="md:col-span-2 bg-gray-50 border border-gray-200 rounded-lg p-5">
-                <canvas id="samplingChart" height="180" aria-label="Sampling distribution chart" role="img"></canvas>
-                <p class="text-xs text-gray-500">
-                  The chart shows a toy probability distribution over next-token candidates after temperature + top-p are applied.
-                </p>
+              <div class="bg-white rounded-xl p-6 border border-gray-200">
+                <div class="grid grid-cols-2 gap-4">
+                  <div>
+                    <div class="text-sm text-gray-500">Characters</div>
+                    <div id="charCountNew" class="text-2xl font-extrabold">0</div>
+                  </div>
+                  <div>
+                    <div class="text-sm text-gray-500">Approx Tokens</div>
+                    <div id="tokenCountNew" class="text-2xl font-extrabold text-sky-700">0</div>
+                  </div>
+                </div>
+
+                <div class="mt-5">
+                  <label class="block font-bold mb-2">Optional: price per 1M tokens (your model/provider):</label>
+                  <div class="flex gap-3 items-center">
+                    <input id="pricePerM" type="number" min="0" step="0.01" value="0"
+                      class="w-40 p-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-sky-300" />
+                    <span class="text-gray-600 text-sm">USD / 1,000,000 tokens</span>
+                  </div>
+                  <div class="mt-3 text-sm text-gray-500">
+                    We don't hardcode prices because they change. Enter your own.
+                  </div>
+                </div>
+
+                <div class="mt-6 bg-slate-50 border border-slate-200 rounded-lg p-4">
+                  <div class="text-sm text-gray-500 mb-1">Estimated cost for this text</div>
+                  <div id="costEstimate" class="text-xl font-extrabold text-emerald-700">$0.00</div>
+                  <div class="text-xs text-gray-500 mt-1">
+                    This is a rough planning number (tokens and billing differ by provider and settings).
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -756,74 +747,6 @@
         </section>
 
         <div class="section-divider"></div>
-
-        <!-- COURSE / PLAYLIST -->
-        <section id="course" class="mb-16">
-          <h2 class="text-4xl font-bold text-center mb-8 text-gray-800">Course Companion: YouTube Playlist</h2>
-
-          <div class="bg-white">
-            <div class="flex items-start justify-between gap-6 flex-wrap">
-              <div>
-                <h3 class="text-2xl font-bold mb-2 text-sky-700">Large Language Models (LLMs) Playlist</h3>
-                <p class="text-gray-700">
-                  Here’s the playlist you shared. I embedded it so you can follow along while using this page as notes + tools.
-                </p>
-                <p class="text-sm text-gray-600 mt-2">
-                  Playlist link: <span class="mono">https://youtube.com/playlist?list=PLoROMvodv4rObv1FMizXqumgVVdzX4_05</span>
-                </p>
-              </div>
-              <div class="flex gap-2">
-                <button class="bg-sky-600 text-white px-4 py-2 rounded-lg hover:bg-sky-700 transition interactive-button"
-                  onclick="scrollToSection('roadmap')">Match to roadmap</button>
-                <button class="bg-white"
-                  onclick="window.open('https://youtube.com/playlist?list=PLoROMvodv4rObv1FMizXqumgVVdzX4_05','_blank')">Open on YouTube</button>
-              </div>
-            </div>
-
-            <div class="mt-6 bg-gray-50 border border-gray-200 rounded-xl p-4">
-              <div class="relative w-full" style="padding-top: 56.25%;">
-                <iframe
-                  class="absolute inset-0 w-full h-full rounded-lg"
-                  src="https://www.youtube.com/embed/videoseries?list=PLoROMvodv4rObv1FMizXqumgVVdzX4_05"
-                  title="LLM Playlist"
-                  frameborder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowfullscreen>
-                </iframe>
-              </div>
-              <p class="text-xs text-gray-500 mt-3">
-                If the embed is blocked on some networks, use the “Open on YouTube” button above.
-              </p>
-            </div>
-
-            <div class="mt-6 grid md:grid-cols-3 gap-6">
-              <div class="bg-sky-50 border border-sky-200 rounded-lg p-5">
-                <h4 class="font-bold text-sky-800 mb-2">How to study</h4>
-                <ul class="text-sm text-gray-700 space-y-2">
-                  <li>Watch 1 video</li>
-                  <li>Write 5 bullet notes</li>
-                  <li>Implement 1 mini-demo (prompt/RAG/eval)</li>
-                </ul>
-              </div>
-              <div class="bg-emerald-50 border border-emerald-200 rounded-lg p-5">
-                <h4 class="font-bold text-emerald-800 mb-2">What to build</h4>
-                <ul class="text-sm text-gray-700 space-y-2">
-                  <li>RAG FAQ bot</li>
-                  <li>Summarizer with citations</li>
-                  <li>Eval dashboard for prompts</li>
-                </ul>
-              </div>
-              <div class="bg-violet-50 border border-violet-200 rounded-lg p-5">
-                <h4 class="font-bold text-violet-800 mb-2">Portfolio angle</h4>
-                <ul class="text-sm text-gray-700 space-y-2">
-                  <li>Show failure cases</li>
-                  <li>Show eval metrics</li>
-                  <li>Show safety guardrails</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </section>
 
         <!-- ROADMAP -->
         <section id="roadmap" class="mb-16">
@@ -1425,8 +1348,7 @@ Support:
       { id: 'finetune', label: 'RAG vs fine-tune vs tools' },
       { id: 'inference', label: 'Latency + ops checklist' },
       { id: 'eval', label: 'Eval rubric + golden set' },
-      { id: 'safety', label: 'Safety + injection defense' },
-      { id: 'course', label: 'Playlist study session' }
+      { id: 'safety', label: 'Safety + injection defense' }
     ];
 
     function loadProgress() {
