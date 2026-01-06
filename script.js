@@ -119,10 +119,10 @@ function initScrollEffects() {
         });
     });
     
-    // Scroll animations
+    // Scroll animations with Intersection Observer - Faster and earlier trigger
     const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
+        threshold: 0.05,
+        rootMargin: '0px 0px 100px 0px' // Trigger 100px before element enters viewport
     };
     
     const observer = new IntersectionObserver((entries) => {
@@ -130,18 +130,47 @@ function initScrollEffects() {
             if (entry.isIntersecting) {
                 entry.target.style.opacity = '1';
                 entry.target.style.transform = 'translateY(0)';
+                observer.unobserve(entry.target);
             }
         });
     }, observerOptions);
     
-    // Observe elements for animation
-    const animatedElements = document.querySelectorAll('.skill-card, .interest-card, .project-card, .contact-link');
-    animatedElements.forEach(el => {
+    // Observe elements for animation - Faster transitions, minimal delay
+    const animatedElements = document.querySelectorAll('.skill-item, .interest-item, .project-card, .contact-link, .cert-card, .approach-item, .learning-card');
+    animatedElements.forEach((el, index) => {
         el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        el.style.transform = 'translateY(15px)'; // Reduced from 30px
+        // Faster transition (0.3s), minimal delay (0.02s per item)
+        el.style.transition = `opacity 0.3s ease ${index * 0.02}s, transform 0.3s ease ${index * 0.02}s`;
         observer.observe(el);
     });
+    
+    // Animate sections on load (only once) - Faster
+    const sections = document.querySelectorAll('section');
+    let sectionsAnimated = false;
+    
+    const animateSections = () => {
+        if (sectionsAnimated) return;
+        sectionsAnimated = true;
+        
+        sections.forEach((section, index) => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(10px)'; // Reduced from 20px
+            setTimeout(() => {
+                // Faster transition (0.4s), minimal delay (0.05s per section)
+                section.style.transition = `opacity 0.4s ease ${index * 0.05}s, transform 0.4s ease ${index * 0.05}s`;
+                section.style.opacity = '1';
+                section.style.transform = 'translateY(0)';
+            }, 10); // Reduced from 50ms
+        });
+    };
+    
+    // Trigger on load
+    if (document.readyState === 'loading') {
+        window.addEventListener('load', animateSections);
+    } else {
+        animateSections();
+    }
 }
 
 // Photo gallery functionality - Continuous clockwise rotation with all photos moving
