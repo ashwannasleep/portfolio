@@ -38,12 +38,24 @@
 
     <!-- Hero Section -->
 <section id="home" class="hero">
+    <!-- MONU Notification Banner -->
+    <div class="monu-notification">
+      <a href="https://www.monu-planner.com/" target="_blank" class="monu-notification-link">
+        <span class="new-badge">New</span>
+        <span class="notification-text">MONU Planner is live!</span>
+        <svg class="notification-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+    </div>
+    
     <div class="hero-container">
       <div class="hero-content">
         <h1 class="hero-title">
           <span class="greeting">Hello,</span>
-          <span class="name typing-heading">I’m Ashley Chang</span>
+          <span class="name typing-heading">I'm Ashley Chang</span>
         </h1>
+        <p class="hero-role">Founder of MONU</p>
         <p class="hero-subtitle">
           Frontend Developer & UX/UI Designer — builds seamless, minimalist digital experiences that blend technical precision with design clarity.
         </p>
@@ -67,26 +79,36 @@
     <!-- Music Section -->
     <section class="music-section">
         <div class="container">
-            <h2 class="section-title">🎵 What I'm Listening To</h2>
-            <p class="section-subtitle">Ashley's current music rotation</p>
+            <h2 class="music-section-title">🎵 What I'm Listening To</h2>
             
-            <div class="spotify-player" id="apple-music-player-container">
-                <!-- Apple Music playlist player will be loaded here -->
-                <div id="apple-music-player" style="border-radius:12px; background: var(--bg-secondary); padding: var(--spacing-lg); border: 1px solid var(--border-color); min-height: 100px;">
-                    <div style="display: flex; align-items: center; gap: var(--spacing-lg);">
-                        <div style="width: 80px; height: 80px; border-radius: 12px; background: linear-gradient(90deg, var(--border-color) 25%, rgba(255,255,255,0.5) 50%, var(--border-color) 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; flex-shrink: 0;"></div>
-                        <div style="flex: 1; min-width: 0;">
-                            <div style="height: 16px; background: var(--border-color); border-radius: 4px; margin-bottom: 12px; width: 40%; animation: shimmer 1.5s infinite;"></div>
-                            <div style="height: 20px; background: var(--border-color); border-radius: 4px; margin-bottom: 8px; width: 60%; animation: shimmer 1.5s infinite;"></div>
-                            <div style="height: 14px; background: var(--border-color); border-radius: 4px; width: 30%; animation: shimmer 1.5s infinite;"></div>
+            <div class="music-layout">
+                <div class="spotify-player" id="apple-music-player-container">
+                    <!-- Apple Music playlist player will be loaded here -->
+                    <div id="apple-music-player" style="width: 100%; height: 100%;">
+                        <div style="width: 100%; height: auto; min-height: 320px; background: #1a1a1a; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; box-sizing: border-box;">
+                            <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 20px; flex-shrink: 0;">
+                                <div style="width: 100px; height: 100px; border-radius: 12px; background: linear-gradient(90deg, #2a2a2a 25%, rgba(255,255,255,0.1) 50%, #2a2a2a 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; flex-shrink: 0;"></div>
+                                <div style="flex: 1; min-width: 0;">
+                                    <div style="height: 20px; background: linear-gradient(90deg, #2a2a2a 25%, rgba(255,255,255,0.1) 50%, #2a2a2a 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: 4px; margin-bottom: 8px; width: 60%;"></div>
+                                    <div style="height: 14px; background: linear-gradient(90deg, #2a2a2a 25%, rgba(255,255,255,0.1) 50%, #2a2a2a 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: 4px; width: 40%;"></div>
+                                </div>
+                            </div>
+                            <div style="flex: 1;">
+                                <div style="display: flex; align-items: center; gap: 12px; padding: 12px; margin-bottom: 4px;">
+                                    <div style="width: 48px; height: 48px; border-radius: 8px; background: linear-gradient(90deg, #2a2a2a 25%, rgba(255,255,255,0.1) 50%, #2a2a2a 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite;"></div>
+                                    <div style="flex: 1;">
+                                        <div style="height: 15px; background: linear-gradient(90deg, #2a2a2a 25%, rgba(255,255,255,0.1) 50%, #2a2a2a 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: 4px; margin-bottom: 6px; width: 70%;"></div>
+                                        <div style="height: 13px; background: linear-gradient(90deg, #2a2a2a 25%, rgba(255,255,255,0.1) 50%, #2a2a2a 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: 4px; width: 50%;"></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            
-            <h3 class="recent-tracks-title">From My Playlist</h3>
-            <div class="tracks-grid" id="tracks-container">
-                <!-- Apple Music playlist tracks will be loaded here -->
+                
+                <div class="tracks-grid" id="tracks-container">
+                    <!-- Apple Music playlist tracks will be loaded here -->
+                </div>
             </div>
         </div>
     </section>
@@ -94,7 +116,7 @@
     <!-- Work Section -->
     <section id="work" class="work">
         <div class="container">
-            <h2 class="section-title">My Skills & Projects</h2>
+            <h2 class="section-title">My Skills</h2>
             
             <!-- Skills Grid -->
             <div class="skills-grid">
@@ -103,7 +125,7 @@
                         <i class="fas fa-palette"></i>
                     </div>
                     <h3>UI & Visual Design</h3>
-                    <p>Passionate about creating clean, modern, and engaging interfaces. Skilled in typography, color theory, and layout design for digital products.</p>
+                    <p>Creating clean, modern interfaces with strong typography, color theory, and layout design.</p>
                 </div>
                 
                 <div class="skill-card">
@@ -111,7 +133,7 @@
                         <i class="fas fa-code"></i>
                     </div>
                     <h3>Web Design & Development</h3>
-                    <p>Experience designing and coding responsive websites using HTML, CSS, and JavaScript. Familiar with front-end frameworks like React.</p>
+                    <p>Designing and coding responsive websites using HTML, CSS, JavaScript, and React.</p>
                 </div>
                 
                 <div class="skill-card">
@@ -119,15 +141,7 @@
                         <i class="fas fa-mobile-alt"></i>
                     </div>
                     <h3>Prototyping & Wireframing</h3>
-                    <p>Skilled in using Figma and Adobe XD to create low and high-fidelity prototypes, helping bring ideas to life before development.</p>
-                </div>
-                
-                <div class="skill-card">
-                    <div class="skill-icon">
-                        <i class="fas fa-image"></i>
-                    </div>
-                    <h3>Graphic Design</h3>
-                    <p>Proficient in using Photoshop and Illustrator to create visually appealing graphics, icons, and branding materials.</p>
+                    <p>Using Figma to create low and high-fidelity prototypes that bring ideas to life.</p>
                 </div>
                 
                 <div class="skill-card">
@@ -135,38 +149,42 @@
                         <i class="fas fa-search"></i>
                     </div>
                     <h3>UX Research</h3>
-                    <p>Conducting usability testing, interviews, and competitive analysis to improve user experience and product accessibility.</p>
-                </div>
-                
-                <div class="skill-card">
-                    <div class="skill-icon">
-                        <i class="fas fa-tasks"></i>
-                    </div>
-                    <h3>Project Management</h3>
-                    <p>Familiar with agile methodologies and collaboration tools like Notion to efficiently manage projects and workflows.</p>
+                    <p>Conducting usability testing, interviews, and competitive analysis to improve user experience.</p>
                 </div>
             </div>
             
-            <!-- Current Work Section -->
-            <div class="current-work-section">
-                <h3>What I'm Working On</h3>
-                <div class="current-work-card">
-                    <div class="current-work-icon">
-                        <i class="fas fa-rocket"></i>
-                    </div>
-                    <div class="current-work-info">
-                        <h4>Expanding MONU's Ecosystem</h4>
-                        <p>Currently developing new features for MONU including advanced analytics, team collaboration tools, and cross-platform synchronization. Building on the success of the iOS app to create a comprehensive productivity suite.</p>
-                        <div class="current-tech">
-                            <span class="tech-tag">SwiftUI</span>
-                            <span class="tech-tag">AWS Amplify</span>
-                            <span class="tech-tag">Figma</span>
-                            <span class="tech-tag">User Research</span>
-                        </div>
-                    </div>
+            <!-- Skills Marquee -->
+            <div class="skills-marquee">
+                <div class="marquee-track">
+                    <div class="skill-item"><i class="fab fa-figma"></i> Figma</div>
+                    <div class="skill-item"><i class="fas fa-pencil-ruler"></i> Adobe XD</div>
+                    <div class="skill-item"><i class="fab fa-sketch"></i> Sketch</div>
+                    <div class="skill-item"><i class="fas fa-lightbulb"></i> InVision</div>
+                    <div class="skill-item"><i class="fas fa-network-wired"></i> Miro</div>
+                    <div class="skill-item"><i class="fas fa-sticky-note"></i> Notion</div>
+                    <div class="skill-item"><i class="fab fa-github"></i> GitHub</div>
+                    <div class="skill-item"><i class="fab fa-html5"></i> HTML</div>
+                    <div class="skill-item"><i class="fab fa-css3-alt"></i> CSS</div>
+                    <div class="skill-item"><i class="fab fa-js"></i> JavaScript</div>
+                    <div class="skill-item"><i class="fab fa-react"></i> React</div>
+                    <div class="skill-item"><i class="fas fa-code"></i> VS Code</div>
+                    
+                    <!-- Duplicate for seamless loop -->
+                    <div class="skill-item"><i class="fab fa-figma"></i> Figma</div>
+                    <div class="skill-item"><i class="fas fa-pencil-ruler"></i> Adobe XD</div>
+                    <div class="skill-item"><i class="fab fa-sketch"></i> Sketch</div>
+                    <div class="skill-item"><i class="fas fa-lightbulb"></i> InVision</div>
+                    <div class="skill-item"><i class="fas fa-network-wired"></i> Miro</div>
+                    <div class="skill-item"><i class="fas fa-sticky-note"></i> Notion</div>
+                    <div class="skill-item"><i class="fab fa-github"></i> GitHub</div>
+                    <div class="skill-item"><i class="fab fa-html5"></i> HTML</div>
+                    <div class="skill-item"><i class="fab fa-css3-alt"></i> CSS</div>
+                    <div class="skill-item"><i class="fab fa-js"></i> JavaScript</div>
+                    <div class="skill-item"><i class="fab fa-react"></i> React</div>
+                    <div class="skill-item"><i class="fas fa-code"></i> VS Code</div>
                 </div>
             </div>
-
+            
             <!-- Projects Grid -->
             <div class="projects-section">
                 <h3>Some of My Projects</h3>
@@ -224,15 +242,23 @@
                         </a>
                         <div class="project-info">
                             <h4>AI Chat Demo</h4>
-                            <p class="project-tagline">Lightweight AI-Powered Chat Interface</p>
+                            <p class="project-tagline">Conversational AI Interface</p>
                             <button class="project-details-btn" data-project="ai-chat">
                                 <span class="btn-text">Learn More</span>
                                 <i class="fas fa-chevron-down"></i>
                             </button>
                             <div class="project-details" id="ai-chat-details">
                                 <p>
-                                    A lightweight AI chat prototype built to explore conversational UI patterns and front-end AI integration. 
-                                    Focused on message flow, loading states, and responsive interaction to create a smooth, human-like chat experience.
+                                    A polished chat interface exploring real-world async patterns, error handling, and seamless UX. 
+                                    Built with careful attention to loading states, message flow, and responsive design — creating conversations that feel natural and intuitive.
+                                </p>
+                                <p>
+                                    <strong>How It Helps:</strong> Demonstrates practical async request handling, error recovery states, and smooth message transitions. 
+                                    Useful for understanding how to build responsive chat interfaces that handle edge cases gracefully, with clear feedback for loading, retry, and success states — essential patterns for modern web applications.
+                                </p>
+                                <p>
+                                    <strong>What I Learned:</strong> Building this project deepened my understanding of async JavaScript patterns, error handling strategies, and UX design for real-time interfaces. 
+                                    I learned how to create smooth loading states, implement retry mechanisms, and design conversation flows that feel natural and responsive.
                                 </p>
                                 <div class="project-tech">
                                     <span class="tech-tag">HTML</span>
@@ -266,6 +292,14 @@
                                 <p>
                                     <strong>Role:</strong> Product Designer & Frontend Developer
                                 </p>
+                                <p>
+                                    <strong>How It Helps:</strong> Provides a practical example of organizing complex job-search workflows into a clean, structured interface. 
+                                    Demonstrates how thoughtful information architecture and user flows can reduce stress in high-stakes scenarios like career planning and job applications.
+                                </p>
+                                <p>
+                                    <strong>What I Learned:</strong> This project taught me how to design for high-stress user contexts, where clarity and organization are critical. 
+                                    I learned to prioritize information hierarchy, create intuitive navigation patterns, and build prototypes that effectively communicate product concepts before full development.
+                                </p>
                                 
                                 <div class="project-tech">
                                     <span class="tech-tag">Web Development</span>
@@ -280,6 +314,39 @@
                             <h4>Project 4</h4>
                             <p class="project-tagline">Coming Soon</p>
                             <p class="project-description">Stay tuned for my next exciting project!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Current Work Section -->
+            <div class="current-work-section">
+                <h3>What I'm Working On</h3>
+                <div class="current-work-card">
+                    <div class="work-status-badge">
+                        <span class="status-dot"></span>
+                        <span class="status-text">In Progress</span>
+                    </div>
+                    <div class="current-work-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <div class="current-work-info">
+                        <h4>Expanding MONU's Ecosystem</h4>
+                        <p>Currently developing new features for MONU including advanced analytics, team collaboration tools, and cross-platform synchronization. Building on the success of the iOS app to create a comprehensive productivity suite.</p>
+                        <div class="work-progress">
+                            <div class="progress-label">
+                                <span>Progress</span>
+                                <span class="progress-percent">65%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill"></div>
+                            </div>
+                        </div>
+                        <div class="current-tech">
+                            <span class="tech-tag">SwiftUI</span>
+                            <span class="tech-tag">AWS Amplify</span>
+                            <span class="tech-tag">Figma</span>
+                            <span class="tech-tag">User Research</span>
                         </div>
                     </div>
                 </div>
@@ -383,7 +450,7 @@
 
         <p>I'm Ashley, a product-focused Frontend Developer and UX/UI Designer who builds clean, intuitive digital experiences.</p>
 
-        <p>My latest project, <strong>MONU</strong>, is a digital planner app now live on the App Store. I designed it in Figma, developed it with SwiftUI, and integrated AWS Amplify for cloud functionality — leading the entire process from concept to deployment. Projects like this strengthened my ability to move seamlessly between product design and engineering, turning ideas into polished, production-ready applications.</p>
+        <p>My latest project, <strong><a href="https://www.monu-planner.com/" target="_blank" class="monu-link" data-tooltip="Plan smarter, live better">MONU</a></strong>, is a digital planner app now live on the App Store. I designed it in Figma, developed it with SwiftUI, and integrated AWS Amplify for cloud functionality — leading the entire process from concept to deployment. Projects like this strengthened my ability to move seamlessly between product design and engineering, turning ideas into polished, production-ready applications.</p>
 
         <p>Outside of coding, I find inspiration in journaling, music, fitness, and time with my two dogs — reminders to stay curious, balanced, and creative in both life and work.</p>
 
@@ -393,104 +460,8 @@
 </section>
   
                 
-                <!-- Skills Marquee -->
-                <div class="skills-marquee">
-                    <div class="marquee-track">
-                        <div class="skill-item"><i class="fab fa-figma"></i> Figma</div>
-                        <div class="skill-item"><i class="fas fa-pencil-ruler"></i> Adobe XD</div>
-                        <div class="skill-item"><i class="fab fa-sketch"></i> Sketch</div>
-                        <div class="skill-item"><i class="fas fa-lightbulb"></i> InVision</div>
-                        <div class="skill-item"><i class="fas fa-network-wired"></i> Miro</div>
-                        <div class="skill-item"><i class="fas fa-sticky-note"></i> Notion</div>
-                        <div class="skill-item"><i class="fab fa-github"></i> GitHub</div>
-                        <div class="skill-item"><i class="fab fa-html5"></i> HTML</div>
-                        <div class="skill-item"><i class="fab fa-css3-alt"></i> CSS</div>
-                        <div class="skill-item"><i class="fab fa-js"></i> JavaScript</div>
-                        <div class="skill-item"><i class="fab fa-react"></i> React</div>
-                        <div class="skill-item"><i class="fas fa-code"></i> VS Code</div>
-                        
-                        <!-- Duplicate for seamless loop -->
-                        <div class="skill-item"><i class="fab fa-figma"></i> Figma</div>
-                        <div class="skill-item"><i class="fas fa-pencil-ruler"></i> Adobe XD</div>
-                        <div class="skill-item"><i class="fab fa-sketch"></i> Sketch</div>
-                        <div class="skill-item"><i class="fas fa-lightbulb"></i> InVision</div>
-                        <div class="skill-item"><i class="fas fa-network-wired"></i> Miro</div>
-                        <div class="skill-item"><i class="fas fa-sticky-note"></i> Notion</div>
-                        <div class="skill-item"><i class="fab fa-github"></i> GitHub</div>
-                        <div class="skill-item"><i class="fab fa-html5"></i> HTML</div>
-                        <div class="skill-item"><i class="fab fa-css3-alt"></i> CSS</div>
-                        <div class="skill-item"><i class="fab fa-js"></i> JavaScript</div>
-                        <div class="skill-item"><i class="fab fa-react"></i> React</div>
-                        <div class="skill-item"><i class="fas fa-code"></i> VS Code</div>
-                    </div>
-                </div>
-                
                 <div class="location-info">
                     <p>📍 Based in Houston, excited about both local and remote opportunities.</p>
-                </div>
-                
-                <!-- Personal Interests -->
-                <div class="personal-interests">
-                    <h3>Outside of Design</h3>
-                    <div class="interests-grid">
-                        <div class="interest-card">
-                            <div class="interest-icon">🎻</div>
-                            <h4>Music</h4>
-                            <p>I'm a passionate cellist. Playing the cello gives me a deep appreciation for creativity, 
-                            rhythm, and harmony—something I try to bring into my design work as well.</p>
-                        </div>
-                        <div class="interest-card">
-                            <div class="interest-icon">🐶</div>
-                            <h4>Pets</h4>
-                            <p>I have two dogs who have a way of keeping me lighthearted and embracing life's simplicity.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Photo Gallery -->
-                <div class="photo-gallery">
-                    <div class="gallery-container">
-                        <div class="gallery-slide active">
-                            <img src="images/Dog1.jpg" alt="Dog 1">
-                        </div>
-                        <div class="gallery-slide">
-                            <img src="images/Dog2.jpg" alt="Dog 2">
-                        </div>
-                        <div class="gallery-slide">
-                            <img src="images/Dog3.jpg" alt="Dog 3">
-                        </div>
-                        <div class="gallery-slide">
-                            <img src="images/Dog4.jpg" alt="Dog 4">
-                        </div>
-                        <div class="gallery-slide">
-                            <img src="images/Dog5.jpg" alt="Dog 5">
-                        </div>
-                        <div class="gallery-slide">
-                            <img src="images/Dog6.jpg" alt="Dog 6">
-                        </div>
-                        <div class="gallery-slide">
-                            <img src="images/Dog7.jpg" alt="Dog 7">
-                        </div>
-                        <div class="gallery-slide">
-                            <img src="images/Dog8.jpg" alt="Dog 8">
-                        </div>
-                        <div class="gallery-slide">
-                            <img src="images/Dog9.jpg" alt="Dog 9">
-                        </div>
-                        <div class="gallery-slide">
-                            <img src="images/Dog10.jpg" alt="Dog 10">
-                        </div>
-                        <div class="gallery-slide">
-                            <img src="images/Cello1.jpg" alt="Cello 1">
-                        </div>
-                        <div class="gallery-slide">
-                            <img src="images/Cello2.jpg" alt="Cello 2">
-                        </div>
-                    </div>
-                    <div class="gallery-controls">
-                        <button class="gallery-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
-                        <button class="gallery-btn next-btn"><i class="fas fa-chevron-right"></i></button>
-                    </div>
                 </div>
             </div>
         </div>
@@ -552,27 +523,117 @@
                 
                 <div class="learning-approach">
                     <h3>My Learning Philosophy</h3>
-                    <div class="approach-grid">
+                    <div class="approach-list">
                         <div class="approach-item">
-                            <div class="approach-icon">📚</div>
-                            <h4>Study Deeply</h4>
-                            <p>I don't just skim the surface. I dive deep into concepts until I understand the underlying principles.</p>
+                            <div class="approach-number">01</div>
+                            <div class="approach-content">
+                                <h4>Study Deeply</h4>
+                                <p>I don't just skim the surface. I dive deep into concepts until I understand the underlying principles.</p>
+                            </div>
                         </div>
                         <div class="approach-item">
-                            <div class="approach-icon">✍️</div>
-                            <h4>Document Everything</h4>
-                            <p>Creating comprehensive guides helps me solidify my understanding and creates value for others.</p>
+                            <div class="approach-number">02</div>
+                            <div class="approach-content">
+                                <h4>Document Everything</h4>
+                                <p>Creating comprehensive guides helps me solidify my understanding and creates value for others.</p>
+                            </div>
                         </div>
                         <div class="approach-item">
-                            <div class="approach-icon">🎯</div>
-                            <h4>Build Projects</h4>
-                            <p>I apply what I learn by building real applications, turning theory into practical experience.</p>
+                            <div class="approach-number">03</div>
+                            <div class="approach-content">
+                                <h4>Build Projects</h4>
+                                <p>I apply what I learn by building real applications, turning theory into practical experience.</p>
+                            </div>
                         </div>
                         <div class="approach-item">
-                            <div class="approach-icon">😊</div>
-                            <h4>Feel-Good Learning</h4>
-                            <p>Learning should be enjoyable, not stressful. When you enjoy the process, you retain more and stay motivated longer.</p>
+                            <div class="approach-number">04</div>
+                            <div class="approach-content">
+                                <h4>Feel-Good Learning</h4>
+                                <p>Learning should be enjoyable, not stressful. When you enjoy the process, you retain more and stay motivated longer.</p>
+                            </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Personal Interests Section -->
+    <section class="personal-interests-section">
+        <div class="container">
+            <h3 class="section-title">Personal Interests</h3>
+            <div class="interests-layout">
+                <div class="interests-content">
+                    <div class="interest-item">
+                        <div class="interest-content">
+                            <span class="interest-icon">🎻</span>
+                            <div class="interest-text">
+                                <h4>Music</h4>
+                                <p>I'm a passionate cellist. Playing the cello gives me a deep appreciation for creativity, rhythm, and harmony—something I try to bring into my work as well.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="interest-item">
+                        <div class="interest-content">
+                            <span class="interest-icon">🐶</span>
+                            <div class="interest-text">
+                                <h4>Pets</h4>
+                                <p>I have two dogs who have a way of keeping me lighthearted and embracing life's simplicity.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Photo Gallery -->
+                <div class="photo-gallery">
+                <div class="gallery-container">
+                    <div class="gallery-stack">
+                        <div class="gallery-slide slide-back" data-position="back">
+                            <img src="images/Dog1.jpg" alt="Dog 1">
+                        </div>
+                        <div class="gallery-slide slide-middle" data-position="middle">
+                            <img src="images/Dog2.jpg" alt="Dog 2">
+                        </div>
+                        <div class="gallery-slide slide-front active" data-position="front">
+                            <img src="images/Dog3.jpg" alt="Dog 3">
+                        </div>
+                    </div>
+                    <!-- Hidden slides for rotation -->
+                    <div class="gallery-slide hidden" data-index="0">
+                        <img src="images/Dog1.jpg" alt="Dog 1">
+                    </div>
+                    <div class="gallery-slide hidden" data-index="1">
+                        <img src="images/Dog2.jpg" alt="Dog 2">
+                    </div>
+                    <div class="gallery-slide hidden" data-index="2">
+                        <img src="images/Dog3.jpg" alt="Dog 3">
+                    </div>
+                    <div class="gallery-slide hidden" data-index="3">
+                        <img src="images/Dog4.jpg" alt="Dog 4">
+                    </div>
+                    <div class="gallery-slide hidden" data-index="4">
+                        <img src="images/Dog5.jpg" alt="Dog 5">
+                    </div>
+                    <div class="gallery-slide hidden" data-index="5">
+                        <img src="images/Dog6.jpg" alt="Dog 6">
+                    </div>
+                    <div class="gallery-slide hidden" data-index="6">
+                        <img src="images/Dog7.jpg" alt="Dog 7">
+                    </div>
+                    <div class="gallery-slide hidden" data-index="7">
+                        <img src="images/Dog8.jpg" alt="Dog 8">
+                    </div>
+                    <div class="gallery-slide hidden" data-index="8">
+                        <img src="images/Dog9.jpg" alt="Dog 9">
+                    </div>
+                    <div class="gallery-slide hidden" data-index="9">
+                        <img src="images/Dog10.jpg" alt="Dog 10">
+                    </div>
+                    <div class="gallery-slide hidden" data-index="10">
+                        <img src="images/Cello1.jpg" alt="Cello 1">
+                    </div>
+                    <div class="gallery-slide hidden" data-index="11">
+                        <img src="images/Cello2.jpg" alt="Cello 2">
                     </div>
                 </div>
             </div>

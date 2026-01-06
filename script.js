@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initSmoothScrolling();
     // Apple Music integration is initialized in apple-music-integration.js
     initProjectDetails();
+    initProgressBar();
 });
 
 // Navigation functionality
@@ -143,38 +144,129 @@ function initScrollEffects() {
     });
 }
 
-// Photo gallery functionality
+// Photo gallery functionality - Continuous clockwise rotation with all photos moving
 function initGallery() {
-    const slides = document.querySelectorAll('.gallery-slide');
-    const prevBtn = document.querySelector('.prev-btn');
-    const nextBtn = document.querySelector('.next-btn');
-    let currentSlide = 0;
+    const hiddenSlides = document.querySelectorAll('.gallery-slide.hidden');
+    const slideFront = document.querySelector('.slide-front');
+    const slideMiddle = document.querySelector('.slide-middle');
+    const slideBack = document.querySelector('.slide-back');
     
-    function showSlide(index) {
-        slides.forEach((slide, i) => {
-            slide.classList.toggle('active', i === index);
-        });
+    if (!hiddenSlides.length || !slideFront || !slideMiddle || !slideBack) return;
+    
+    const totalSlides = hiddenSlides.length;
+    let currentIndex = 2; // Start with third image (index 2)
+    let rotationTime = 0; // Time-based rotation
+    
+    // Get image sources from hidden slides
+    const imageSources = Array.from(hiddenSlides).map(slide => {
+        const img = slide.querySelector('img');
+        return img ? img.src : '';
+    });
+    
+    function updateImages() {
+        // Calculate indices for triangle positions
+        const frontIndex = currentIndex;
+        const middleIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+        const backIndex = (currentIndex - 2 + totalSlides) % totalSlides;
+        
+        // Update images
+        const imgFront = slideFront.querySelector('img');
+        const imgMiddle = slideMiddle.querySelector('img');
+        const imgBack = slideBack.querySelector('img');
+        
+        if (imgFront && imageSources[frontIndex]) {
+            imgFront.src = imageSources[frontIndex];
+        }
+        if (imgMiddle && imageSources[middleIndex]) {
+            imgMiddle.src = imageSources[middleIndex];
+        }
+        if (imgBack && imageSources[backIndex]) {
+            imgBack.src = imageSources[backIndex];
+        }
     }
     
-    function nextSlide() {
-        currentSlide = (currentSlide + 1) % slides.length;
-        showSlide(currentSlide);
+    function updateRotation() {
+        // Increment rotation time (controls speed)
+        rotationTime += 0.002; // Adjust for speed (0.002 = ~5 seconds per full cycle, slower)
+        
+        // Calculate progress (0 to 1, loops)
+        const progress = rotationTime % 1;
+        
+        // Three positions in triangle, each photo moves through all three
+        // Front: progress 0-0.33 = front position, 0.33-0.66 = middle, 0.66-1 = back
+        // Middle: offset by 0.33
+        // Back: offset by 0.66
+        
+        function getPosition(offset) {
+            const pos = (progress + offset) % 1;
+            let x, y, size, opacity, zIndex, rotation;
+            
+            if (pos < 0.33) {
+                // Front position (center-right)
+                x = -40; // Center-right
+                y = -50;
+                size = 0.75; // Fixed size, no zoom
+                opacity = 1;
+                zIndex = 3;
+                rotation = 0; // No rotation at front
+            } else if (pos < 0.66) {
+                // Middle position (left)
+                x = -80;
+                y = -50;
+                size = 0.6; // Fixed size, no zoom
+                opacity = 0.85;
+                zIndex = 2;
+                rotation = -8; // Fixed rotation
+            } else {
+                // Back position (right)
+                x = -10;
+                y = -50;
+                size = 0.55; // Fixed size, no zoom
+                opacity = 0.7;
+                zIndex = 1;
+                rotation = 6; // Fixed rotation
+            }
+            
+            return { x, y, size, opacity, zIndex, rotation };
+        }
+        
+        // Update all three photos continuously - smooth 2D rotation
+        const frontPos = getPosition(0);
+        slideFront.style.width = (frontPos.size * 100) + '%';
+        slideFront.style.height = (frontPos.size * 100) + '%';
+        slideFront.style.transform = `translate(${frontPos.x}%, ${frontPos.y}%) rotate(${frontPos.rotation}deg)`;
+        slideFront.style.zIndex = frontPos.zIndex;
+        slideFront.style.opacity = frontPos.opacity;
+        
+        const middlePos = getPosition(0.33);
+        slideMiddle.style.width = (middlePos.size * 100) + '%';
+        slideMiddle.style.height = (middlePos.size * 100) + '%';
+        slideMiddle.style.transform = `translate(${middlePos.x}%, ${middlePos.y}%) rotate(${middlePos.rotation}deg)`;
+        slideMiddle.style.zIndex = middlePos.zIndex;
+        slideMiddle.style.opacity = middlePos.opacity;
+        
+        const backPos = getPosition(0.66);
+        slideBack.style.width = (backPos.size * 100) + '%';
+        slideBack.style.height = (backPos.size * 100) + '%';
+        slideBack.style.transform = `translate(${backPos.x}%, ${backPos.y}%) rotate(${backPos.rotation}deg)`;
+        slideBack.style.zIndex = backPos.zIndex;
+        slideBack.style.opacity = backPos.opacity;
+        
+        // Update images when cycle completes
+        if (Math.floor(rotationTime) > Math.floor(rotationTime - 0.002)) {
+            currentIndex = (currentIndex + 1) % totalSlides;
+            updateImages();
+        }
+        
+        // Continue animation
+        requestAnimationFrame(updateRotation);
     }
     
-    function prevSlide() {
-        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-        showSlide(currentSlide);
-    }
+    // Initialize with first three images
+    updateImages();
     
-    // Event listeners
-    if (nextBtn) nextBtn.addEventListener('click', nextSlide);
-    if (prevBtn) prevBtn.addEventListener('click', prevSlide);
-    
-    // Auto-advance slides
-    setInterval(nextSlide, 4000);
-    
-    // Initialize first slide
-    showSlide(0);
+    // Start continuous rotation
+    updateRotation();
 }
 
 // Smooth scrolling for anchor links
@@ -200,6 +292,54 @@ function initSmoothScrolling() {
 
 // Apple Music integration is handled in apple-music-integration.js
 // The AppleMusicIntegration class initializes automatically when the script loads
+
+// Progress bar animation
+function initProgressBar() {
+    const progressBar = document.querySelector('.progress-fill');
+    const progressPercent = document.querySelector('.progress-percent');
+    
+    if (!progressBar || !progressPercent) return;
+    
+    const targetProgress = 65; // Target percentage
+    let currentProgress = 0;
+    const duration = 2000; // 2 seconds
+    const increment = targetProgress / (duration / 16); // 60fps
+    
+    // Use Intersection Observer to trigger animation when element is visible
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && currentProgress === 0) {
+                animateProgress();
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.3
+    });
+    
+    const progressContainer = progressBar.closest('.current-work-card');
+    if (progressContainer) {
+        observer.observe(progressContainer);
+    }
+    
+    function animateProgress() {
+        // Reset to 0
+        progressBar.style.width = '0%';
+        progressPercent.textContent = '0%';
+        
+        const interval = setInterval(() => {
+            currentProgress += increment;
+            
+            if (currentProgress >= targetProgress) {
+                currentProgress = targetProgress;
+                clearInterval(interval);
+            }
+            
+            progressBar.style.width = currentProgress + '%';
+            progressPercent.textContent = Math.round(currentProgress) + '%';
+        }, 16); // ~60fps
+    }
+}
 
 // Error handling
 window.addEventListener('error', (e) => {
