@@ -13,37 +13,56 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Navigation functionality
 function initNavigation() {
+    const body = document.body;
     const hamburger = document.getElementById('hamburger');
     const navMenu = document.getElementById('nav-menu');
     const navLinks = document.querySelectorAll('.nav-link');
-    
+
+    const closeMobileMenu = () => {
+        if (!navMenu || !hamburger) return;
+        navMenu.classList.remove('active');
+        hamburger.classList.remove('active');
+        body.classList.remove('menu-open');
+    };
+
     // Mobile menu toggle
     if (hamburger && navMenu) {
-        hamburger.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-            hamburger.classList.toggle('active');
+        hamburger.addEventListener('click', (event) => {
+            event.stopPropagation();
+            const isActive = navMenu.classList.toggle('active');
+            hamburger.classList.toggle('active', isActive);
+            body.classList.toggle('menu-open', isActive);
+        });
+
+        navMenu.addEventListener('click', (event) => {
+            event.stopPropagation();
+        });
+
+        document.addEventListener('click', closeMobileMenu);
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                closeMobileMenu();
+            }
         });
     }
-    
+
     // Close mobile menu when clicking on links
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            navMenu.classList.remove('active');
-            hamburger.classList.remove('active');
-        });
+    navLinks.forEach((link) => {
+        link.addEventListener('click', closeMobileMenu);
     });
-    
+
     // Active link highlighting
     window.addEventListener('scroll', () => {
         const sections = document.querySelectorAll('section[id]');
         const scrollPos = window.scrollY + 100;
-        
+
         sections.forEach(section => {
             const sectionTop = section.offsetTop;
             const sectionHeight = section.offsetHeight;
             const sectionId = section.getAttribute('id');
             const correspondingLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
-            
+
             if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
                 navLinks.forEach(link => link.classList.remove('active'));
                 if (correspondingLink) {
