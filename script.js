@@ -114,38 +114,46 @@ function initTypingHeading() {
 // Theme toggle functionality - SIMPLIFIED AND WORKING
 function initThemeToggle() {
     const themeToggle = document.getElementById('theme-toggle');
-    const body = document.body;
     
     // Check for saved theme preference or default to light mode
     const savedTheme = localStorage.getItem('theme') || 'light';
     
     // Apply initial theme
-    if (savedTheme === 'dark') {
-        body.classList.add('dark-mode');
-    } else {
-        body.classList.remove('dark-mode');
-    }
-    
-    updateThemeIcon(savedTheme);
+    setTheme(savedTheme, false);
     
     // Add click event listener
     if (themeToggle) {
         themeToggle.addEventListener('click', function() {
-            const isDark = body.classList.contains('dark-mode');
-            
-            if (isDark) {
-                // Switch to light mode
-                body.classList.remove('dark-mode');
-                localStorage.setItem('theme', 'light');
-                updateThemeIcon('light');
-            } else {
-                // Switch to dark mode
-                body.classList.add('dark-mode');
-                localStorage.setItem('theme', 'dark');
-                updateThemeIcon('dark');
-            }
+            const isDark = document.body.classList.contains('dark-mode');
+            setTheme(isDark ? 'light' : 'dark');
         });
     }
+}
+
+function setTheme(theme, persist = true) {
+    const body = document.body;
+    const normalizedTheme = theme === 'dark' ? 'dark' : 'light';
+
+    body.classList.toggle('dark-mode', normalizedTheme === 'dark');
+    updateThemeIcon(normalizedTheme);
+    updateThemeColor(normalizedTheme);
+
+    if (persist) {
+        localStorage.setItem('theme', normalizedTheme);
+    }
+}
+
+function updateThemeColor(theme) {
+    const color = theme === 'dark' ? '#0A0A0A' : '#FAFAFA';
+    let themeMeta = document.querySelector('meta[name="theme-color"]');
+
+    if (!themeMeta) {
+        themeMeta = document.createElement('meta');
+        themeMeta.setAttribute('name', 'theme-color');
+        document.head.appendChild(themeMeta);
+    }
+
+    themeMeta.setAttribute('content', color);
 }
 
 function updateThemeIcon(theme) {
