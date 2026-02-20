@@ -1,0 +1,82 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="80" y1="40" x2="1080" y2="760" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0F172A"/>
+      <stop offset="1" stop-color="#1E293B"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="230" y1="160" x2="960" y2="640" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#111827"/>
+      <stop offset="1" stop-color="#0B1220"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="460" y1="110" x2="760" y2="460" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#22D3EE"/>
+      <stop offset="1" stop-color="#3B82F6"/>
+    </linearGradient>
+    <linearGradient id="sales" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#14B8A6"/>
+      <stop offset="1" stop-color="#0EA5E9"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="800" rx="44" fill="url(#bg)"/>
+  <rect x="100" y="100" width="1000" height="600" rx="32" fill="url(#panel)" stroke="#334155" stroke-width="2"/>
+  <rect x="132" y="132" width="936" height="62" rx="18" fill="#0F172A" stroke="#1E293B"/>
+  <circle cx="168" cy="163" r="8" fill="#EF4444"/>
+  <circle cx="194" cy="163" r="8" fill="#F59E0B"/>
+  <circle cx="220" cy="163" r="8" fill="#10B981"/>
+  <rect x="258" y="145" width="280" height="34" rx="10" fill="#111827"/>
+  <text x="278" y="167" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#CBD5E1">Merchant Dashboard</text>
+
+  <rect x="132" y="222" width="220" height="132" rx="18" fill="#0F172A" stroke="#1E293B"/>
+  <text x="156" y="258" font-family="Arial, sans-serif" font-size="16" fill="#94A3B8">Revenue</text>
+  <text x="156" y="306" font-family="Arial, sans-serif" font-size="34" font-weight="700" fill="#F8FAFC">$48.2K</text>
+  <text x="156" y="334" font-family="Arial, sans-serif" font-size="14" fill="#34D399">+12.4% this week</text>
+
+  <rect x="372" y="222" width="220" height="132" rx="18" fill="#0F172A" stroke="#1E293B"/>
+  <text x="396" y="258" font-family="Arial, sans-serif" font-size="16" fill="#94A3B8">Orders</text>
+  <text x="396" y="306" font-family="Arial, sans-serif" font-size="34" font-weight="700" fill="#F8FAFC">1,328</text>
+  <text x="396" y="334" font-family="Arial, sans-serif" font-size="14" fill="#60A5FA">87 pending fulfillment</text>
+
+  <rect x="612" y="222" width="220" height="132" rx="18" fill="#0F172A" stroke="#1E293B"/>
+  <text x="636" y="258" font-family="Arial, sans-serif" font-size="16" fill="#94A3B8">Conversion</text>
+  <text x="636" y="306" font-family="Arial, sans-serif" font-size="34" font-weight="700" fill="#F8FAFC">4.7%</text>
+  <text x="636" y="334" font-family="Arial, sans-serif" font-size="14" fill="#22D3EE">+0.9 pts month-over-month</text>
+
+  <rect x="852" y="222" width="216" height="132" rx="18" fill="#0F172A" stroke="#1E293B"/>
+  <text x="876" y="258" font-family="Arial, sans-serif" font-size="16" fill="#94A3B8">Low Stock</text>
+  <text x="876" y="306" font-family="Arial, sans-serif" font-size="34" font-weight="700" fill="#F8FAFC">9</text>
+  <text x="876" y="334" font-family="Arial, sans-serif" font-size="14" fill="#F59E0B">Items need reorder</text>
+
+  <rect x="132" y="382" width="556" height="286" rx="22" fill="#0F172A" stroke="#1E293B"/>
+  <text x="164" y="424" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#E2E8F0">Sales Trend</text>
+
+  <line x1="164" y1="622" x2="648" y2="622" stroke="#334155" stroke-width="1.5"/>
+  <line x1="164" y1="586" x2="648" y2="586" stroke="#1E293B" stroke-width="1"/>
+  <line x1="164" y1="550" x2="648" y2="550" stroke="#1E293B" stroke-width="1"/>
+  <line x1="164" y1="514" x2="648" y2="514" stroke="#1E293B" stroke-width="1"/>
+
+  <path d="M176 596C206 590 238 520 274 530C308 540 338 574 376 560C410 548 430 480 466 476C498 472 536 520 578 498C606 484 624 448 646 438" stroke="url(#accent)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <rect x="720" y="382" width="348" height="286" rx="22" fill="#0F172A" stroke="#1E293B"/>
+  <text x="752" y="424" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#E2E8F0">Top Categories</text>
+
+  <rect x="752" y="452" width="284" height="28" rx="10" fill="#111827"/>
+  <rect x="752" y="452" width="232" height="28" rx="10" fill="url(#sales)"/>
+  <text x="760" y="471" font-family="Arial, sans-serif" font-size="13" fill="#E2E8F0">Home Essentials</text>
+  <text x="1008" y="471" font-family="Arial, sans-serif" font-size="13" fill="#E2E8F0">42%</text>
+
+  <rect x="752" y="498" width="284" height="28" rx="10" fill="#111827"/>
+  <rect x="752" y="498" width="198" height="28" rx="10" fill="#3B82F6"/>
+  <text x="760" y="517" font-family="Arial, sans-serif" font-size="13" fill="#E2E8F0">Beauty</text>
+  <text x="1008" y="517" font-family="Arial, sans-serif" font-size="13" fill="#E2E8F0">35%</text>
+
+  <rect x="752" y="544" width="284" height="28" rx="10" fill="#111827"/>
+  <rect x="752" y="544" width="154" height="28" rx="10" fill="#0EA5E9"/>
+  <text x="760" y="563" font-family="Arial, sans-serif" font-size="13" fill="#E2E8F0">Accessories</text>
+  <text x="1008" y="563" font-family="Arial, sans-serif" font-size="13" fill="#E2E8F0">27%</text>
+
+  <rect x="752" y="590" width="284" height="28" rx="10" fill="#111827"/>
+  <rect x="752" y="590" width="96" height="28" rx="10" fill="#334155"/>
+  <text x="760" y="609" font-family="Arial, sans-serif" font-size="13" fill="#E2E8F0">Other</text>
+  <text x="1008" y="609" font-family="Arial, sans-serif" font-size="13" fill="#E2E8F0">16%</text>
+</svg>

@@ -2561,7 +2561,9 @@ body.dark-mode .project-card:hover {
 
 .project-card:hover .monu-logo,
 .project-card:hover .ai-chat-logo,
-.project-card:hover .ashpire-logo {
+.project-card:hover .ashpire-logo,
+.project-card:hover .memoria-logo,
+.project-card:hover .merchant-dashboard-logo {
     opacity: 1;
     transform: scale(1.05);
 }
@@ -2807,6 +2809,32 @@ body.dark-mode .monu-screenshots {
 }
 
 .memoria-project:hover .memoria-logo {
+    opacity: 1;
+}
+
+/* Merchant Dashboard Project Card Styling */
+.merchant-dashboard-project {
+    background: var(--bg-secondary);
+    position: relative;
+    overflow: hidden;
+    transition: transform var(--transition-normal);
+}
+
+.merchant-dashboard-logo {
+    width: 100%;
+    height: auto;
+    opacity: 0.8;
+    transition: opacity var(--transition-normal);
+    border-radius: var(--radius-xl);
+    display: block;
+}
+
+.merchant-dashboard-project:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px var(--shadow-medium);
+}
+
+.merchant-dashboard-project:hover .merchant-dashboard-logo {
     opacity: 1;
 }
 
@@ -5014,5 +5042,208 @@ body:not(.dark-mode) .played-time {
 
     .track-link-indicator {
         display: none;
+    }
+}
+
+/* Project Card Responsive Scaling Fixes */
+@media (max-width: 900px) {
+    .projects-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        max-width: none;
+        gap: 0.6rem;
+    }
+
+    .project-card {
+        min-height: auto;
+    }
+
+    .project-link {
+        flex: 0 0 148px;
+        height: 148px;
+        padding: 0.45rem;
+    }
+
+    .project-link img,
+    .monu-logo,
+    .ai-chat-logo,
+    .ashpire-logo,
+    .memoria-logo,
+    .merchant-dashboard-logo {
+        opacity: 1;
+        transform: none;
+    }
+
+    .project-info {
+        padding: 0.6rem;
+    }
+
+    .project-info h4 {
+        font-size: 0.98rem;
+        line-height: 1.25;
+        margin-bottom: 0.3rem;
+    }
+
+    .project-tagline {
+        display: none;
+    }
+
+    .project-actions {
+        margin-top: 0.5rem;
+        gap: 0.45rem;
+    }
+
+    .project-action-btn,
+    .project-details-btn {
+        min-height: 36px;
+        font-size: 0.74rem;
+        padding: 0.38rem 0.42rem;
+    }
+
+    .project-action-btn i,
+    .project-details-btn i {
+        font-size: 0.72rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .projects-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        max-width: none;
+        gap: 0.6rem;
+    }
+
+    .project-link {
+        flex: 0 0 132px;
+        height: 132px;
+        padding: 0.42rem;
+    }
+
+    .project-info {
+        padding: 0.56rem;
+    }
+
+    .project-info h4 {
+        font-size: 0.92rem;
+        margin-bottom: 0.22rem;
+    }
+
+    .project-tagline {
+        display: none;
+    }
+
+    .project-actions {
+        margin-top: 0.38rem;
+        gap: 0.34rem;
+    }
+
+    .project-action-btn,
+    .project-details-btn {
+        min-height: 33px;
+        font-size: 0.72rem;
+        padding: 0.3rem 0.34rem;
+    }
+}
+
+@media (max-width: 430px) {
+    .project-link {
+        flex-basis: 118px;
+        height: 118px;
+    }
+
+    .project-info {
+        padding: 0.5rem;
+    }
+
+    .project-info h4 {
+        font-size: 0.86rem;
+    }
+
+    .project-action-btn,
+    .project-details-btn {
+        min-height: 31px;
+        font-size: 0.68rem;
+    }
+}
+
+/* Certifications as plain rows (no boxed cards) */
+.certifications-grid {
+    grid-template-columns: 1fr;
+    max-width: 860px;
+    gap: 0;
+}
+
+.cert-card {
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: none;
+    min-height: 0;
+    padding: 0.9rem 0;
+    grid-template-columns: 52px minmax(0, 1fr);
+    gap: 0.7rem;
+    align-items: center;
+}
+
+.cert-card:last-child {
+    border-bottom: 0;
+}
+
+.cert-card:hover {
+    background: transparent;
+    border-color: var(--border-color);
+    transform: none;
+    box-shadow: none;
+}
+
+body.dark-mode .cert-card {
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid var(--border-color-dark);
+    box-shadow: none;
+}
+
+body.dark-mode .cert-card:hover {
+    background: transparent;
+    border-color: var(--border-color-dark);
+    box-shadow: none;
+}
+
+.cert-logo {
+    width: 48px;
+    height: 48px;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    padding: 0;
+    box-shadow: none;
+}
+
+.cert-logo-img {
+    border-radius: 0;
+}
+
+body.dark-mode .cert-logo {
+    border: 0;
+    background: transparent;
+}
+
+.cert-card:hover .cert-logo {
+    border: 0;
+    background: transparent;
+    transform: none;
+    box-shadow: none;
+}
+
+@media (max-width: 640px) {
+    .cert-card {
+        padding: 0.72rem 0;
+        grid-template-columns: 44px minmax(0, 1fr);
+        gap: 0.58rem;
+    }
+
+    .cert-logo {
+        width: 42px;
+        height: 42px;
     }
 }
