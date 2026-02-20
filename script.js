@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initScrollEffects();
     initGallery();
     initSmoothScrolling();
+    initTypingHeading();
     // Apple Music integration is initialized in apple-music-integration.js
     initProjectDetails();
     initProgressBar();
@@ -70,6 +71,43 @@ function initNavigation() {
                 }
             }
         });
+    });
+}
+
+// Mobile typing effect for hero name (avoids CSS width/ch spacing artifacts)
+function initTypingHeading() {
+    if (!window.matchMedia('(max-width: 767px)').matches) return;
+
+    const typingHeadings = document.querySelectorAll('.typing-heading');
+    if (!typingHeadings.length) return;
+
+    typingHeadings.forEach((heading) => {
+        if (heading.dataset.mobileTyped === 'true') return;
+
+        const fullText = (heading.dataset.fullText || heading.textContent || '').trim();
+        if (!fullText) return;
+
+        heading.dataset.mobileTyped = 'true';
+        heading.dataset.fullText = fullText;
+        heading.textContent = '';
+
+        // Keep only cursor blink on mobile; JS controls character reveal.
+        heading.style.width = 'auto';
+        heading.style.maxWidth = '100%';
+        heading.style.overflow = 'visible';
+        heading.style.whiteSpace = 'nowrap';
+        heading.style.animation = 'blink 0.75s step-end infinite';
+
+        let charIndex = 0;
+        const typeStep = () => {
+            charIndex += 1;
+            heading.textContent = fullText.slice(0, charIndex);
+            if (charIndex < fullText.length) {
+                window.setTimeout(typeStep, 95);
+            }
+        };
+
+        window.setTimeout(typeStep, 160);
     });
 }
 
@@ -397,44 +435,90 @@ window.addEventListener('error', (e) => {
 // Project Details functionality
 function initProjectDetails() {
     const detailButtons = document.querySelectorAll('.project-details-btn');
-    
-    detailButtons.forEach(button => {
-        button.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            
+    if (!detailButtons.length) return;
+
+    const modal = document.createElement('div');
+    modal.className = 'project-modal';
+    modal.setAttribute('aria-hidden', 'true');
+    modal.innerHTML = `
+        <div class="project-modal-overlay" data-modal-close></div>
+        <div class="project-modal-content" role="dialog" aria-modal="true" aria-labelledby="project-modal-title">
+            <div class="project-modal-header">
+                <h4 id="project-modal-title"></h4>
+                <button class="project-modal-close" type="button" aria-label="Close project details">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="project-modal-body"></div>
+        </div>
+    `;
+    document.body.appendChild(modal);
+
+    const modalTitle = modal.querySelector('#project-modal-title');
+    const modalBody = modal.querySelector('.project-modal-body');
+    const modalCloseBtn = modal.querySelector('.project-modal-close');
+    const modalOverlay = modal.querySelector('.project-modal-overlay');
+    let activeButton = null;
+
+    const resetButtonState = () => {
+        detailButtons.forEach((btn) => btn.classList.remove('active'));
+        if (activeButton) {
+            activeButton.focus();
+        }
+        activeButton = null;
+    };
+
+    const closeModal = () => {
+        modal.classList.remove('active');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('project-modal-open');
+        resetButtonState();
+    };
+
+    const handleKeydown = (event) => {
+        if (event.key === 'Escape') {
+            closeModal();
+        }
+    };
+
+    const openModal = (button, details, title) => {
+        if (!modalBody || !modalTitle) return;
+
+        detailButtons.forEach((btn) => btn.classList.remove('active'));
+        button.classList.add('active');
+        activeButton = button;
+
+        modalTitle.textContent = title || 'Project Details';
+        modalBody.innerHTML = details.innerHTML;
+        modalBody.scrollTop = 0;
+
+        modal.classList.add('active');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('project-modal-open');
+        modalCloseBtn?.focus();
+    };
+
+    detailButtons.forEach((button) => {
+        button.addEventListener('click', (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+
             const projectId = button.getAttribute('data-project');
             const details = document.getElementById(`${projectId}-details`);
-            
-            if (details) {
-                const isActive = details.classList.contains('active');
-                
-                // Close all other details
-                document.querySelectorAll('.project-details').forEach(detail => {
-                    detail.classList.remove('active');
-                });
-                document.querySelectorAll('.project-details-btn').forEach(btn => {
-                    btn.classList.remove('active');
-                });
-                
-                // Toggle current details
-                if (!isActive) {
-                    details.classList.add('active');
-                    button.classList.add('active');
-                }
+            const projectTitle = button.closest('.project-info')?.querySelector('h4')?.textContent?.trim();
+            if (!details) return;
+
+            const isAlreadyOpen = modal.classList.contains('active') && activeButton === button;
+            if (isAlreadyOpen) {
+                closeModal();
+                return;
             }
+
+            openModal(button, details, projectTitle);
         });
     });
-    
-    // Close details when clicking outside
-    document.addEventListener('click', (e) => {
-        if (!e.target.closest('.project-card')) {
-            document.querySelectorAll('.project-details').forEach(detail => {
-                detail.classList.remove('active');
-            });
-            document.querySelectorAll('.project-details-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-        }
-    });
+
+    modalCloseBtn?.addEventListener('click', closeModal);
+    modalOverlay?.addEventListener('click', closeModal);
+    document.addEventListener('keydown', handleKeydown);
 }

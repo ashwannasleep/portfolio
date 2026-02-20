@@ -89,6 +89,17 @@ class AppleMusicIntegration {
         }
     }
 
+    escapeHtml(value) {
+        if (typeof value !== 'string') return '';
+
+        return value
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;');
+    }
+
     async loadPlaylistData() {
         try {
             console.log('Loading playlist data...');
@@ -361,55 +372,62 @@ class AppleMusicIntegration {
         // Create playlist URL first (before using it in template strings)
         const playlistUrl = `https://music.apple.com/us/playlist/${this.playlistId}`;
 
-        // Create cover image HTML with error handling and play button overlay - larger size
+        const safePlaylistName = this.escapeHtml(playlistName);
+
+        // Create cover image HTML with error handling and play button overlay
         const coverImageHtml = playlistArtwork 
-            ? `<div class="playlist-cover-container" style="width: 140px; height: 140px; border-radius: 16px; overflow: hidden; flex-shrink: 0; box-shadow: 0 6px 16px rgba(0,0,0,0.4); position: relative; background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%); cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;" onclick="window.open('${playlistUrl}', '_blank')">
-                   <img class="playlist-cover-img" src="${playlistArtwork}" alt="${playlistName}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease;">
-                   <div class="playlist-cover-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease; pointer-events: none;">
-                       <svg width="40" height="40" viewBox="0 0 24 24" fill="white" style="filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));">
+            ? `<a class="playlist-cover-container" href="${playlistUrl}" target="_blank" rel="noopener noreferrer" aria-label="Open ${safePlaylistName} on Apple Music">
+                   <img class="playlist-cover-img" src="${playlistArtwork}" alt="${safePlaylistName}" loading="lazy">
+                   <div class="playlist-cover-overlay">
+                       <svg class="playlist-cover-play-icon" viewBox="0 0 24 24" fill="white">
                            <path d="M8 5v14l11-7z"/>
                        </svg>
                    </div>
-                   <div class="playlist-cover-fallback" style="width: 100%; height: 100%; display: none; align-items: center; justify-content: center; position: absolute; top: 0; left: 0;">
-                       <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                   <div class="playlist-cover-fallback">
+                       <svg class="playlist-cover-icon" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                            <path d="M9 18V5l12-2v13"></path>
                            <circle cx="6" cy="18" r="3"></circle>
                            <circle cx="18" cy="16" r="3"></circle>
                        </svg>
                    </div>
-               </div>`
-            : `<div class="playlist-cover-container" style="width: 140px; height: 140px; border-radius: 16px; background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%); display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 6px 16px rgba(0,0,0,0.4); cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;" onclick="window.open('${playlistUrl}', '_blank')">
-                   <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+               </a>`
+            : `<a class="playlist-cover-container" href="${playlistUrl}" target="_blank" rel="noopener noreferrer" aria-label="Open playlist on Apple Music">
+                   <svg class="playlist-cover-icon" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                        <path d="M9 18V5l12-2v13"></path>
                        <circle cx="6" cy="18" r="3"></circle>
                        <circle cx="18" cy="16" r="3"></circle>
                    </svg>
-               </div>`;
+               </a>`;
         
         // Get playlist description if available
         const playlistDescription = playlist.attributes?.description?.standard || 
-                                   playlist.attributes?.description?.short ||
-                                   playlist.description ||
-                                   null;
+            playlist.attributes?.description?.short ||
+            playlist.description ||
+            null;
+        const safeDescription = this.escapeHtml(
+            (playlistDescription && playlistDescription.trim()) ||
+            'Personal focus mix for coding, studying, and deep work.'
+        );
+        const songLabel = trackCount === 1 ? 'song' : 'songs';
         
         playerContainer.innerHTML = `
-            <div class="custom-player" style="width: 100%; height: auto; min-height: 320px; border-radius: 16px; padding: 24px; display: flex; flex-direction: column; box-sizing: border-box;">
-                <div style="display: flex; align-items: flex-start; gap: 20px; flex-shrink: 0; margin-bottom: ${playlistDescription ? '16px' : '0'};">
+            <div class="custom-player">
+                <div class="playlist-header${playlistDescription ? ' has-description' : ''}">
                     ${coverImageHtml}
-                    <div style="flex: 1; min-width: 0; padding-top: 4px;">
-                        <h3 class="playlist-name" style="font-size: 24px; font-weight: 700; margin: 0 0 8px 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; line-height: 1.2;">${playlistName}</h3>
-                        <p class="playlist-count" style="font-size: 15px; margin: 0 0 12px 0; opacity: 0.8;">${trackCount} songs</p>
-                        ${playlistDescription ? `<p class="playlist-description" style="font-size: 13px; margin: 0; opacity: 0.7; line-height: 1.4; color: var(--text-secondary-dark);">${playlistDescription}</p>` : ''}
+                    <div class="playlist-meta">
+                        <h3 class="playlist-name">${safePlaylistName}</h3>
+                        <p class="playlist-count">${trackCount} ${songLabel}</p>
+                        <p class="playlist-description">${safeDescription}</p>
                     </div>
                 </div>
-                <div style="margin-top: auto; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.1);">
-                    <div style="display: flex; align-items: center; gap: 8px; opacity: 0.7;">
+                <div class="playlist-footer">
+                    <div class="playlist-footer-note">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M9 18V5l12-2v13"></path>
                             <circle cx="6" cy="18" r="3"></circle>
                             <circle cx="18" cy="16" r="3"></circle>
                         </svg>
-                        <span style="font-size: 13px; color: var(--text-secondary-dark); line-height: 1.4;">Music helps me focus and stay creative while working</span>
+                        <span>Music helps me focus and stay creative while working</span>
                     </div>
                 </div>
             </div>
@@ -426,20 +444,7 @@ class AppleMusicIntegration {
                 });
             }
         }
-        
-        // Add hover effect listeners for cover image
-        const coverContainer = playerContainer.querySelector('.playlist-cover-container');
-        if (coverContainer) {
-            coverContainer.addEventListener('mouseenter', () => {
-                const overlay = coverContainer.querySelector('.playlist-cover-overlay');
-                if (overlay) overlay.style.opacity = '1';
-            });
-            coverContainer.addEventListener('mouseleave', () => {
-                const overlay = coverContainer.querySelector('.playlist-cover-overlay');
-                if (overlay) overlay.style.opacity = '0';
-            });
-        }
-        
+
         // Match heights after rendering (with multiple attempts to ensure accuracy)
         setTimeout(() => {
             this.matchHeights();
@@ -457,37 +462,10 @@ class AppleMusicIntegration {
         // Get the actual content heights
         const customPlayer = playerContainer.querySelector('.custom-player');
         if (customPlayer) {
-            // Force reflow to ensure accurate measurements
-            void customPlayer.offsetHeight;
-            void tracksContainer.offsetHeight;
-            
-            // Reset heights to auto to get natural height
             customPlayer.style.height = 'auto';
-            customPlayer.style.minHeight = 'auto';
+            customPlayer.style.minHeight = '0';
             tracksContainer.style.height = 'auto';
-            tracksContainer.style.minHeight = 'auto';
-            
-            // Force another reflow
-            void customPlayer.offsetHeight;
-            void tracksContainer.offsetHeight;
-            
-            // Get the natural heights after reset
-            const playerHeight = customPlayer.offsetHeight;
-            const tracksHeight = tracksContainer.offsetHeight;
-            
-            // Set both to the maximum height (with a minimum based on content)
-            const maxHeight = Math.max(playerHeight, tracksHeight, 180);
-            
-            customPlayer.style.height = `${maxHeight}px`;
-            customPlayer.style.minHeight = `${maxHeight}px`;
-            tracksContainer.style.height = `${maxHeight}px`;
-            tracksContainer.style.minHeight = `${maxHeight}px`;
-            
-            console.log('📏 Height matching:', {
-                playerHeight,
-                tracksHeight,
-                maxHeight
-            });
+            tracksContainer.style.minHeight = '0';
         }
     }
 
@@ -502,18 +480,19 @@ class AppleMusicIntegration {
         
         // Use CSS classes instead of inline styles for better theme support
         playerContainer.innerHTML = `
-            <div class="custom-player" style="width: 100%; height: auto; min-height: 320px; border-radius: 16px; padding: 24px; display: flex; flex-direction: column; box-sizing: border-box;">
-                <div style="display: flex; align-items: flex-start; gap: 20px; flex-shrink: 0;">
-                    <div class="playlist-cover-container" style="width: 140px; height: 140px; border-radius: 16px; background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%); display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 6px 16px rgba(0,0,0,0.4);">
-                        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <div class="custom-player custom-player-loading">
+                <div class="playlist-header">
+                    <div class="playlist-cover-container">
+                        <svg class="playlist-cover-icon" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M9 18V5l12-2v13"></path>
                             <circle cx="6" cy="18" r="3"></circle>
                             <circle cx="18" cy="16" r="3"></circle>
                         </svg>
                     </div>
-                    <div style="flex: 1; min-width: 0; padding-top: 4px;">
-                        <h3 class="playlist-name" style="font-size: 24px; font-weight: 700; margin: 0 0 8px 0; line-height: 1.2;">My Playlist</h3>
-                        <p class="playlist-count" style="font-size: 15px; margin: 0; opacity: 0.8;">Loading...</p>
+                    <div class="playlist-meta">
+                        <h3 class="playlist-name">Ashwannamusic</h3>
+                        <p class="playlist-count">Loading playlist...</p>
+                        <p class="playlist-description">Syncing your latest tracks from Apple Music.</p>
                     </div>
                 </div>
             </div>
@@ -622,13 +601,16 @@ class AppleMusicIntegration {
                     .replace('{f}', 'jpg');
             }
             
-            const trackName = track.name || 'Unknown Track';
-            const artist = track.artistName || 'Unknown Artist';
+            const trackName = this.escapeHtml(track.name || 'Unknown Track');
+            const artist = this.escapeHtml(track.artistName || 'Unknown Artist');
             const appleMusicUrl = track.url || (track.albumId ? `https://music.apple.com/us/album/${track.albumId}` : '#');
             
+            trackCard.setAttribute('role', 'link');
+            trackCard.setAttribute('tabindex', '0');
+
             trackCard.innerHTML = `
                 <div class="track-image">
-                    <img src="${albumArt}" alt="${trackName} cover" loading="lazy" onerror="this.src='images/fuji.jpg'">
+                    <img src="${albumArt || 'images/fuji.jpg'}" alt="${trackName} cover" loading="lazy" onerror="this.src='images/fuji.jpg'">
                     <div class="track-play-overlay">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="white" style="filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));">
                             <path d="M8 5v14l11-7z"/>
@@ -639,22 +621,24 @@ class AppleMusicIntegration {
                     <h4 class="track-name">${trackName}</h4>
                     <p class="track-artist">${artist}</p>
                 </div>
+                <div class="track-link-indicator" aria-hidden="true">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M7 17L17 7"></path>
+                        <path d="M9 7h8v8"></path>
+                    </svg>
+                </div>
             `;
             
-            // Make the entire card clickable with smooth interaction
-            trackCard.style.cursor = 'pointer';
-            trackCard.addEventListener('click', () => {
+            const openTrack = () => {
                 window.open(appleMusicUrl, '_blank');
-            });
-            
-            // Add touch support for mobile
-            trackCard.addEventListener('touchstart', (e) => {
-                trackCard.style.transform = 'scale(0.98)';
-            });
-            trackCard.addEventListener('touchend', () => {
-                setTimeout(() => {
-                    trackCard.style.transform = '';
-                }, 150);
+            };
+
+            trackCard.addEventListener('click', openTrack);
+            trackCard.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    openTrack();
+                }
             });
             
             tracksContainer.appendChild(trackCard);
