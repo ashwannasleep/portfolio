@@ -123,7 +123,7 @@ body {
 
 @media (max-width: 480px) {
     .container {
-        padding: 0 var(--spacing-sm);
+        padding: 0 var(--spacing-md);
     }
     
     /* Ensure touch targets are at least 44x44px */
@@ -1600,7 +1600,7 @@ body.dark-mode .interest-content {
     position: relative;
     width: 100%;
     max-width: 500px;
-    height: 350px;
+    height: 390px;
     margin: 0 auto;
     display: flex;
     align-items: center;
@@ -1666,20 +1666,25 @@ body.dark-mode .interest-content {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: 50% 24%;
     display: block;
+}
+
+.gallery-slide img[src*="Cello"] {
+    object-position: 50% 50%;
 }
 
 @media (max-width: 768px) {
     .gallery-container {
         max-width: 450px;
-        height: 320px;
+        height: 350px;
     }
 }
 
 @media (max-width: 480px) {
     .gallery-container {
         max-width: 380px;
-        height: 280px;
+        height: 310px;
     }
 }
 
@@ -2018,86 +2023,85 @@ body.dark-mode .approach-item {
 
 .certifications-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: var(--spacing-md);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.82rem;
     margin-bottom: var(--spacing-2xl);
-    max-width: 1200px;
+    max-width: 1040px;
     margin-left: auto;
     margin-right: auto;
 }
 
 @media (max-width: 768px) {
     .certifications-grid {
-        grid-template-columns: 1fr;
-        gap: var(--spacing-md);
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.66rem;
     }
 }
 
 @media (max-width: 480px) {
     .certifications-grid {
-        grid-template-columns: 1fr;
-        gap: var(--spacing-sm);
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.5rem;
     }
 }
 
 .cert-card {
-    background-color: transparent;
+    background-color: var(--bg-secondary);
     border-radius: var(--radius-lg);
-    padding: var(--spacing-lg);
+    padding: 0.95rem 0.88rem;
     border: 1px solid var(--border-color);
-    display: flex;
-    gap: var(--spacing-md);
-    align-items: center;
-    transition: all var(--transition-normal);
+    display: grid;
+    grid-template-columns: 54px minmax(0, 1fr);
+    gap: 0.72rem;
+    align-items: flex-start;
+    transition: transform var(--transition-normal), box-shadow var(--transition-normal), border-color var(--transition-normal);
     animation: slideInFromLeft 0.6s ease-out;
     position: relative;
     overflow: hidden;
+    min-height: 124px;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
 }
 
 body.dark-mode .cert-card {
     border-color: var(--border-color-dark);
-    background-color: rgba(255, 255, 255, 0.02);
+    background-color: rgba(255, 255, 255, 0.03);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 .cert-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 3px;
-    height: 100%;
-    background: linear-gradient(180deg, var(--accent-primary), var(--accent-secondary));
-    opacity: 0;
-    transition: opacity var(--transition-normal);
+    display: none;
+}
+
+.cert-card::after {
+    display: none;
 }
 
 .cert-card:hover {
-    border-color: var(--accent-primary);
-    background-color: rgba(59, 130, 246, 0.05);
-    transform: translateX(4px) translateY(-2px);
-    box-shadow: 0 8px 24px rgba(59, 130, 246, 0.2);
-}
-
-.cert-card:hover::before {
-    opacity: 1;
+    border-color: #d1d5db;
+    background-color: var(--bg-secondary);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 22px rgba(15, 23, 42, 0.08);
 }
 
 body.dark-mode .cert-card:hover {
-    background-color: rgba(59, 130, 246, 0.1);
+    border-color: #444;
+    background-color: rgba(255, 255, 255, 0.04);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.42);
 }
 
 .cert-logo {
-    width: 64px;
-    height: 64px;
+    width: 54px;
+    height: 54px;
     background-color: var(--bg-primary);
-    border-radius: var(--radius-md);
+    border-radius: 14px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    padding: 8px;
+    padding: 6px;
     border: 1px solid var(--border-color);
-    transition: all var(--transition-normal);
+    transition: transform var(--transition-normal), border-color var(--transition-normal), box-shadow var(--transition-normal);
+    box-shadow: none;
 }
 
 body.dark-mode .cert-logo {
@@ -2106,9 +2110,10 @@ body.dark-mode .cert-logo {
 }
 
 .cert-card:hover .cert-logo {
-    border-color: var(--accent-primary);
-    background-color: rgba(59, 130, 246, 0.1);
-    transform: scale(1.05);
+    border-color: var(--border-color);
+    background-color: var(--bg-primary);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(15, 23, 42, 0.08);
 }
 
 .cert-logo-img {
@@ -2119,67 +2124,68 @@ body.dark-mode .cert-logo {
     object-fit: contain;
     object-position: center;
     border-radius: var(--radius-md);
-    filter: none !important;
+    filter: saturate(0.68) contrast(1.02) !important;
     mix-blend-mode: normal;
 }
 
 .cert-info {
     flex: 1;
-}
-
-.cert-info {
-    flex: 1;
     min-width: 0;
-}
-
-.cert-info {
-    flex: 1;
-    min-width: 0;
-    position: relative;
+    padding-right: 0;
 }
 
 .cert-info h4 {
-    font-size: var(--font-size-base);
-    font-weight: 600;
-    margin-bottom: 4px;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.28rem;
     color: var(--text-primary);
-    line-height: 1.4;
+    line-height: 1.25;
     overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    transition: color var(--transition-normal);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    transition: color var(--transition-normal), transform var(--transition-normal);
+    letter-spacing: -0.01em;
 }
 
 .cert-card:hover .cert-info h4 {
-    color: var(--accent-primary);
+    color: var(--text-primary);
 }
 
 .cert-issuer {
-    font-size: var(--font-size-sm);
+    font-size: 0.82rem;
+    font-weight: 600;
     color: var(--text-secondary);
-    margin-bottom: 2px;
-    line-height: 1.4;
+    margin-bottom: 0.32rem;
+    line-height: 1.3;
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;
+    white-space: normal;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 
 .cert-date {
-    font-size: var(--font-size-xs);
+    font-size: 0.66rem;
     color: var(--text-secondary);
     margin-bottom: 0;
-    line-height: 1.3;
-    opacity: 0.7;
-    font-weight: 500;
-    display: flex;
+    line-height: 1.2;
+    opacity: 0.88;
+    font-weight: 600;
+    display: inline-flex;
     align-items: center;
-    gap: var(--spacing-xs);
+    gap: 0;
+    letter-spacing: 0.01em;
 }
 
 .cert-date::before {
-    content: '•';
-    color: var(--accent-primary);
-    opacity: 0.6;
+    display: none;
+}
+
+body.dark-mode .cert-date {
+    color: var(--text-secondary-dark);
+    opacity: 0.86;
 }
 
 .cert-button {
@@ -2817,13 +2823,27 @@ body.dark-mode .monu-screenshots {
 
 /* New Project Card Structure */
 .project-link {
-    flex: 0 0 200px;
+    flex: 0 0 220px;
+    height: 220px;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: var(--spacing-lg);
     text-decoration: none;
     transition: all var(--transition-normal);
+}
+
+.project-link img,
+.monu-logo,
+.ai-chat-logo,
+.ashpire-logo,
+.memoria-logo {
+    width: auto;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
 }
 
 .project-link:hover {
@@ -3801,25 +3821,23 @@ body:not(.dark-mode) .played-time {
 
     .tracks-grid {
         display: grid;
-        grid-template-columns: repeat(3, minmax(180px, 1fr));
+        grid-template-columns: repeat(3, minmax(0, 1fr));
         max-height: none;
-        overflow-x: auto;
-        overflow-y: hidden;
-        gap: 0.46rem;
+        overflow: hidden;
+        gap: 0.38rem;
         padding: 0 0 2px 0;
         align-items: stretch;
-        scroll-snap-type: x mandatory;
-        -webkit-overflow-scrolling: touch;
     }
 
     .track-card {
-        padding: 0.46rem;
-        gap: 0.46rem;
+        padding: 0.4rem;
+        gap: 0.34rem;
         margin-bottom: 0;
         border-radius: 12px;
         width: auto;
-        min-height: 86px;
-        scroll-snap-align: start;
+        min-height: 104px;
+        flex-direction: column;
+        align-items: flex-start;
     }
 
     .track-card:hover,
@@ -3832,23 +3850,29 @@ body:not(.dark-mode) .played-time {
     }
 
     .track-image {
-        width: 42px;
-        height: 42px;
+        width: 40px;
+        height: 40px;
         border-radius: 8px;
     }
 
     .track-info {
-        gap: 2px;
+        width: 100%;
+        gap: 3px;
     }
 
     .track-name {
-        font-size: 0.9rem;
-        line-height: 1.22;
+        font-size: 0.8rem;
+        line-height: 1.2;
+        -webkit-line-clamp: 2;
     }
 
     .track-artist {
-        font-size: 0.76rem;
+        font-size: 0.66rem;
         line-height: 1.2;
+    }
+
+    .track-link-indicator {
+        display: none;
     }
 
     .played-time {
@@ -3928,66 +3952,6 @@ body:not(.dark-mode) .played-time {
         margin-bottom: 1rem;
     }
 
-    .skills-list {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 0.6rem;
-        margin: 0 auto 0.7rem;
-        max-width: none;
-    }
-
-    .skill-item {
-        min-width: 0;
-    }
-
-    .skill-content {
-        display: grid;
-        grid-template-columns: auto 1fr;
-        gap: 0.48rem;
-        padding: 0.62rem 0.58rem;
-        min-height: 78px;
-        align-items: center;
-        justify-content: flex-start;
-        border: 1px solid var(--border-color);
-        border-radius: 14px;
-    }
-
-    .skill-content:hover {
-        padding-left: 0.58rem;
-        transform: none;
-    }
-
-    .skill-text {
-        display: flex;
-        align-items: center;
-    }
-
-    .skill-icon-wrapper {
-        width: 32px;
-        height: 32px;
-        border-radius: 10px;
-        flex-shrink: 0;
-    }
-
-    .skill-icon-wrapper i {
-        font-size: 0.78rem;
-    }
-
-    .skill-text h3 {
-        font-size: 0.82rem;
-        line-height: 1.18;
-        margin-bottom: 0;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-        text-wrap: balance;
-    }
-
-    .skill-text p {
-        display: none;
-    }
-
     .skills-marquee {
         margin-bottom: 0.75rem;
         padding: 0.32rem 0.15rem;
@@ -4018,7 +3982,7 @@ body:not(.dark-mode) .played-time {
     .projects-section,
     .current-work-section,
     .certifications-section {
-        margin-top: var(--spacing-xl);
+        margin-top: var(--spacing-2xl);
     }
 
     .projects-grid {
@@ -4054,9 +4018,9 @@ body:not(.dark-mode) .played-time {
     }
 
     .project-info h4 {
-        font-size: 0.82rem;
-        margin-bottom: 1px;
-        line-height: 1.22;
+        font-size: 0.84rem;
+        margin-bottom: 0.24rem;
+        line-height: 1.26;
     }
 
     .project-tagline {
@@ -4064,17 +4028,17 @@ body:not(.dark-mode) .played-time {
     }
 
     .project-actions {
-        margin-top: 0.3rem;
+        margin-top: 0.46rem;
         flex-direction: row;
-        gap: 0.25rem;
+        gap: 0.4rem;
     }
 
     .project-action-btn,
     .project-details-btn {
         width: 50%;
-        padding: 0.24rem 0.3rem;
-        font-size: 0.62rem;
-        min-height: 30px;
+        padding: 0.3rem 0.34rem;
+        font-size: 0.64rem;
+        min-height: 34px;
         border-radius: 8px;
     }
 
@@ -4193,38 +4157,58 @@ body:not(.dark-mode) .played-time {
 
     .certifications-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 0.52rem;
+        gap: 0.66rem;
     }
 
     .cert-card {
         align-items: flex-start;
-        padding: 0.56rem;
-        gap: 0.52rem;
+        min-height: 112px;
+        grid-template-columns: 46px minmax(0, 1fr);
+        padding: 0.74rem 0.64rem;
+        gap: 0.58rem;
+        border-radius: 14px;
+    }
+
+    .cert-card::after {
+        display: none;
     }
 
     .cert-logo {
-        width: 40px;
-        height: 40px;
-        padding: 5px;
+        width: 46px;
+        height: 46px;
+        padding: 6px;
+        border-radius: 12px;
+    }
+
+    .cert-info {
+        padding-right: 0;
     }
 
     .cert-info h4 {
-        font-size: 0.78rem;
-        line-height: 1.24;
-        white-space: normal;
+        font-size: 0.88rem;
+        line-height: 1.22;
+        margin-bottom: 0.24rem;
         display: -webkit-box;
-        -webkit-line-clamp: 3;
+        -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
         overflow: hidden;
     }
 
     .cert-issuer {
-        font-size: 0.66rem;
+        font-size: 0.74rem;
+        margin-bottom: 0.2rem;
+        line-height: 1.24;
         white-space: normal;
     }
 
     .cert-date {
         font-size: 0.62rem;
+        padding: 0;
+        gap: 0;
+    }
+
+    .cert-date::before {
+        display: none;
     }
 
     .learning-card {
@@ -4327,7 +4311,7 @@ body:not(.dark-mode) .played-time {
 
     .gallery-container {
         max-width: 100%;
-        height: 236px;
+        height: 280px;
     }
 
     .gallery-controls {
@@ -4396,12 +4380,12 @@ body:not(.dark-mode) .played-time {
     .container,
     .hero-container,
     .monu-notification {
-        padding-left: var(--spacing-sm);
-        padding-right: var(--spacing-sm);
+        padding-left: var(--spacing-md);
+        padding-right: var(--spacing-md);
     }
 
     .nav-container {
-        padding: 0 var(--spacing-sm);
+        padding: 0 var(--spacing-md);
     }
 
     .nav-menu {
@@ -4482,33 +4466,39 @@ body:not(.dark-mode) .played-time {
     }
 
     .tracks-grid {
-        grid-template-columns: repeat(3, minmax(164px, 1fr));
+        grid-template-columns: repeat(3, minmax(0, 1fr));
         max-height: none;
-        overflow-x: auto;
-        overflow-y: hidden;
-        gap: 0.4rem;
+        overflow: hidden;
+        gap: 0.32rem;
         align-items: stretch;
     }
 
     .track-card {
-        padding: 0.4rem;
-        gap: 0.4rem;
+        padding: 0.34rem;
+        gap: 0.28rem;
         margin-bottom: 0;
         width: auto;
-        min-height: 80px;
+        min-height: 96px;
+        flex-direction: column;
+        align-items: flex-start;
     }
 
     .track-image {
-        width: 38px;
-        height: 38px;
+        width: 36px;
+        height: 36px;
     }
 
     .track-name {
-        font-size: 0.82rem;
+        font-size: 0.74rem;
+        -webkit-line-clamp: 2;
     }
 
     .track-artist {
-        font-size: 0.7rem;
+        font-size: 0.62rem;
+    }
+
+    .track-link-indicator {
+        display: none;
     }
 
     #about .section-title,
@@ -4660,33 +4650,6 @@ body:not(.dark-mode) .played-time {
         word-spacing: 0.01em;
     }
 
-    .skills-list {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 0.46rem;
-        margin-bottom: 0.48rem;
-    }
-
-    .skill-content {
-        min-height: 70px;
-        padding: 0.5rem 0.44rem;
-        gap: 0.4rem;
-        border-radius: 12px;
-    }
-
-    .skill-icon-wrapper {
-        width: 28px;
-        height: 28px;
-    }
-
-    .skill-icon-wrapper i {
-        font-size: 0.68rem;
-    }
-
-    .skill-text h3 {
-        font-size: 0.76rem;
-        line-height: 1.18;
-    }
-
     .skills-marquee {
         margin-bottom: 0.5rem;
         padding: 0.22rem;
@@ -4781,23 +4744,31 @@ body:not(.dark-mode) .played-time {
 
     .certifications-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 0.4rem;
+        gap: 0.46rem;
     }
 
     .cert-card {
-        padding: 0.44rem;
-        gap: 0.4rem;
+        grid-template-columns: 40px minmax(0, 1fr);
+        min-height: 102px;
+        padding: 0.6rem 0.52rem;
+        gap: 0.44rem;
+        border-radius: 12px;
     }
 
     .cert-logo {
-        width: 34px;
-        height: 34px;
-        padding: 4px;
+        width: 40px;
+        height: 40px;
+        padding: 5px;
+    }
+
+    .cert-info {
+        padding-right: 0;
     }
 
     .cert-info h4 {
-        font-size: 0.68rem;
+        font-size: 0.8rem;
         line-height: 1.2;
+        margin-bottom: 0.2rem;
         -webkit-line-clamp: 2;
     }
 
@@ -4807,14 +4778,25 @@ body:not(.dark-mode) .played-time {
     }
 
     .cert-issuer {
-        font-size: 0.58rem;
+        font-size: 0.64rem;
         line-height: 1.2;
+        margin-bottom: 0.16rem;
         white-space: normal;
     }
 
     .cert-date {
-        display: flex;
-        font-size: 0.55rem;
+        display: block;
+        font-size: 0.56rem;
+        padding: 0;
+        gap: 0;
+    }
+
+    .cert-card::after {
+        display: none;
+    }
+
+    .cert-date::before {
+        display: none;
     }
 
     .projects-grid {
@@ -4832,8 +4814,9 @@ body:not(.dark-mode) .played-time {
     }
 
     .project-info h4 {
-        font-size: 0.74rem;
-        line-height: 1.18;
+        font-size: 0.76rem;
+        line-height: 1.2;
+        margin-bottom: 0.2rem;
     }
 
     .project-tagline {
@@ -4841,15 +4824,15 @@ body:not(.dark-mode) .played-time {
     }
 
     .project-actions {
-        margin-top: 0.2rem;
-        gap: 0.22rem;
+        margin-top: 0.36rem;
+        gap: 0.3rem;
     }
 
     .project-action-btn,
     .project-details-btn {
-        min-height: 28px;
-        font-size: 0.56rem;
-        padding: 0.18rem 0.24rem;
+        min-height: 32px;
+        font-size: 0.6rem;
+        padding: 0.24rem 0.28rem;
     }
 
     .project-modal {
@@ -4901,7 +4884,7 @@ body:not(.dark-mode) .played-time {
     }
 
     .gallery-container {
-        height: 200px;
+        height: 240px;
     }
 
     .contact-links {
@@ -4986,5 +4969,50 @@ body:not(.dark-mode) .played-time {
     .track-artist {
         font-size: 0.64rem;
         line-height: 1.14;
+    }
+}
+
+@media (min-width: 640px) and (max-width: 767px) {
+    .music-layout {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+
+    .tracks-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        overflow: hidden;
+        gap: 0.38rem;
+    }
+
+    .track-card {
+        min-height: 102px;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0.4rem;
+        gap: 0.32rem;
+    }
+
+    .track-image {
+        width: 40px;
+        height: 40px;
+    }
+
+    .track-info {
+        width: 100%;
+    }
+
+    .track-name {
+        font-size: 0.8rem;
+        line-height: 1.2;
+        -webkit-line-clamp: 2;
+    }
+
+    .track-artist {
+        font-size: 0.66rem;
+        line-height: 1.18;
+    }
+
+    .track-link-indicator {
+        display: none;
     }
 }

@@ -25,6 +25,34 @@
     .copy-btn:hover { background: rgba(255,255,255,0.18); }
     .kbd { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; font-size: 0.75rem; padding: 0.15rem 0.35rem; border-radius: 0.35rem; border: 1px solid #e5e7eb; background: #f9fafb; }
     .sticky-panel { position: sticky; top: 92px; }
+
+    /* Improve topic separation and visual rhythm */
+    main > section[id] {
+      margin-bottom: 5rem !important;
+      padding-top: 0.4rem;
+      scroll-margin-top: 120px;
+    }
+    main > section[id] > h2 {
+      margin-bottom: 2.25rem !important;
+    }
+    .section-divider {
+      margin: 3.25rem 0;
+      opacity: 0.95;
+    }
+
+    @media (max-width: 768px) {
+      main > section[id] {
+        margin-bottom: 3.5rem !important;
+        scroll-margin-top: 104px;
+      }
+      main > section[id] > h2 {
+        margin-bottom: 1.5rem !important;
+      }
+      .section-divider {
+        margin: 2.2rem 0;
+      }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       .card-hover, .interactive-button { transition: none !important; }
       .card-hover:hover, .interactive-button:hover { transform: none !important; }

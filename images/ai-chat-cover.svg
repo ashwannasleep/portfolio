@@ -1,86 +1,81 @@
-<svg width="300" height="300" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+<svg width="600" height="600" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="AI Chat Demo cover">
   <defs>
-    <!-- Clean modern background with nice colors -->
-    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#f8fafc;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#e2e8f0;stop-opacity:1" />
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#050608"/>
+      <stop offset="100%" stop-color="#0a0a0c"/>
     </linearGradient>
-    
-    <!-- Accent gradient -->
-    <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0.1" />
-      <stop offset="100%" style="stop-color:#2563eb;stop-opacity:0.05" />
-    </linearGradient>
-    
-    <!-- Chat bubble shadow -->
-    <filter id="softShadow">
-      <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
-      <feOffset dx="0" dy="1" result="offsetblur"/>
-      <feComponentTransfer>
-        <feFuncA type="linear" slope="0.1"/>
-      </feComponentTransfer>
-      <feMerge>
-        <feMergeNode/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
+    <radialGradient id="coreGlow" cx="50%" cy="48%" r="40%">
+      <stop offset="0%" stop-color="#f97316" stop-opacity="0.26"/>
+      <stop offset="52%" stop-color="#f97316" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#f97316" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1f2937" stroke-opacity="0.24" stroke-width="1"/>
+    </pattern>
+    <filter id="orangeSoft" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="11"/>
     </filter>
-    
-    <!-- AI response gradient -->
-    <linearGradient id="aiBubble" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#2563eb;stop-opacity:1" />
-    </linearGradient>
+    <style>
+      .meta { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #64748b; font-size: 10px; letter-spacing: 3px; font-weight: 600; }
+      .tiny { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #94a3b8; font-size: 8px; letter-spacing: 1.8px; }
+      .headline { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-weight: 800; font-size: 56px; letter-spacing: 1px; }
+      .sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #64748b; font-size: 12px; letter-spacing: 6px; font-weight: 600; }
+      .badge { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #f97316; font-size: 10px; font-weight: 700; letter-spacing: 1px; }
+      .label { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #475569; font-size: 11px; letter-spacing: 1.6px; font-weight: 700; }
+      .value { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #e2e8f0; font-size: 12px; letter-spacing: 0.5px; font-weight: 500; }
+    </style>
   </defs>
-  
-  <!-- Background -->
-  <rect width="300" height="300" fill="url(#bgGradient)" rx="24"/>
-  <rect width="300" height="300" fill="url(#accentGradient)" rx="24"/>
-  
-  <!-- Main chat window -->
-  <rect x="40" y="50" width="220" height="200" rx="16" fill="white" filter="url(#softShadow)"/>
-  
-  <!-- Chat messages showing async/error handling concepts -->
-  
-  <!-- User message 1 -->
-  <rect x="60" y="70" width="100" height="28" rx="14" fill="#f1f5f9"/>
-  <text x="110" y="88" text-anchor="middle" font-family="Inter, -apple-system, sans-serif" 
-        font-size="12" font-weight="500" fill="#1e293b">Send request</text>
-  
-  <!-- Loading state indicator -->
-  <rect x="180" y="75" width="60" height="18" rx="9" fill="#e0e7ff" opacity="0.8"/>
-  <circle cx="195" cy="84" r="2.5" fill="#3b82f6" opacity="0.6">
-    <animate attributeName="opacity" values="0.3;1;0.3" dur="1s" repeatCount="indefinite" begin="0s"/>
-  </circle>
-  <circle cx="205" cy="84" r="2.5" fill="#3b82f6" opacity="0.6">
-    <animate attributeName="opacity" values="0.3;1;0.3" dur="1s" repeatCount="indefinite" begin="0.2s"/>
-  </circle>
-  <circle cx="215" cy="84" r="2.5" fill="#3b82f6" opacity="0.6">
-    <animate attributeName="opacity" values="0.3;1;0.3" dur="1s" repeatCount="indefinite" begin="0.4s"/>
-  </circle>
-  
-  <!-- AI response -->
-  <rect x="140" y="110" width="100" height="32" rx="16" fill="url(#aiBubble)"/>
-  <text x="190" y="130" text-anchor="middle" font-family="Inter, -apple-system, sans-serif" 
-        font-size="11" font-weight="500" fill="white">Response</text>
-  
-  <!-- Error state example -->
-  <rect x="60" y="155" width="120" height="28" rx="14" fill="#fee2e2"/>
-  <text x="120" y="173" text-anchor="middle" font-family="Inter, -apple-system, sans-serif" 
-        font-size="11" font-weight="500" fill="#991b1b">Error occurred</text>
-  
-  <!-- Retry button -->
-  <rect x="190" y="160" width="50" height="18" rx="9" fill="#f1f5f9" stroke="#3b82f6" stroke-width="1"/>
-  <text x="215" y="172" text-anchor="middle" font-family="Inter, -apple-system, sans-serif" 
-        font-size="10" font-weight="600" fill="#3b82f6">Retry</text>
-  
-  <!-- Success state -->
-  <rect x="140" y="195" width="100" height="28" rx="14" fill="#dcfce7"/>
-  <text x="190" y="213" text-anchor="middle" font-family="Inter, -apple-system, sans-serif" 
-        font-size="11" font-weight="500" fill="#166534">Success!</text>
-  
-  <!-- Decorative elements -->
-  <circle cx="30" cy="80" r="2.5" fill="#3b82f6" opacity="0.2"/>
-  <circle cx="270" cy="100" r="2" fill="#3b82f6" opacity="0.15"/>
-  <circle cx="30" cy="220" r="2" fill="#3b82f6" opacity="0.2"/>
-  <circle cx="270" cy="240" r="2.5" fill="#3b82f6" opacity="0.15"/>
+
+  <rect width="600" height="600" fill="url(#bg)"/>
+  <rect width="600" height="600" fill="url(#coreGlow)"/>
+  <rect width="600" height="600" fill="url(#grid)" opacity="0.8"/>
+
+  <line x1="300" y1="0" x2="300" y2="600" stroke="#1e293b" stroke-opacity="0.3"/>
+  <line x1="0" y1="300" x2="600" y2="300" stroke="#1e293b" stroke-opacity="0.3"/>
+
+  <path d="M16 10h16M10 10v16" stroke="#334155" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M584 10h-16M590 10v16" stroke="#334155" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M16 590h16M10 590v-16" stroke="#334155" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M584 590h-16M590 590v-16" stroke="#334155" stroke-width="1.5" stroke-linecap="round"/>
+
+  <text x="24" y="28" class="meta">UX CASE STUDY / 001</text>
+  <line x1="24" y1="35" x2="48" y2="35" stroke="#f97316" stroke-width="1.5"/>
+
+  <text x="516" y="28" class="meta">V 2.4.0</text>
+  <rect x="483" y="34" width="95" height="21" rx="4" fill="#130e0b" stroke="#f97316" stroke-opacity="0.55"/>
+  <circle cx="493" cy="44.5" r="2" fill="#f97316"/>
+  <text x="501" y="48.5" class="badge">STABLE BUILD</text>
+
+  <circle cx="300" cy="250" r="66" fill="#f97316" fill-opacity="0.24" filter="url(#orangeSoft)"/>
+  <rect x="235" y="165" width="130" height="130" rx="16" fill="#121417" fill-opacity="0.72" stroke="#f97316" stroke-opacity="0.48" stroke-width="1.5"/>
+
+  <rect x="280" y="212" width="40" height="32" rx="5" fill="#f97316"/>
+  <path d="M280 244 L280 252 L288 244 Z" fill="#f97316"/>
+  <circle cx="341" cy="187" r="3" fill="#f97316"/>
+
+  <rect x="223" y="169" width="28" height="28" rx="6" fill="#14161a" stroke="#334155" stroke-opacity="0.55"/>
+  <path d="M232 187h10l-3-3m3 3l-3 3" fill="none" stroke="#94a3b8" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <rect x="289" y="302" width="74" height="20" rx="5" fill="#17181d" stroke="#334155" stroke-opacity="0.52"/>
+  <text x="296" y="315" class="tiny">LATENCY:</text>
+  <text x="334" y="315" class="value" style="font-size:10px;">14ms</text>
+
+  <text x="300" y="385" class="headline" text-anchor="middle">
+    <tspan fill="#f8fafc">AI CHAT </tspan>
+    <tspan fill="#f97316">DEMO</tspan>
+  </text>
+
+  <line x1="157" y1="412" x2="222" y2="412" stroke="#1d4ed8" stroke-opacity="0.45" stroke-width="1.5"/>
+  <line x1="380" y1="412" x2="446" y2="412" stroke="#1d4ed8" stroke-opacity="0.45" stroke-width="1.5"/>
+  <text x="229" y="419" class="sub">DESIGNER / ENGINEER</text>
+
+  <text x="24" y="545" class="label">STATUS</text>
+  <text x="24" y="567" class="value">ENCRYPTED  //  AES-256</text>
+  <line x1="123" y1="538" x2="123" y2="571" stroke="#334155" stroke-width="1.5"/>
+
+  <text x="136" y="545" class="label">NETWORK</text>
+  <text x="136" y="567" class="value">TCP  /  IP</text>
+
+  <text x="468" y="548" class="meta" style="font-size:11px; letter-spacing:2px;">PORTFOLIO CORE</text>
+  <text x="468" y="566" class="tiny">(c) 2024 PRECISION SYSTEMS</text>
 </svg>
