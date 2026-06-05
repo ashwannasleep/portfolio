@@ -2486,18 +2486,26 @@ body.dark-mode .current-work-card:hover {
 }
 
 .projects-grid {
+    --project-grid-gap: var(--spacing-lg);
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: var(--spacing-lg);
+    gap: var(--project-grid-gap);
     max-width: 800px;
     margin: 0 auto;
 }
 
+.projects-grid > .project-card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: calc((100% - var(--project-grid-gap)) / 2);
+}
+
 @media (max-width: 768px) {
     .projects-grid {
+        --project-grid-gap: var(--spacing-md);
         grid-template-columns: repeat(2, 1fr);
         max-width: 600px;
-        gap: var(--spacing-md);
+        gap: var(--project-grid-gap);
     }
 }
 
@@ -2506,6 +2514,12 @@ body.dark-mode .current-work-card:hover {
         grid-template-columns: 1fr;
         max-width: 400px;
         gap: var(--spacing-md);
+    }
+
+    .projects-grid > .project-card:last-child:nth-child(odd) {
+        grid-column: auto;
+        justify-self: stretch;
+        width: 100%;
     }
 }
 
@@ -2865,7 +2879,8 @@ body.dark-mode .monu-screenshots {
 .monu-logo,
 .ai-chat-logo,
 .ashpire-logo,
-.memoria-logo {
+.memoria-logo,
+.merchant-dashboard-logo {
     width: auto;
     height: 100%;
     max-width: 100%;
@@ -4014,9 +4029,10 @@ body:not(.dark-mode) .played-time {
     }
 
     .projects-grid {
+        --project-grid-gap: var(--spacing-sm);
         grid-template-columns: repeat(2, minmax(0, 1fr));
         max-width: none;
-        gap: var(--spacing-sm);
+        gap: var(--project-grid-gap);
     }
 
     .project-card {
@@ -4828,8 +4844,9 @@ body:not(.dark-mode) .played-time {
     }
 
     .projects-grid {
+        --project-grid-gap: 0.35rem;
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 0.35rem;
+        gap: var(--project-grid-gap);
     }
 
     .project-link {
@@ -5048,9 +5065,10 @@ body:not(.dark-mode) .played-time {
 /* Project Card Responsive Scaling Fixes */
 @media (max-width: 900px) {
     .projects-grid {
+        --project-grid-gap: 0.6rem;
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        max-width: none;
-        gap: 0.6rem;
+        max-width: 720px;
+        gap: var(--project-grid-gap);
     }
 
     .project-card {
@@ -5090,10 +5108,15 @@ body:not(.dark-mode) .played-time {
     .project-actions {
         margin-top: 0.5rem;
         gap: 0.45rem;
+        flex-direction: row;
+        flex-wrap: wrap;
     }
 
     .project-action-btn,
     .project-details-btn {
+        flex: 1 1 0;
+        min-width: 0;
+        width: auto;
         min-height: 36px;
         font-size: 0.74rem;
         padding: 0.38rem 0.42rem;
@@ -5107,9 +5130,10 @@ body:not(.dark-mode) .played-time {
 
 @media (max-width: 640px) {
     .projects-grid {
+        --project-grid-gap: 0.6rem;
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        max-width: none;
-        gap: 0.6rem;
+        max-width: 560px;
+        gap: var(--project-grid-gap);
     }
 
     .project-link {
@@ -5138,6 +5162,9 @@ body:not(.dark-mode) .played-time {
 
     .project-action-btn,
     .project-details-btn {
+        flex: 1 1 0;
+        min-width: 0;
+        width: auto;
         min-height: 33px;
         font-size: 0.72rem;
         padding: 0.3rem 0.34rem;
@@ -5270,6 +5297,48 @@ body.dark-mode .cert-logo {
 }
 
 @media (max-width: 480px) {
+    .projects-grid {
+        --project-grid-gap: 0.85rem;
+        grid-template-columns: 1fr;
+        max-width: 400px;
+        gap: var(--project-grid-gap);
+    }
+
+    .projects-grid > .project-card:last-child:nth-child(odd) {
+        grid-column: auto;
+        justify-self: stretch;
+        width: 100%;
+    }
+
+    .project-link {
+        flex-basis: clamp(140px, 44vw, 180px);
+        height: clamp(140px, 44vw, 180px);
+        padding: 0.72rem;
+    }
+
+    .project-info {
+        padding: 0.72rem;
+    }
+
+    .project-info h4 {
+        font-size: 0.96rem;
+    }
+
+    .project-actions {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .project-action-btn,
+    .project-details-btn {
+        flex: 1 1 130px;
+        min-height: 44px;
+        width: auto;
+        font-size: 0.76rem;
+        padding: 0.42rem 0.5rem;
+    }
+
     .tracks-grid {
         grid-auto-rows: 96px;
     }
