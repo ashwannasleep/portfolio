@@ -64,11 +64,13 @@ function initNavigation() {
             const sectionId = section.getAttribute('id');
             const correspondingLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
 
+            // Sections without a nav link (e.g. #focus) shouldn't clear the
+            // current highlight — leave the previous section's link active.
+            if (!correspondingLink) return;
+
             if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
                 navLinks.forEach(link => link.classList.remove('active'));
-                if (correspondingLink) {
-                    correspondingLink.classList.add('active');
-                }
+                correspondingLink.classList.add('active');
             }
         });
     });
@@ -201,7 +203,7 @@ function initScrollEffects() {
     }, observerOptions);
     
     // Observe elements for animation - Faster transitions, minimal delay
-    const animatedElements = document.querySelectorAll('.skill-item, .interest-item, .project-card, .contact-link, .cert-card, .approach-item, .learning-card');
+    const animatedElements = document.querySelectorAll('.focus-card, .interest-item, .project-card, .contact-link, .cert-card, .learning-card');
     animatedElements.forEach((el, index) => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(15px)'; // Reduced from 30px

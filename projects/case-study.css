@@ -1,0 +1,208 @@
+/* Case study pages — layered on top of the site stylesheet */
+
+.case-study {
+    padding: calc(70px + var(--spacing-3xl)) 0 var(--spacing-4xl);
+    background-color: var(--bg-primary);
+}
+
+.case-container {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-lg);
+}
+
+.case-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    text-decoration: none;
+    margin-bottom: var(--spacing-lg);
+}
+
+.case-back:hover {
+    color: var(--accent-primary);
+}
+
+.case-title {
+    font-size: clamp(1.9rem, 4vw, 2.6rem);
+    font-weight: 700;
+    line-height: 1.15;
+    margin: 0 0 var(--spacing-sm);
+    color: var(--text-primary);
+}
+
+.case-summary {
+    font-size: var(--font-size-lg);
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin: 0 0 var(--spacing-lg);
+}
+
+.case-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+    align-items: center;
+    margin-bottom: var(--spacing-2xl);
+    padding-bottom: var(--spacing-lg);
+    border-bottom: 1px solid var(--border-color);
+}
+
+body.dark-mode .case-meta {
+    border-bottom-color: var(--border-color-dark);
+}
+
+.case-study h2 {
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: var(--spacing-2xl) 0 var(--spacing-sm);
+    line-height: 1.3;
+}
+
+.case-study h3 {
+    font-size: var(--font-size-base);
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: var(--spacing-lg) 0 var(--spacing-xs);
+}
+
+.case-study p {
+    font-size: var(--font-size-base);
+    line-height: 1.75;
+    color: var(--text-secondary);
+    margin: 0 0 var(--spacing-md);
+}
+
+.case-study ul,
+.case-study ol {
+    margin: 0 0 var(--spacing-md);
+    padding-left: 1.35rem;
+    color: var(--text-secondary);
+    line-height: 1.75;
+}
+
+.case-study li {
+    margin-bottom: 0.4rem;
+}
+
+.case-study strong {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.case-study a:not(.case-back):not(.btn) {
+    color: var(--accent-primary);
+}
+
+/* Inline code and blocks */
+.case-study code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.85em;
+    background-color: rgba(59, 130, 246, 0.09);
+    padding: 0.12em 0.36em;
+    border-radius: 4px;
+    color: var(--text-primary);
+}
+
+.case-study pre {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
+    overflow-x: auto;
+    margin: 0 0 var(--spacing-md);
+}
+
+body.dark-mode .case-study pre {
+    border-color: var(--border-color-dark);
+}
+
+.case-study pre code {
+    background: none;
+    padding: 0;
+    font-size: 0.82rem;
+    line-height: 1.65;
+    color: var(--text-primary);
+    white-space: pre;
+}
+
+/* Architecture diagram */
+.case-figure {
+    margin: 0 0 var(--spacing-md);
+}
+
+.case-figure svg {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.case-figure figcaption {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    margin-top: var(--spacing-xs);
+}
+
+/* Callout for honest caveats */
+.case-note {
+    border-left: 3px solid var(--accent-primary);
+    background-color: rgba(59, 130, 246, 0.06);
+    padding: var(--spacing-md);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    margin: 0 0 var(--spacing-md);
+}
+
+.case-note p:last-child {
+    margin-bottom: 0;
+}
+
+/* Key/value facts list */
+.case-facts {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--spacing-md);
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 0.5rem var(--spacing-md);
+    font-size: var(--font-size-sm);
+}
+
+.case-facts dt {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.case-facts dd {
+    margin: 0;
+    color: var(--text-secondary);
+}
+
+@media (max-width: 640px) {
+    .case-study {
+        padding: calc(70px + var(--spacing-lg)) 0 var(--spacing-2xl);
+    }
+
+    .case-container {
+        padding: 0 var(--spacing-md);
+    }
+
+    .case-summary {
+        font-size: var(--font-size-base);
+    }
+
+    .case-study pre code {
+        font-size: 0.74rem;
+    }
+
+    .case-facts {
+        grid-template-columns: 1fr;
+        gap: 0.15rem;
+    }
+
+    .case-facts dd {
+        margin-bottom: 0.5rem;
+    }
+}

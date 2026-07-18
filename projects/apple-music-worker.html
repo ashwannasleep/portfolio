@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+    <meta name="theme-color" content="#FAFAFA">
+    <title>Apple Music Edge API — Ashley Chang</title>
+    <meta name="description" content="A Cloudflare Worker that signs ES256 JWTs with the Web Crypto API to authenticate against the Apple Music API, keeping an Apple developer private key off the client.">
+    <meta property="og:title" content="Apple Music Edge API — Ashley Chang">
+    <meta property="og:description" content="A Cloudflare Worker that signs ES256 JWTs with the Web Crypto API to authenticate against the Apple Music API.">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="case-study.css">
+    <link rel="icon" type="image/png" href="../images/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto+Slab:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        // Match the theme chosen on the homepage before first paint.
+        (function () {
+            if (localStorage.getItem('theme') === 'dark') {
+                document.documentElement.classList.add('pre-dark');
+            }
+        })();
+    </script>
+    <style>
+        html.pre-dark body { background-color: #0A0A0A; }
+    </style>
+</head>
+<body>
+    <main class="case-study">
+        <div class="case-container">
+            <a href="../index.html#work" class="case-back">← Back to projects</a>
+
+            <h1 class="case-title">Apple Music Edge API</h1>
+            <p class="case-summary">
+                A Cloudflare Worker that signs ES256 JWTs with the Web Crypto API, so my site can read the
+                Apple Music API without shipping my developer private key to a browser.
+            </p>
+
+            <div class="case-meta">
+                <span class="project-status status-shipped">Shipped</span>
+                <span class="tech-tag">Cloudflare Workers</span>
+                <span class="tech-tag">Web Crypto</span>
+                <span class="tech-tag">JWT / ES256</span>
+            </div>
+
+            <h2>The problem</h2>
+            <p>
+                I wanted the homepage to show what I'm actually listening to, live. Every Apple Music API
+                request needs a developer token — a JWT you sign yourself with a private key Apple issues as
+                a <code>.p8</code> file. Signing that in client-side JavaScript means handing the key to
+                every visitor, so it has to happen somewhere I control.
+            </p>
+            <p>
+                My site is static and already behind Cloudflare, so a Worker adds a server-side step without
+                adding a server to maintain.
+            </p>
+
+            <figure class="case-figure">
+                <svg viewBox="0 0 720 200" xmlns="http://www.w3.org/2000/svg" role="img"
+                     aria-label="Browser calls the Cloudflare Worker, which signs a JWT and calls the Apple Music API. The private key stays in Worker secrets.">
+                    <g fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.85">
+                        <rect x="8" y="56" width="150" height="60" rx="8"/>
+                        <rect x="285" y="56" width="150" height="60" rx="8"/>
+                        <rect x="562" y="56" width="150" height="60" rx="8"/>
+                        <rect x="285" y="146" width="150" height="42" rx="8" stroke-dasharray="4 3"/>
+                    </g>
+                    <g fill="currentColor" font-family="Inter, sans-serif" text-anchor="middle">
+                        <text x="83" y="82" font-size="13" font-weight="600">Browser</text>
+                        <text x="83" y="100" font-size="11" opacity="0.7">static site</text>
+                        <text x="360" y="82" font-size="13" font-weight="600">Cloudflare Worker</text>
+                        <text x="360" y="100" font-size="11" opacity="0.7">signs ES256 JWT</text>
+                        <text x="637" y="82" font-size="13" font-weight="600">Apple Music API</text>
+                        <text x="637" y="100" font-size="11" opacity="0.7">api.music.apple.com</text>
+                        <text x="360" y="164" font-size="11" font-weight="600">Worker secrets</text>
+                        <text x="360" y="179" font-size="10" opacity="0.7">.p8 private key</text>
+                        <text x="221" y="76" font-size="10" opacity="0.75">GET</text>
+                        <text x="221" y="104" font-size="10" opacity="0.75">JSON</text>
+                        <text x="498" y="76" font-size="10" opacity="0.75">Bearer JWT</text>
+                        <text x="498" y="104" font-size="10" opacity="0.75">playlist</text>
+                    </g>
+                    <g stroke="currentColor" stroke-width="1.5" opacity="0.85" fill="none">
+                        <path d="M158 80 L278 80" marker-end="url(#ah)"/>
+                        <path d="M285 96 L165 96" marker-end="url(#ah)"/>
+                        <path d="M435 80 L555 80" marker-end="url(#ah)"/>
+                        <path d="M562 96 L442 96" marker-end="url(#ah)"/>
+                        <path d="M360 146 L360 118" marker-end="url(#ah)"/>
+                    </g>
+                    <defs>
+                        <marker id="ah" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto">
+                            <path d="M0 0 L8 4 L0 8 z" fill="currentColor"/>
+                        </marker>
+                    </defs>
+                </svg>
+                <figcaption>The key never leaves the dashed box. The browser only ever sees playlist JSON.</figcaption>
+            </figure>
+
+            <h2>Signing the token</h2>
+            <p>
+                Workers don't run Node, so <code>jsonwebtoken</code> isn't available — the ES256 signature is
+                built against the Web Crypto API instead.
+            </p>
+
+<pre><code>const cryptoKey = await crypto.subtle.importKey(
+  'pkcs8', keyBuffer,
+  { name: 'ECDSA', namedCurve: 'P-256' },
+  false,          // non-extractable
+  ['sign']
+);
+
+const payload = { iss: teamId, iat: now, exp: now + 3600 };</code></pre>
+
+            <p>
+                Two details matter. The key is imported <strong>non-extractable</strong>, so even code inside
+                the Worker can't read the raw bytes back out. And JWS expects the raw <code>r‖s</code>
+                signature, which is what <code>crypto.subtle.sign</code> returns for ECDSA — the DER-wrapped
+                form some libraries produce is silently rejected by Apple.
+            </p>
+
+            <h2>The part that took longest</h2>
+            <p>
+                Not the cryptography — the key formatting. <code>importKey</code> needs raw PKCS#8 bytes, but
+                a <code>.p8</code> arrives as PEM text, and passing through an environment variable mangles
+                it in several different ways: newlines as literal <code>\n</code> pairs, the key collapsed to
+                one line, Windows line endings, or the markers stripped entirely. Every variant fails in the
+                same place with the same unhelpful error.
+            </p>
+            <p>
+                So the Worker normalises before it parses — unescape, re-wrap the base64 body at 64
+                characters, restore the markers, then decode. Unglamorous, and it's most of what makes this
+                work across deploys instead of only on the machine where it was first set up.
+            </p>
+
+            <h2>Reliability</h2>
+            <ul>
+                <li>Apple's status code is passed through rather than flattened, so a rate limit reads as a rate limit.</li>
+                <li>Errors return JSON with CORS headers, same as success — one shape for the client to handle.</li>
+                <li>Responses cache for an hour at the edge, which keeps almost all traffic off Apple's API and off my rate limit.</li>
+            </ul>
+
+            <h2>Tradeoffs</h2>
+            <p>
+                A Worker over a backend: no idle cost and nothing to patch, at the price of being coupled to
+                the Workers runtime — which is exactly why the signing is hand-rolled.
+            </p>
+            <p>
+                The token is valid for an hour but a new one is minted per uncached request. Caching it would
+                save a cheap signature and add cross-invocation state; with an hour of response caching in
+                front, that hasn't been worth it.
+            </p>
+
+            <p style="margin-top: var(--spacing-2xl);">
+                <a href="../index.html#work" class="case-back">← Back to projects</a>
+            </p>
+        </div>
+    </main>
+
+    <script>
+        document.documentElement.classList.remove('pre-dark');
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-mode');
+        }
+    </script>
+</body>
+</html>
