@@ -4967,18 +4967,6 @@ body.dark-mode .cert-logo {
     margin-top: 0;
 }
 
-.more-projects {
-    margin-top: var(--spacing-4xl);
-}
-
-.more-projects h3 {
-    font-size: var(--font-size-xl);
-    font-weight: 600;
-    text-align: center;
-    margin: 0 0 var(--spacing-xl);
-    color: var(--text-secondary);
-}
-
 /* Project status badges */
 .project-heading {
     display: flex;
