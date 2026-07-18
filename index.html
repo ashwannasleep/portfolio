@@ -22,8 +22,9 @@
             </div>
             <div class="nav-menu" id="nav-menu">
                 <a href="#home" class="nav-link active">Home</a>
-                <a href="#about" class="nav-link">About</a>
                 <a href="#work" class="nav-link">Work</a>
+                <a href="#writing" class="nav-link">Writing</a>
+                <a href="#about" class="nav-link">About</a>
                 <a href="#contact" class="nav-link">Contact</a>
                 <button class="theme-toggle" id="theme-toggle">
                     <i class="fas fa-moon"></i>
@@ -49,7 +50,7 @@
         </svg>
       </a>
     </div>
-    
+
     <div class="hero-container">
       <div class="hero-content">
         <h1 class="hero-title">
@@ -63,155 +64,42 @@
           <a href="#work" class="btn btn-primary">See My Work</a>
           <a href="#contact" class="btn btn-secondary">Let’s Connect</a>
         </div>
+        <ul class="hero-proof">
+          <li><i class="fab fa-app-store-ios" aria-hidden="true"></i> iOS app shipped on the App Store</li>
+          <li><i class="fas fa-cloud" aria-hidden="true"></i> SwiftUI + AWS Amplify</li>
+          <li><i class="fas fa-bolt" aria-hidden="true"></i> Edge API on Cloudflare Workers</li>
+        </ul>
       </div>
       <div class="hero-image">
         <img src="images/Waving.png" alt="Ashley waving" class="hero-img">
       </div>
     </div>
   </section>
-  
-        
+
+
         <!-- Scroll indicator -->
         <div class="scroll-indicator">
             <div class="scroll-arrow"></div>
         </div>
 
-    <!-- Music Section -->
-    <section class="music-section">
-        <div class="container">
-            <h2 class="music-section-title">🎵 What I'm Listening To While I Code</h2>
-            
-            <div class="music-layout">
-                <div class="spotify-player" id="apple-music-player-container">
-                    <!-- Apple Music playlist player will be loaded here -->
-                    <div id="apple-music-player" style="width: 100%; height: 100%;">
-                        <div style="width: 100%; height: auto; min-height: 320px; background: #1a1a1a; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; box-sizing: border-box;">
-                            <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 20px; flex-shrink: 0;">
-                                <div style="width: 100px; height: 100px; border-radius: 12px; background: linear-gradient(90deg, #2a2a2a 25%, rgba(255,255,255,0.1) 50%, #2a2a2a 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; flex-shrink: 0;"></div>
-                                <div style="flex: 1; min-width: 0;">
-                                    <div style="height: 20px; background: linear-gradient(90deg, #2a2a2a 25%, rgba(255,255,255,0.1) 50%, #2a2a2a 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: 4px; margin-bottom: 8px; width: 60%;"></div>
-                                    <div style="height: 14px; background: linear-gradient(90deg, #2a2a2a 25%, rgba(255,255,255,0.1) 50%, #2a2a2a 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: 4px; width: 40%;"></div>
-                                </div>
-                            </div>
-                            <div style="flex: 1;">
-                                <div style="display: flex; align-items: center; gap: 12px; padding: 12px; margin-bottom: 4px;">
-                                    <div style="width: 48px; height: 48px; border-radius: 8px; background: linear-gradient(90deg, #2a2a2a 25%, rgba(255,255,255,0.1) 50%, #2a2a2a 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite;"></div>
-                                    <div style="flex: 1;">
-                                        <div style="height: 15px; background: linear-gradient(90deg, #2a2a2a 25%, rgba(255,255,255,0.1) 50%, #2a2a2a 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: 4px; margin-bottom: 6px; width: 70%;"></div>
-                                        <div style="height: 13px; background: linear-gradient(90deg, #2a2a2a 25%, rgba(255,255,255,0.1) 50%, #2a2a2a 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: 4px; width: 50%;"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="tracks-grid" id="tracks-container">
-                    <!-- Apple Music playlist tracks will be loaded here -->
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Work Section -->
+    <!-- Featured Work Section -->
     <section id="work" class="work">
         <div class="container">
-            <h2 class="section-title">My Skills</h2>
-            
-            <!-- Skills List -->
-            <div class="skills-list">
-                <div class="skill-item">
-                    <div class="skill-content">
-                        <div class="skill-icon-wrapper">
-                            <i class="fas fa-palette"></i>
-                        </div>
-                        <div class="skill-text">
-                            <h3>UI & Visual Design</h3>
-                            <p>Creating clean, modern interfaces with strong typography, color theory, and layout design.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="skill-item">
-                    <div class="skill-content">
-                        <div class="skill-icon-wrapper">
-                            <i class="fas fa-code"></i>
-                        </div>
-                        <div class="skill-text">
-                            <h3>Web Design & Development</h3>
-                            <p>Designing and coding responsive websites using HTML, CSS, JavaScript, and React.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="skill-item">
-                    <div class="skill-content">
-                        <div class="skill-icon-wrapper">
-                            <i class="fas fa-mobile-alt"></i>
-                        </div>
-                        <div class="skill-text">
-                            <h3>Prototyping & Wireframing</h3>
-                            <p>Using Figma to create low and high-fidelity prototypes that bring ideas to life.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="skill-item">
-                    <div class="skill-content">
-                        <div class="skill-icon-wrapper">
-                            <i class="fas fa-search"></i>
-                        </div>
-                        <div class="skill-text">
-                            <h3>UX Research</h3>
-                            <p>Conducting usability testing, interviews, and competitive analysis to improve user experience.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Skills Marquee -->
-            <div class="skills-marquee">
-                <div class="marquee-track">
-                    <div class="marquee-item"><i class="fab fa-figma"></i> Figma</div>
-                    <div class="marquee-item"><i class="fas fa-pencil-ruler"></i> Adobe XD</div>
-                    <div class="marquee-item"><i class="fab fa-sketch"></i> Sketch</div>
-                    <div class="marquee-item"><i class="fas fa-lightbulb"></i> InVision</div>
-                    <div class="marquee-item"><i class="fas fa-network-wired"></i> Miro</div>
-                    <div class="marquee-item"><i class="fas fa-sticky-note"></i> Notion</div>
-                    <div class="marquee-item"><i class="fab fa-github"></i> GitHub</div>
-                    <div class="marquee-item"><i class="fab fa-html5"></i> HTML</div>
-                    <div class="marquee-item"><i class="fab fa-css3-alt"></i> CSS</div>
-                    <div class="marquee-item"><i class="fab fa-js"></i> JavaScript</div>
-                    <div class="marquee-item"><i class="fab fa-react"></i> React</div>
-                    <div class="marquee-item"><i class="fas fa-code"></i> VS Code</div>
-                    
-                    <!-- Duplicate for seamless loop -->
-                    <div class="marquee-item"><i class="fab fa-figma"></i> Figma</div>
-                    <div class="marquee-item"><i class="fas fa-pencil-ruler"></i> Adobe XD</div>
-                    <div class="marquee-item"><i class="fab fa-sketch"></i> Sketch</div>
-                    <div class="marquee-item"><i class="fas fa-lightbulb"></i> InVision</div>
-                    <div class="marquee-item"><i class="fas fa-network-wired"></i> Miro</div>
-                    <div class="marquee-item"><i class="fas fa-sticky-note"></i> Notion</div>
-                    <div class="marquee-item"><i class="fab fa-github"></i> GitHub</div>
-                    <div class="marquee-item"><i class="fab fa-html5"></i> HTML</div>
-                    <div class="marquee-item"><i class="fab fa-css3-alt"></i> CSS</div>
-                    <div class="marquee-item"><i class="fab fa-js"></i> JavaScript</div>
-                    <div class="marquee-item"><i class="fab fa-react"></i> React</div>
-                    <div class="marquee-item"><i class="fas fa-code"></i> VS Code</div>
-                </div>
-            </div>
-            
+            <h2 class="section-title">Featured Work</h2>
+
             <!-- Projects Grid -->
-            <div class="projects-section">
-                <h3>Some of My Projects</h3>
+            <div class="projects-section projects-section--lead">
                 <div class="projects-grid">
                     <div class="project-card monu-project">
                         <a href="https://www.monu-planner.com/" target="_blank" class="project-link">
                             <img src="images/monu.png" alt="MONU Logo" class="monu-logo">
                         </a>
                         <div class="project-info">
-                            <h4>MONU Planner</h4>
-                            <p class="project-tagline">Productivity planning tool</p>
+                            <div class="project-heading">
+                                <h4>MONU Planner</h4>
+                                <span class="project-status status-shipped">Shipped</span>
+                            </div>
+                            <p class="project-tagline">Native iOS planner on the App Store — SwiftUI client with AWS Amplify authentication and cloud sync</p>
                             <div class="project-actions">
                                 <a href="https://www.monu-planner.com/" target="_blank" class="project-action-btn view-live">
                                     <i class="fas fa-external-link-alt"></i>
@@ -224,26 +112,29 @@
                             </div>
                             <div class="project-details" id="monu-details">
                                 <p>
-                                    A minimalist digital planner app built with SwiftUI and AWS Amplify, designed and developed end-to-end. 
-                                    MONU focuses on calm, structured planning workflows — daily tasks, habits, goals, and calendar views — 
+                                    A minimalist digital planner app built with SwiftUI and AWS Amplify, designed and developed end-to-end.
+                                    MONU focuses on calm, structured planning workflows — daily tasks, habits, goals, and calendar views —
                                     wrapped in a clean, linen-inspired UI.
-                                    I also explored AI-enhanced planning concepts through prototypes such as task suggestions, summaries, 
-                                    and productivity insights to evaluate how intelligent assistance could support daily routines.
                                 </p>
                                 <p>
-                                    <strong>Design & Product:</strong> Conducted user research and competitive analysis, then designed user flows, 
+                                    <strong>Design & Product:</strong> Conducted user research and competitive analysis, then designed user flows,
                                     wireframes, and high-fidelity prototypes in Figma. Iterated through multiple design versions based on usability feedback.
                                 </p>
                                 <p>
-                                    <strong>Development & Impact:</strong> Built the native iOS app using SwiftUI and integrated AWS Amplify 
-                                    for authentication and cloud data sync. Successfully launched on the App Store and continue refining features 
+                                    <strong>Development & Impact:</strong> Built the native iOS app using SwiftUI and integrated AWS Amplify
+                                    for authentication and cloud data sync. Successfully launched on the App Store and continue refining features
                                     based on user feedback and usage patterns.
                                 </p>
+                                <p>
+                                    <strong>AI product exploration:</strong> Prototyped AI-assisted planning concepts — task suggestions, summaries,
+                                    and productivity insights — to evaluate how intelligent assistance could support daily routines.
+                                    These remain exploratory prototypes and are not part of the shipped app.
+                                </p>
                                 <div class="project-tech">
-                                    <span class="tech-tag">Figma</span>
                                     <span class="tech-tag">SwiftUI</span>
+                                    <span class="tech-tag">Swift</span>
                                     <span class="tech-tag">AWS Amplify</span>
-                                    <span class="tech-tag">User Research</span>
+                                    <span class="tech-tag">Figma</span>
                                     <span class="tech-tag">App Store</span>
                                 </div>
                                 <div style="margin-top: var(--spacing-lg); padding-top: var(--spacing-md); border-top: 1px solid var(--border-color);">
@@ -258,13 +149,58 @@
                             </div>
                         </div>
                     </div>
+                    <div class="project-card ai-chat-project">
+                        <a href="https://ashwannasleep.github.io/AI-chat-demo/" target="_blank" class="project-link">
+                            <img src="images/ai-chat-cover.svg" alt="AI Chat Demo" class="ai-chat-logo">
+                        </a>
+                        <div class="project-info">
+                            <div class="project-heading">
+                                <h4>AI Chat Demo</h4>
+                                <span class="project-status status-prototype">Prototype</span>
+                            </div>
+                            <p class="project-tagline">Conversational interface built around async request lifecycles, error recovery, and retry states</p>
+                            <div class="project-actions">
+                                <a href="https://ashwannasleep.github.io/AI-chat-demo/" target="_blank" class="project-action-btn view-live">
+                                    <i class="fas fa-external-link-alt"></i>
+                                    <span>View Live</span>
+                                </a>
+                                <button class="project-details-btn" data-project="ai-chat">
+                                    <span class="btn-text">Learn More</span>
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+                            </div>
+                            <div class="project-details" id="ai-chat-details">
+                                <p>
+                                    A polished chat interface exploring real-world async patterns, error handling, and seamless UX.
+                                    Built with careful attention to loading states, message flow, and responsive design — creating conversations that feel natural and intuitive.
+                                </p>
+                                <p>
+                                    <strong>How It Helps:</strong> Demonstrates practical async request handling, error recovery states, and smooth message transitions.
+                                    Useful for understanding how to build responsive chat interfaces that handle edge cases gracefully, with clear feedback for loading, retry, and success states — essential patterns for modern web applications.
+                                </p>
+                                <p>
+                                    <strong>What I Learned:</strong> Building this project deepened my understanding of async JavaScript patterns, error handling strategies, and UX design for real-time interfaces.
+                                    I learned how to create smooth loading states, implement retry mechanisms, and design conversation flows that feel natural and responsive.
+                                </p>
+                                <div class="project-tech">
+                                    <span class="tech-tag">HTML</span>
+                                    <span class="tech-tag">CSS</span>
+                                    <span class="tech-tag">JavaScript</span>
+                                    <span class="tech-tag">AI API</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="project-card merchant-dashboard-project">
                         <a href="https://ashwannasleep.github.io/Merchant-Dashboard/" target="_blank" class="project-link">
                             <img src="images/merchant-dashboard-cover.svg" alt="Merchant Dashboard Preview" class="merchant-dashboard-logo">
                         </a>
                         <div class="project-info">
-                            <h4>Merchant Dashboard</h4>
-                            <p class="project-tagline">E-commerce operations and analytics console</p>
+                            <div class="project-heading">
+                                <h4>Merchant Dashboard</h4>
+                                <span class="project-status status-concept">Concept</span>
+                            </div>
+                            <p class="project-tagline">E-commerce operations console — KPI cards, order pipeline, and low-stock alerts in one view</p>
                             <div class="project-actions">
                                 <a href="https://ashwannasleep.github.io/Merchant-Dashboard/" target="_blank" class="project-action-btn view-live">
                                     <i class="fas fa-external-link-alt"></i>
@@ -295,13 +231,23 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <!-- More Projects -->
+            <div class="more-projects">
+                <h3>More Projects</h3>
+                <div class="projects-grid projects-grid--compact">
                     <div class="project-card memoria-project">
                         <a href="https://ashwannasleep.github.io/memoria/" target="_blank" class="project-link">
                             <img src="images/memoria-logo.svg" alt="Memoria Logo" class="memoria-logo">
                         </a>
                         <div class="project-info">
-                            <h4>Memoria</h4>
-                            <p class="project-tagline">Knowledge Management & Reading Tracker</p>
+                            <div class="project-heading">
+                                <h4>Memoria</h4>
+                                <span class="project-status status-prototype">Prototype</span>
+                            </div>
+                            <p class="project-tagline">Reading tracker and knowledge manager — highlights, streaks, and progress visualization</p>
                             <div class="project-actions">
                                 <a href="https://ashwannasleep.github.io/memoria/" target="_blank" class="project-action-btn view-live">
                                     <i class="fas fa-external-link-alt"></i>
@@ -314,20 +260,16 @@
                             </div>
                             <div class="project-details" id="memoria-details">
                                 <p>
-                                    A knowledge management and reading tracking application designed to help users build lasting reading habits 
-                                    and capture meaningful insights. Features include book tracking, highlight management, streak tracking, 
+                                    A knowledge management and reading tracking application designed to help users build lasting reading habits
+                                    and capture meaningful insights. Features include book tracking, highlight management, streak tracking,
                                     and mastery progress visualization.
                                 </p>
                                 <p>
-                                    <strong>Features:</strong> Day streak tracking, highlight collection, book library management, and mastery progress tracking. 
+                                    <strong>Features:</strong> Day streak tracking, highlight collection, book library management, and mastery progress tracking.
                                     Built with a focus on simplicity and user engagement to encourage consistent reading habits.
                                 </p>
                                 <p>
-                                    <strong>How It Helps:</strong> Demonstrates practical knowledge management patterns, progress tracking UI, and habit-building interfaces. 
-                                    Useful for understanding how to design engaging tracking systems that motivate users through visual progress indicators and gamification elements.
-                                </p>
-                                <p>
-                                    <strong>What I Learned:</strong> Building Memoria taught me how to design effective progress tracking interfaces and habit-building systems. 
+                                    <strong>What I Learned:</strong> Building Memoria taught me how to design effective progress tracking interfaces and habit-building systems.
                                     I learned how to balance simplicity with functionality, create engaging visual feedback, and design interfaces that encourage consistent user engagement.
                                 </p>
                                 <div class="project-tech">
@@ -339,49 +281,207 @@
                             </div>
                         </div>
                     </div>
-                    <div class="project-card ai-chat-project">
-                        <a href="https://ashwannasleep.github.io/AI-chat-demo/" target="_blank" class="project-link">
-                            <img src="images/ai-chat-cover.svg" alt="AI Chat Demo" class="ai-chat-logo">
-                        </a>
-                        <div class="project-info">
-                            <h4>AI Chat Demo</h4>
-                            <p class="project-tagline">Conversational AI Interface</p>
-                            <div class="project-actions">
-                                <a href="https://ashwannasleep.github.io/AI-chat-demo/" target="_blank" class="project-action-btn view-live">
-                                    <i class="fas fa-external-link-alt"></i>
-                                    <span>View Live</span>
-                                </a>
-                                <button class="project-details-btn" data-project="ai-chat">
-                                    <span class="btn-text">Learn More</span>
-                                    <i class="fas fa-chevron-down"></i>
-                                </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Engineering Focus Section -->
+    <section id="focus" class="engineering-focus">
+        <div class="container">
+            <h2 class="section-title">Engineering Focus</h2>
+            <p class="section-subtitle">The systems I've actually built, and what I used to build them.</p>
+
+            <div class="focus-grid">
+                <div class="focus-card">
+                    <div class="focus-icon"><i class="fas fa-mobile-screen-button"></i></div>
+                    <h3>Native iOS Development</h3>
+                    <p>Built and shipped a SwiftUI planner app to the App Store, owning the client architecture, navigation, and state handling end to end.</p>
+                    <div class="focus-tags">
+                        <span class="tech-tag">Swift</span>
+                        <span class="tech-tag">SwiftUI</span>
+                        <span class="tech-tag">Xcode</span>
+                    </div>
+                </div>
+
+                <div class="focus-card">
+                    <div class="focus-icon"><i class="fas fa-cloud"></i></div>
+                    <h3>Cloud Auth &amp; Data Sync</h3>
+                    <p>Integrated AWS Amplify for user authentication and cloud data sync in a production iOS app, so a user's planner state follows them across sessions and devices.</p>
+                    <div class="focus-tags">
+                        <span class="tech-tag">AWS Amplify</span>
+                        <span class="tech-tag">Authentication</span>
+                        <span class="tech-tag">Cloud Sync</span>
+                    </div>
+                </div>
+
+                <div class="focus-card">
+                    <div class="focus-icon"><i class="fas fa-bolt"></i></div>
+                    <h3>Edge Services &amp; API Auth</h3>
+                    <p>Wrote a Cloudflare Worker that signs ES256 JWTs with the Web Crypto API to authenticate against the Apple Music API — keeping the developer private key server-side instead of shipping it to the browser. Deployed via Wrangler with secrets managed outside the repo.</p>
+                    <div class="focus-tags">
+                        <span class="tech-tag">Cloudflare Workers</span>
+                        <span class="tech-tag">JWT / ES256</span>
+                        <span class="tech-tag">Web Crypto</span>
+                        <span class="tech-tag">Wrangler</span>
+                    </div>
+                </div>
+
+                <div class="focus-card">
+                    <div class="focus-icon"><i class="fas fa-code"></i></div>
+                    <h3>Frontend Systems</h3>
+                    <p>Async request lifecycles, loading and error states, retry paths, responsive layouts, and theming — built directly against the DOM rather than leaning on a framework to hide the details.</p>
+                    <div class="focus-tags">
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">HTML</span>
+                        <span class="tech-tag">CSS</span>
+                        <span class="tech-tag">React</span>
+                    </div>
+                </div>
+
+                <div class="focus-card">
+                    <div class="focus-icon"><i class="fas fa-brain"></i></div>
+                    <h3>AI Product Exploration</h3>
+                    <p>Prototyped AI-assisted planning features to test where intelligent assistance actually helps, and wrote a long-form guide working through LLM fundamentals, RAG, evaluation, and deployment. Exploratory work — not yet shipped in production.</p>
+                    <div class="focus-tags">
+                        <span class="tech-tag">LLM APIs</span>
+                        <span class="tech-tag">RAG</span>
+                        <span class="tech-tag">Evaluation</span>
+                        <span class="tech-tag">Prototyping</span>
+                    </div>
+                </div>
+
+                <div class="focus-card">
+                    <div class="focus-icon"><i class="fas fa-compass-drafting"></i></div>
+                    <h3>Product &amp; Interface Design</h3>
+                    <p>User research, flows, and high-fidelity prototypes in Figma — the reason the engineering decisions above start from what the user needs rather than what's convenient to build.</p>
+                    <div class="focus-tags">
+                        <span class="tech-tag">Figma</span>
+                        <span class="tech-tag">User Research</span>
+                        <span class="tech-tag">Prototyping</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Writing Section -->
+    <section id="writing" class="learning-journey">
+        <div class="container">
+            <h2 class="section-title">Technical Writing</h2>
+            <p class="section-subtitle">Long-form guides I write to work through a topic properly — the test of whether I actually understand something is whether I can explain it.</p>
+
+            <div class="learning-content">
+                <div class="learning-project">
+                    <div class="learning-card">
+                        <div class="learning-icon">
+                            <i class="fas fa-code-branch"></i>
+                        </div>
+                        <div class="learning-info">
+                            <h3>Complete Algorithm Guide</h3>
+                            <p class="learning-description">A comprehensive guide covering fundamental algorithms and data structures, broken down into worked explanations with interactive complexity charts. Written as a single self-contained page.</p>
+                            <div class="learning-highlights">
+                                <span class="highlight-tag">Data Structures</span>
+                                <span class="highlight-tag">Algorithms</span>
+                                <span class="highlight-tag">Complexity Analysis</span>
                             </div>
-                            <div class="project-details" id="ai-chat-details">
-                                <p>
-                                    A polished chat interface exploring real-world async patterns, error handling, and seamless UX. 
-                                    Built with careful attention to loading states, message flow, and responsive design — creating conversations that feel natural and intuitive.
-                                </p>
-                                <p>
-                                    <strong>How It Helps:</strong> Demonstrates practical async request handling, error recovery states, and smooth message transitions. 
-                                    Useful for understanding how to build responsive chat interfaces that handle edge cases gracefully, with clear feedback for loading, retry, and success states — essential patterns for modern web applications.
-                                </p>
-                                <p>
-                                    <strong>What I Learned:</strong> Building this project deepened my understanding of async JavaScript patterns, error handling strategies, and UX design for real-time interfaces. 
-                                    I learned how to create smooth loading states, implement retry mechanisms, and design conversation flows that feel natural and responsive.
-                                </p>
-                                <div class="project-tech">
-                                    <span class="tech-tag">HTML</span>
-                                    <span class="tech-tag">CSS</span>
-                                    <span class="tech-tag">JavaScript</span>
-                                    <span class="tech-tag">AI API</span>
+                            <a href="complete_algorithm_guide.html" target="_blank" class="learning-link">
+                                <span>Read the Algorithm Guide</span>
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="learning-card">
+                        <div class="learning-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <div class="learning-info">
+                            <h3>Complete LLM Guide</h3>
+                            <p class="learning-description">A guide to Large Language Models covering fundamentals through RAG, evaluation, and deployment — built from the ground up, with the practical tradeoffs that show up when you try to ship something.</p>
+                            <div class="learning-highlights">
+                                <span class="highlight-tag">LLMs</span>
+                                <span class="highlight-tag">RAG</span>
+                                <span class="highlight-tag">Evaluation</span>
+                                <span class="highlight-tag">Deployment</span>
+                            </div>
+                            <a href="llm_learning_guide.html" target="_blank" class="learning-link">
+                                <span>Read the LLM Guide</span>
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- About Section -->
+<section id="about" class="about">
+  <div class="container">
+    <div class="about-content">
+      <h2 class="section-title">A little bit about myself</h2>
+      <div class="about-text">
+        <p>I'm Ashley, a software engineer who builds and ships full-stack products — with a design background that shapes how I think about the people using them.</p>
+
+        <p>My latest project, <strong><a href="https://www.monu-planner.com/" target="_blank" class="monu-link" data-tooltip="Plan smarter, live better">MONU</a></strong>, is a digital planner app now live on the App Store. I designed it in Figma, developed it with SwiftUI, and integrated AWS Amplify for cloud functionality — leading the entire process from concept to deployment. Projects like this strengthened my ability to move seamlessly between product design and engineering, turning ideas into polished, production-ready applications.</p>
+
+        <p>Outside of coding, I find inspiration in journaling, music, fitness, and time with my two dogs — reminders to stay curious, balanced, and creative in both life and work.</p>
+      </div>
+
+      <div class="location-info">
+        <p>📍 Based in Houston, excited about both local and remote opportunities.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+    <!-- Music Section — live frontend for the Apple Music Cloudflare Worker -->
+    <section class="music-section">
+        <div class="container">
+            <h2 class="music-section-title">What I'm Listening To While I Code</h2>
+            <p class="section-subtitle music-section-note">
+                This widget is the frontend of a small system I built. A
+                <strong>Cloudflare Worker</strong> signs an ES256 JWT with the Web Crypto API, calls the Apple Music API,
+                and returns just the playlist data — so my Apple developer private key stays on the edge and never reaches
+                the browser.
+            </p>
+
+            <div class="music-layout">
+                <div class="spotify-player" id="apple-music-player-container">
+                    <!-- Apple Music playlist player will be loaded here -->
+                    <div id="apple-music-player" style="width: 100%; height: 100%;">
+                        <div style="width: 100%; height: auto; min-height: 320px; background: #1a1a1a; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; box-sizing: border-box;">
+                            <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 20px; flex-shrink: 0;">
+                                <div style="width: 100px; height: 100px; border-radius: 12px; background: linear-gradient(90deg, #2a2a2a 25%, rgba(255,255,255,0.1) 50%, #2a2a2a 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; flex-shrink: 0;"></div>
+                                <div style="flex: 1; min-width: 0;">
+                                    <div style="height: 20px; background: linear-gradient(90deg, #2a2a2a 25%, rgba(255,255,255,0.1) 50%, #2a2a2a 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: 4px; margin-bottom: 8px; width: 60%;"></div>
+                                    <div style="height: 14px; background: linear-gradient(90deg, #2a2a2a 25%, rgba(255,255,255,0.1) 50%, #2a2a2a 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: 4px; width: 40%;"></div>
+                                </div>
+                            </div>
+                            <div style="flex: 1;">
+                                <div style="display: flex; align-items: center; gap: 12px; padding: 12px; margin-bottom: 4px;">
+                                    <div style="width: 48px; height: 48px; border-radius: 8px; background: linear-gradient(90deg, #2a2a2a 25%, rgba(255,255,255,0.1) 50%, #2a2a2a 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite;"></div>
+                                    <div style="flex: 1;">
+                                        <div style="height: 15px; background: linear-gradient(90deg, #2a2a2a 25%, rgba(255,255,255,0.1) 50%, #2a2a2a 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: 4px; margin-bottom: 6px; width: 70%;"></div>
+                                        <div style="height: 13px; background: linear-gradient(90deg, #2a2a2a 25%, rgba(255,255,255,0.1) 50%, #2a2a2a 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: 4px; width: 50%;"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                <div class="tracks-grid" id="tracks-container">
+                    <!-- Apple Music playlist tracks will be loaded here -->
+                </div>
             </div>
-            
-            <!-- Certifications Section -->
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section class="certifications">
+        <div class="container">
             <div class="certifications-section">
                 <h3>Certifications</h3>
                 <div class="certifications-grid">
@@ -425,157 +525,6 @@
                             <p class="cert-date">Issued Sep 2025</p>
                         </div>
                     </div>
-                    <div class="cert-card">
-                        <div class="cert-logo">
-                            <img src="images/google-logo.png" alt="Google Logo" class="cert-logo-img">
-                        </div>
-                        <div class="cert-info">
-                            <h4>Google UX Design Specialization</h4>
-                            <p class="cert-issuer">Google</p>
-                            <p class="cert-date">Issued Mar 2025</p>
-                        </div>
-                    </div>
-                    <div class="cert-card">
-                        <div class="cert-logo">
-                            <img src="images/fcc-logo.png" alt="freeCodeCamp Logo" class="cert-logo-img">
-                        </div>
-                        <div class="cert-info">
-                            <h4>Responsive Web Design</h4>
-                            <p class="cert-issuer">freeCodeCamp</p>
-                            <p class="cert-date">Issued Feb 2024</p>
-                        </div>
-                    </div>
-                    <div class="cert-card">
-                        <div class="cert-logo">
-                            <img src="images/images.jpeg" alt="Uxcel Logo" class="cert-logo-img">
-                        </div>
-                        <div class="cert-info">
-                            <h4>Product Designer</h4>
-                            <p class="cert-issuer">Uxcel</p>
-                            <p class="cert-date">Issued Sep 2025</p>
-                        </div>
-                    </div>
-                    <div class="cert-card">
-                        <div class="cert-logo">
-                            <img src="images/images.jpeg" alt="Uxcel Logo" class="cert-logo-img">
-                        </div>
-                        <div class="cert-info">
-                            <h4>UX/UI Designer</h4>
-                            <p class="cert-issuer">Uxcel</p>
-                            <p class="cert-date">Issued Sep 2025</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-<!-- About Section -->
-<section id="about" class="about">
-  <div class="container">
-    <div class="about-content">
-      <h2 class="section-title">A little bit about myself</h2>
-      <div class="about-text">
-        <p>I'm Ashley, a product-focused Full-Stack Engineer and UX/UI Designer who builds clean, intuitive digital experiences.</p>
-
-        <p>My latest project, <strong><a href="https://www.monu-planner.com/" target="_blank" class="monu-link" data-tooltip="Plan smarter, live better">MONU</a></strong>, is a digital planner app now live on the App Store. I designed it in Figma, developed it with SwiftUI, and integrated AWS Amplify for cloud functionality — leading the entire process from concept to deployment. Projects like this strengthened my ability to move seamlessly between product design and engineering, turning ideas into polished, production-ready applications.</p>
-
-        <p>Outside of coding, I find inspiration in journaling, music, fitness, and time with my two dogs — reminders to stay curious, balanced, and creative in both life and work.</p>
-      </div>
-
-      <div class="location-info">
-        <p>📍 Based in Houston, excited about both local and remote opportunities.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-    <!-- Learning Journey Section -->
-    <section class="learning-journey">
-        <div class="container">
-            <h2 class="section-title">My Learning Journey</h2>
-            <p class="section-subtitle">Building deep understanding through teaching and documentation</p>
-            
-            <div class="learning-content">
-                <div class="learning-philosophy">
-                    <p>I believe the best way to prove you've truly learned something is to teach it to someone else. That's why I create comprehensive guides and resources as I master new concepts.</p>
-                    <p class="philosophy-highlight">Learning should feel good, not stressful. When you enjoy the process, you retain more, stay motivated longer, and actually want to keep growing.</p>
-                </div>
-                
-                <div class="learning-project">
-                    <div class="learning-card">
-                        <div class="learning-icon">
-                            <i class="fas fa-code-branch"></i>
-                        </div>
-                        <div class="learning-info">
-                            <h3>Complete Algorithm Guide</h3>
-                            <p class="learning-description">A comprehensive HTML guide covering fundamental algorithms and data structures. This resource demonstrates my systematic approach to learning complex computer science concepts by breaking them down into digestible, well-documented explanations.</p>
-                            <div class="learning-highlights">
-                                <span class="highlight-tag">Data Structures</span>
-                                <span class="highlight-tag">Algorithms</span>
-                                <span class="highlight-tag">Teaching</span>
-                                <span class="highlight-tag">Documentation</span>
-                            </div>
-                            <a href="complete_algorithm_guide.html" target="_blank" class="learning-link">
-                                <span>View Learning Guide</span>
-                                <i class="fas fa-external-link-alt"></i>
-                            </a>
-                        </div>
-                    </div>
-                    
-                    <div class="learning-card">
-                        <div class="learning-icon">
-                            <i class="fas fa-brain"></i>
-                        </div>
-                        <div class="learning-info">
-                            <h3>Complete LLM Guide</h3>
-                            <p class="learning-description">A comprehensive guide to Large Language Models covering everything from fundamentals to RAG, evaluation, and deployment. This resource demonstrates my approach to understanding AI/ML concepts by building practical knowledge from the ground up, with real-world applications and deployment strategies.</p>
-                            <div class="learning-highlights">
-                                <span class="highlight-tag">Machine Learning</span>
-                                <span class="highlight-tag">LLMs</span>
-                                <span class="highlight-tag">RAG</span>
-                                <span class="highlight-tag">AI Deployment</span>
-                            </div>
-                            <a href="llm_learning_guide.html" target="_blank" class="learning-link">
-                                <span>View Learning Guide</span>
-                                <i class="fas fa-external-link-alt"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="learning-approach">
-                    <h3>My Learning Philosophy</h3>
-                    <div class="approach-list">
-                        <div class="approach-item">
-                            <div class="approach-number">01</div>
-                            <div class="approach-content">
-                                <h4>Study Deeply</h4>
-                                <p>I don't just skim the surface. I dive deep into concepts until I understand the underlying principles.</p>
-                            </div>
-                        </div>
-                        <div class="approach-item">
-                            <div class="approach-number">02</div>
-                            <div class="approach-content">
-                                <h4>Document Everything</h4>
-                                <p>Creating comprehensive guides helps me solidify my understanding and creates value for others.</p>
-                            </div>
-                        </div>
-                        <div class="approach-item">
-                            <div class="approach-number">03</div>
-                            <div class="approach-content">
-                                <h4>Build Projects</h4>
-                                <p>I apply what I learn by building real applications, turning theory into practical experience.</p>
-                            </div>
-                        </div>
-                        <div class="approach-item">
-                            <div class="approach-number">04</div>
-                            <div class="approach-content">
-                                <h4>Feel-Good Learning</h4>
-                                <p>Learning should be enjoyable, not stressful. When you enjoy the process, you retain more and stay motivated longer.</p>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -606,7 +555,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Photo Gallery -->
                 <div class="photo-gallery">
                 <div class="gallery-container">
@@ -652,8 +601,8 @@
     <section id="contact" class="contact">
         <div class="container">
             <h2 class="section-title">Let's Connect</h2>
-            <p class="section-subtitle">I’m open to opportunities in Full-Stack Development, Product Design, and AI-enhanced product roles or internships.</p>
-            
+            <p class="section-subtitle">I’m looking for software engineering and AI engineering internships — especially product-focused engineering, developer tools, and AI-enabled applications.</p>
+
             <div class="contact-links">
                 <a href="https://www.instagram.com/ashleychang0831" target="_blank" class="contact-link">
                     <div class="contact-icon">
@@ -693,7 +642,7 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
-                <p>&copy; 2025 Ashley Chang. All Rights Reserved.</p>
+                <p>&copy; 2026 Ashley Chang. All Rights Reserved.</p>
             </div>
         </div>
     </footer>
