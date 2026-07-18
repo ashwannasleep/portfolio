@@ -205,6 +205,23 @@ class AppleMusicIntegration {
             }
         }
 
+    // Transitional. The Worker in production may still be the older build that
+    // expects ?endpoint=. Try the constrained ?resource= form first and fall
+    // back once, so the site and the Worker can be deployed in either order.
+    // Remove the fallback once the Worker has been redeployed.
+    async fetchFromWorker(resource, legacyPath) {
+        const options = {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' }
+        };
+
+        const response = await fetch(`${this.apiBase}?resource=${resource}`, options);
+        if (response.ok) return response;
+
+        console.warn(`Worker rejected ?resource=${resource}; falling back to legacy ?endpoint=`);
+        return fetch(`${this.apiBase}?endpoint=${encodeURIComponent(legacyPath)}`, options);
+    }
+
     async fetchPlaylistInfo() {
         try {
             // Security: Only use hardcoded playlist ID - never accept user input
@@ -218,13 +235,10 @@ class AppleMusicIntegration {
             
             // The Worker builds the Apple Music path itself; we only name the
             // resource we want.
-            const apiUrl = `${this.apiBase}?resource=playlist`;
-            const response = await fetch(apiUrl, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
+            const response = await this.fetchFromWorker(
+                'playlist',
+                `catalog/${this.storefront}/playlists/${this.playlistId}`
+            );
 
             // Check if response is actually JSON
             const contentType = response.headers.get('content-type');
@@ -514,13 +528,10 @@ class AppleMusicIntegration {
             
             // The Worker builds the Apple Music path itself; we only name the
             // resource we want.
-            const apiUrl = `${this.apiBase}?resource=tracks`;
-            const response = await fetch(apiUrl, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
+            const response = await this.fetchFromWorker(
+                'tracks',
+                `catalog/${this.storefront}/playlists/${this.playlistId}/tracks?limit=100`
+            );
 
             // Check if response is actually JSON
             const contentType = response.headers.get('content-type');
