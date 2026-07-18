@@ -806,27 +806,8 @@ body:not(.dark-mode) .notification-arrow {
     width: 100%;
 }
 
-.section-title::after {
-    content: '';
-    position: absolute;
-    bottom: -12px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 4px;
-    background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary), #8B5CF6);
-    background-size: 200% 100%;
-    border-radius: 2px;
-    animation: gradientMove 3s ease infinite;
-}
-
-#about .section-title::after,
-.learning-journey .section-title::after,
-.personal-interests-section .section-title::after,
-#contact .section-title::after,
-#work .section-title::after {
-    display: none;
-}
+/* The animated gradient underline survived on only two of eight section
+   titles, which read as an accident rather than emphasis. Removed. */
 
 .section-subtitle {
     text-align: center;
@@ -2232,7 +2213,8 @@ body.dark-mode .current-work-card:hover {
 .project-card {
     position: relative;
     min-height: 300px;
-    border-radius: var(--radius-xl);
+    /* Same radius as .focus-card — the page had three card radii. */
+    border-radius: var(--radius-lg);
     overflow: hidden;
     text-decoration: none;
     transition: all var(--transition-normal);
@@ -2717,13 +2699,17 @@ body.dark-mode .monu-screenshots {
     gap: var(--spacing-xs);
 }
 
+/* Matches .highlight-tag. The site previously ran two unrelated tag
+   styles — solid blue pills here, tinted chips in the writing section —
+   and the solid fill shouted over everything around it. */
 .tech-tag {
-    background-color: var(--accent-primary);
-    color: white;
-    padding: var(--spacing-xs) var(--spacing-sm);
+    background-color: rgba(59, 130, 246, 0.1);
+    color: var(--accent-primary);
+    padding: 2px var(--spacing-xs);
     border-radius: var(--radius-sm);
     font-size: var(--font-size-xs);
     font-weight: 500;
+    border: 1px solid rgba(59, 130, 246, 0.2);
 }
 
 .project-modal {
@@ -3500,19 +3486,8 @@ body:not(.dark-mode) .played-time {
         text-align: center;
     }
 
-    .section-title::after {
-        left: 0;
-        transform: none;
-        width: 48px;
-    }
-
     #work .section-title {
         text-align: center;
-    }
-
-    #work .section-title::after {
-        left: 50%;
-        transform: translateX(-50%);
     }
 
     .section-subtitle {
@@ -3633,10 +3608,9 @@ body:not(.dark-mode) .played-time {
         max-width: 100%;
     }
 
-    #about .section-title,
-    .learning-journey .section-title,
-    .personal-interests-section .section-title,
-    #contact .section-title {
+    /* Applies to every section title. This used to enumerate sections by
+       name, so any section added later silently kept a larger size. */
+    .section-title {
         font-size: 1.16rem;
         margin-bottom: 0.86rem;
         text-align: center;
@@ -4037,11 +4011,11 @@ body:not(.dark-mode) .played-time {
         display: none;
     }
 
+    /* One size for every section title at this breakpoint. */
+    .section-title,
     .music-section-title,
-    #work .section-title,
     .projects-section h3,
-    .current-work-section h3,
-    .certifications-section h3 {
+    .current-work-section h3 {
         font-size: clamp(1.06rem, 4.9vw, 1.22rem);
         line-height: 1.2;
         margin-bottom: 0.7rem;
@@ -4180,10 +4154,7 @@ body:not(.dark-mode) .played-time {
         display: none;
     }
 
-    #about .section-title,
-    .learning-journey .section-title,
-    .personal-interests-section .section-title,
-    #contact .section-title {
+    .section-title {
         font-size: 1.12rem;
         margin-bottom: 0.74rem;
         text-align: center;
@@ -4479,11 +4450,6 @@ body:not(.dark-mode) .played-time {
         margin-bottom: 0.48rem;
     }
 
-    .section-title,
-    .music-section-title {
-        font-size: clamp(1.2rem, 7vw, 1.45rem);
-    }
-
     .music-section,
     .work,
     .about,
@@ -4517,11 +4483,11 @@ body:not(.dark-mode) .played-time {
         height: 22px;
     }
 
+    /* One size for every section title at this breakpoint. */
+    .section-title,
     .music-section-title,
-    #work .section-title,
     .projects-section h3,
-    .current-work-section h3,
-    .certifications-section h3 {
+    .current-work-section h3 {
         font-size: clamp(0.98rem, 5.8vw, 1.1rem);
         line-height: 1.18;
         margin-bottom: 0.56rem;
@@ -5029,10 +4995,6 @@ body.dark-mode .status-concept {
     background-color: var(--bg-primary);
 }
 
-.engineering-focus .section-title::after {
-    display: none;
-}
-
 .focus-grid {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -5090,6 +5052,8 @@ body.dark-mode .focus-card {
     font-weight: 500;
     color: var(--accent-primary);
     text-decoration: none;
+    /* Never let the arrow orphan onto its own line in a narrow card. */
+    white-space: nowrap;
 }
 
 .focus-link:hover {
@@ -5175,3 +5139,18 @@ body.dark-mode .focus-card {
         line-height: 1.55;
     }
 }
+
+/* ===================================================================
+   Section rhythm
+   Backgrounds previously clumped — focus+writing both read as one block,
+   music+certifications as another — because each section picked its own
+   colour. Set them in page order so they alternate.
+   =================================================================== */
+.work                        { background-color: var(--bg-primary); }
+.engineering-focus           { background-color: var(--bg-secondary); }
+.learning-journey            { background-color: var(--bg-primary); }
+.about                       { background-color: var(--bg-secondary); }
+.music-section               { background-color: var(--bg-primary); }
+.certifications              { background-color: var(--bg-secondary); }
+.personal-interests-section  { background-color: var(--bg-primary); }
+.contact                     { background-color: var(--bg-secondary); }
