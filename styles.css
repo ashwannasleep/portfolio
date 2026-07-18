@@ -5083,6 +5083,19 @@ body.dark-mode .focus-card {
     margin-top: var(--spacing-xs);
 }
 
+.focus-link {
+    display: inline-block;
+    margin-top: var(--spacing-xs);
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    color: var(--accent-primary);
+    text-decoration: none;
+}
+
+.focus-link:hover {
+    text-decoration: underline;
+}
+
 @media (max-width: 900px) {
     .focus-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
