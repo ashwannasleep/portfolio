@@ -216,8 +216,9 @@ class AppleMusicIntegration {
                 throw new Error('Only owner playlist is allowed');
             }
             
-            const endpoint = encodeURIComponent(`catalog/${this.storefront}/playlists/${this.playlistId}`);
-            const apiUrl = `${this.apiBase}?endpoint=${endpoint}`;
+            // The Worker builds the Apple Music path itself; we only name the
+            // resource we want.
+            const apiUrl = `${this.apiBase}?resource=playlist`;
             const response = await fetch(apiUrl, {
                 method: 'GET',
                 headers: {
@@ -511,10 +512,9 @@ class AppleMusicIntegration {
                 throw new Error('Only owner playlist is allowed');
             }
             
-            // Apple Music API endpoint format: catalog/{storefront}/playlists/{playlistId}/tracks
-            // Fetch all tracks first, then we can randomize or select specific ones
-            const endpoint = encodeURIComponent(`catalog/${this.storefront}/playlists/${this.playlistId}/tracks?limit=100`);
-            const apiUrl = `${this.apiBase}?endpoint=${endpoint}`;
+            // The Worker builds the Apple Music path itself; we only name the
+            // resource we want.
+            const apiUrl = `${this.apiBase}?resource=tracks`;
             const response = await fetch(apiUrl, {
                 method: 'GET',
                 headers: {

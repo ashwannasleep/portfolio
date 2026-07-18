@@ -104,52 +104,85 @@ async function generateJWT(teamId, keyId, privateKey) {
   return `${signatureInput}.${signature}`;
 }
 
+// Origins allowed to call this Worker. Anything else gets no CORS grant.
+const ALLOWED_ORIGINS = [
+  'https://ashwannasleep.com',
+  'https://www.ashwannasleep.com',
+  'http://localhost:8000',
+  'http://localhost:8765'
+];
+
+function corsHeaders(request) {
+  const origin = request.headers.get('Origin');
+  const headers = {
+    'Vary': 'Origin',
+    'Access-Control-Allow-Methods': 'GET, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type'
+  };
+  if (origin && ALLOWED_ORIGINS.includes(origin)) {
+    headers['Access-Control-Allow-Origin'] = origin;
+  }
+  return headers;
+}
+
+function json(body, status, request, extra = {}) {
+  return new Response(JSON.stringify(body), {
+    status,
+    headers: {
+      'Content-Type': 'application/json',
+      ...corsHeaders(request),
+      ...extra
+    }
+  });
+}
+
+// The only two Apple Music paths this Worker will ever request. The caller
+// picks by name; it never supplies a path. Previously the path came straight
+// from a query parameter, which let any caller use these credentials to reach
+// arbitrary Apple Music endpoints.
+function resolveResource(resource, storefront, playlistId) {
+  switch (resource) {
+    case 'playlist':
+      return `catalog/${storefront}/playlists/${playlistId}`;
+    case 'tracks':
+      return `catalog/${storefront}/playlists/${playlistId}/tracks?limit=100`;
+    default:
+      return null;
+  }
+}
+
 export default {
   async fetch(request, env) {
     // Handle CORS preflight requests
     if (request.method === 'OPTIONS') {
       return new Response(null, {
         status: 204,
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Methods': 'GET, OPTIONS',
-          'Access-Control-Allow-Headers': 'Content-Type',
-          'Access-Control-Max-Age': '86400'
-        }
+        headers: { ...corsHeaders(request), 'Access-Control-Max-Age': '86400' }
       });
     }
-    
+
     // Only allow GET requests
     if (request.method !== 'GET') {
-      return new Response(
-        JSON.stringify({ error: 'Method not allowed' }),
-        {
-          status: 405,
-          headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'GET, OPTIONS'
-          }
-        }
-      );
+      return json({ error: 'Method not allowed' }, 405, request);
     }
-    
+
     const url = new URL(request.url);
-    const endpoint = url.searchParams.get('endpoint');
-    
-    if (!endpoint) {
-      return new Response(
-        JSON.stringify({ error: 'Missing endpoint parameter' }),
-        {
-          status: 400,
-          headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*'
-          }
-        }
+    const storefront = env.APPLE_STOREFRONT || 'us';
+    const playlistId = env.APPLE_PLAYLIST_ID || 'pl.u-8aAVZ6qho0lEWVJ';
+    const decodedEndpoint = resolveResource(
+      url.searchParams.get('resource'),
+      storefront,
+      playlistId
+    );
+
+    if (!decodedEndpoint) {
+      return json(
+        { error: 'Unknown resource. Expected one of: playlist, tracks' },
+        400,
+        request
       );
     }
-    
+
     // Get credentials from environment variables (Cloudflare Workers secrets)
     const teamId = env.APPLE_TEAM_ID;
     const keyId = env.APPLE_KEY_ID;
@@ -157,79 +190,45 @@ export default {
     const mediaIdentifier = env.APPLE_MEDIA_IDENTIFIER;
     
     if (!teamId || !keyId || !privateKey || !mediaIdentifier) {
-      return new Response(
-        JSON.stringify({
-          error: 'Missing Apple Music credentials. Please configure environment variables.'
-        }),
-        {
-          status: 500,
-          headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*'
-          }
-        }
+      return json(
+        { error: 'Missing Apple Music credentials. Please configure environment variables.' },
+        500,
+        request
       );
     }
-    
+
     try {
       // Generate JWT token
       const token = await generateJWT(teamId, keyId, privateKey);
-      
-      // Fetch data from Apple Music API
-      const decodedEndpoint = decodeURIComponent(endpoint);
+
       const apiUrl = `https://api.music.apple.com/v1/${decodedEndpoint}`;
-      
+
       const response = await fetch(apiUrl, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Music-User-Token': mediaIdentifier
         }
       });
-      
+
       if (!response.ok) {
         const errorText = await response.text();
-        return new Response(
-          JSON.stringify({
-            error: 'Failed to fetch Apple Music data',
-            details: errorText
-          }),
-          {
-            status: response.status,
-            headers: {
-              'Content-Type': 'application/json',
-              'Access-Control-Allow-Origin': '*'
-            }
-          }
+        return json(
+          { error: 'Failed to fetch Apple Music data', details: errorText },
+          response.status,
+          request
         );
       }
-      
+
       const data = await response.json();
-      
-      return new Response(
-        JSON.stringify(data),
-        {
-          status: 200,
-          headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Headers': 'Content-Type',
-            'Cache-Control': 'public, max-age=3600' // Cache for 1 hour
-          }
-        }
-      );
+
+      return json(data, 200, request, {
+        'Cache-Control': 'public, max-age=3600' // Cache for 1 hour
+      });
     } catch (error) {
-      return new Response(
-        JSON.stringify({
-          error: 'Internal server error',
-          details: error.message
-        }),
-        {
-          status: 500,
-          headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*'
-          }
-        }
+      return json(
+        { error: 'Internal server error', details: error.message },
+        500,
+        request
       );
     }
   }
