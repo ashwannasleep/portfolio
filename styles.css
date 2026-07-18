@@ -2263,7 +2263,6 @@ body.dark-mode .project-card:hover {
 
 .project-card:hover .monu-logo,
 .project-card:hover .ai-chat-logo,
-.project-card:hover .ashpire-logo,
 .project-card:hover .memoria-logo,
 .project-card:hover .merchant-dashboard-logo {
     opacity: 1;
@@ -2462,31 +2461,6 @@ body.dark-mode .monu-screenshots {
     opacity: 1;
 }
 
-/* Ashpire Project Card Styling */
-.ashpire-project {
-    background: var(--bg-secondary);
-    position: relative;
-    overflow: hidden;
-    transition: transform var(--transition-normal);
-}
-
-.ashpire-logo {
-    width: 100%;
-    height: auto;
-    opacity: 1;
-    transition: opacity var(--transition-normal);
-    border-radius: var(--radius-xl);
-    display: block;
-}
-
-.ashpire-project:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 25px var(--shadow-medium);
-}
-
-.ashpire-project:hover .ashpire-logo {
-    opacity: 1;
-}
 
 /* Memoria Project Card Styling */
 .memoria-project {
@@ -2566,7 +2540,6 @@ body.dark-mode .monu-screenshots {
 .project-link img,
 .monu-logo,
 .ai-chat-logo,
-.ashpire-logo,
 .memoria-logo,
 .merchant-dashboard-logo {
     width: auto;
@@ -3682,7 +3655,6 @@ body:not(.dark-mode) .played-time {
     .project-link img,
     .monu-logo,
     .ai-chat-logo,
-    .ashpire-logo,
     .memoria-logo {
         width: auto;
         height: 100%;
@@ -4620,7 +4592,6 @@ body:not(.dark-mode) .played-time {
     .project-link img,
     .monu-logo,
     .ai-chat-logo,
-    .ashpire-logo,
     .memoria-logo,
     .merchant-dashboard-logo {
         opacity: 1;
