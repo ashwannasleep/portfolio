@@ -1199,10 +1199,10 @@ body.dark-mode .about-text p {
     padding-left: var(--spacing-xl);
 }
 
+/* Was italic for a personal sign-off paragraph that no longer exists;
+   italicising the closing engineering paragraph would misread it. */
 .about-text p:last-child {
     margin-bottom: 0;
-    font-style: italic;
-    opacity: 0.9;
 }
 
 .about-text strong {
@@ -1321,11 +1321,13 @@ body.dark-mode .monu-link::before {
     margin-bottom: var(--spacing-2xl);
 }
 
+/* With a single interest item left, top-aligning it against the taller
+   gallery stranded ~270px of empty column. Center it instead. */
 .interests-layout {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--spacing-3xl);
-    align-items: start;
+    align-items: center;
 }
 
 .interests-content {
