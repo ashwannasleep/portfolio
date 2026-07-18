@@ -65,9 +65,9 @@
           <a href="#contact" class="btn btn-secondary">Let’s Connect</a>
         </div>
         <ul class="hero-proof">
-          <li><i class="fab fa-app-store-ios" aria-hidden="true"></i> iOS app shipped on the App Store</li>
-          <li><i class="fas fa-cloud" aria-hidden="true"></i> SwiftUI + AWS Amplify</li>
-          <li><i class="fas fa-bolt" aria-hidden="true"></i> Edge API on Cloudflare Workers</li>
+          <li>iOS app shipped on the App Store</li>
+          <li>SwiftUI + AWS Amplify</li>
+          <li>Edge API on Cloudflare Workers</li>
         </ul>
       </div>
       <div class="hero-image">
@@ -290,13 +290,11 @@
     <section id="focus" class="engineering-focus">
         <div class="container">
             <h2 class="section-title">Engineering Focus</h2>
-            <p class="section-subtitle">The systems I've actually built, and what I used to build them.</p>
 
             <div class="focus-grid">
                 <div class="focus-card">
-                    <div class="focus-icon"><i class="fas fa-mobile-screen-button"></i></div>
-                    <h3>Native iOS Development</h3>
-                    <p>Built and shipped a SwiftUI planner app to the App Store, owning the client architecture, navigation, and state handling end to end.</p>
+                    <h3>Native iOS</h3>
+                    <p>A SwiftUI planner app, built and shipped to the App Store.</p>
                     <div class="focus-tags">
                         <span class="tech-tag">Swift</span>
                         <span class="tech-tag">SwiftUI</span>
@@ -305,60 +303,32 @@
                 </div>
 
                 <div class="focus-card">
-                    <div class="focus-icon"><i class="fas fa-cloud"></i></div>
-                    <h3>Cloud Auth &amp; Data Sync</h3>
-                    <p>Integrated AWS Amplify for user authentication and cloud data sync in a production iOS app, so a user's planner state follows them across sessions and devices.</p>
+                    <h3>Cloud Auth &amp; Sync</h3>
+                    <p>Authentication and cloud data sync running in production, via AWS Amplify.</p>
                     <div class="focus-tags">
                         <span class="tech-tag">AWS Amplify</span>
-                        <span class="tech-tag">Authentication</span>
-                        <span class="tech-tag">Cloud Sync</span>
+                        <span class="tech-tag">Auth</span>
+                        <span class="tech-tag">Sync</span>
                     </div>
                 </div>
 
                 <div class="focus-card">
-                    <div class="focus-icon"><i class="fas fa-bolt"></i></div>
-                    <h3>Edge Services &amp; API Auth</h3>
-                    <p>Wrote a Cloudflare Worker that signs ES256 JWTs with the Web Crypto API to authenticate against the Apple Music API — keeping the developer private key server-side instead of shipping it to the browser. Deployed via Wrangler with secrets managed outside the repo.</p>
+                    <h3>Edge Services</h3>
+                    <p>A Cloudflare Worker signing ES256 JWTs, keeping the private key off the client.</p>
                     <div class="focus-tags">
-                        <span class="tech-tag">Cloudflare Workers</span>
+                        <span class="tech-tag">Workers</span>
                         <span class="tech-tag">JWT / ES256</span>
                         <span class="tech-tag">Web Crypto</span>
-                        <span class="tech-tag">Wrangler</span>
                     </div>
                 </div>
 
                 <div class="focus-card">
-                    <div class="focus-icon"><i class="fas fa-code"></i></div>
-                    <h3>Frontend Systems</h3>
-                    <p>Async request lifecycles, loading and error states, retry paths, responsive layouts, and theming — built directly against the DOM rather than leaning on a framework to hide the details.</p>
-                    <div class="focus-tags">
-                        <span class="tech-tag">JavaScript</span>
-                        <span class="tech-tag">HTML</span>
-                        <span class="tech-tag">CSS</span>
-                        <span class="tech-tag">React</span>
-                    </div>
-                </div>
-
-                <div class="focus-card">
-                    <div class="focus-icon"><i class="fas fa-brain"></i></div>
-                    <h3>AI Product Exploration</h3>
-                    <p>Prototyped AI-assisted planning features to test where intelligent assistance actually helps, and wrote a long-form guide working through LLM fundamentals, RAG, evaluation, and deployment. Exploratory work — not yet shipped in production.</p>
+                    <h3>AI Exploration</h3>
+                    <p>Prototyped AI planning features. Wrote a guide on LLM systems. Not shipped yet.</p>
                     <div class="focus-tags">
                         <span class="tech-tag">LLM APIs</span>
                         <span class="tech-tag">RAG</span>
                         <span class="tech-tag">Evaluation</span>
-                        <span class="tech-tag">Prototyping</span>
-                    </div>
-                </div>
-
-                <div class="focus-card">
-                    <div class="focus-icon"><i class="fas fa-compass-drafting"></i></div>
-                    <h3>Product &amp; Interface Design</h3>
-                    <p>User research, flows, and high-fidelity prototypes in Figma — the reason the engineering decisions above start from what the user needs rather than what's convenient to build.</p>
-                    <div class="focus-tags">
-                        <span class="tech-tag">Figma</span>
-                        <span class="tech-tag">User Research</span>
-                        <span class="tech-tag">Prototyping</span>
                     </div>
                 </div>
             </div>
@@ -369,7 +339,7 @@
     <section id="writing" class="learning-journey">
         <div class="container">
             <h2 class="section-title">Technical Writing</h2>
-            <p class="section-subtitle">Long-form guides I write to work through a topic properly — the test of whether I actually understand something is whether I can explain it.</p>
+            <p class="section-subtitle">Long-form guides I write while working through a topic.</p>
 
             <div class="learning-content">
                 <div class="learning-project">
@@ -422,15 +392,17 @@
     <div class="about-content">
       <h2 class="section-title">A little bit about myself</h2>
       <div class="about-text">
-        <p>I'm Ashley, a software engineer who builds and ships full-stack products — with a design background that shapes how I think about the people using them.</p>
+        <p>I'm a software engineer who takes products from design through to deployment.</p>
 
-        <p>My latest project, <strong><a href="https://www.monu-planner.com/" target="_blank" class="monu-link" data-tooltip="Plan smarter, live better">MONU</a></strong>, is a digital planner app now live on the App Store. I designed it in Figma, developed it with SwiftUI, and integrated AWS Amplify for cloud functionality — leading the entire process from concept to deployment. Projects like this strengthened my ability to move seamlessly between product design and engineering, turning ideas into polished, production-ready applications.</p>
+        <p><strong><a href="https://www.monu-planner.com/" target="_blank" class="monu-link" data-tooltip="Plan smarter, live better">MONU</a></strong> is my most recent — an iOS planner now on the App Store. I designed it in Figma, built the client in SwiftUI, and integrated AWS Amplify for authentication and cloud sync, from first concept through release.</p>
 
-        <p>Outside of coding, I find inspiration in journaling, music, fitness, and time with my two dogs — reminders to stay curious, balanced, and creative in both life and work.</p>
+        <p>My work has moved steadily toward the backend since: the sync layer in MONU, and a Cloudflare Worker that handles third-party API authentication for this site. I write long-form technical guides alongside the building.</p>
+
+        <p>Outside of work, I play cello, journal, and spend time with my two dogs.</p>
       </div>
 
       <div class="location-info">
-        <p>📍 Based in Houston, excited about both local and remote opportunities.</p>
+        <p>Based in Houston. Open to local and remote opportunities.</p>
       </div>
     </div>
   </div>
@@ -441,10 +413,8 @@
         <div class="container">
             <h2 class="music-section-title">What I'm Listening To While I Code</h2>
             <p class="section-subtitle music-section-note">
-                This widget is the frontend of a small system I built. A
-                <strong>Cloudflare Worker</strong> signs an ES256 JWT with the Web Crypto API, calls the Apple Music API,
-                and returns just the playlist data — so my Apple developer private key stays on the edge and never reaches
-                the browser.
+                The frontend of a small system I built: a <strong>Cloudflare Worker</strong> signs an ES256 JWT,
+                calls the Apple Music API, and returns only the playlist data — so my private key never reaches the browser.
             </p>
 
             <div class="music-layout">
