@@ -22,7 +22,7 @@ index.html · styles.css · script.js   the site
 apple-music-integration.js            client for the Worker
 cloudflare/workers/                   Apple Music edge API
 projects/                             case studies
-*_guide.html                          long-form technical guides
+llm_learning_guide.html               notes on LLM systems
 ```
 
 ## Apple Music edge API
