@@ -61,7 +61,7 @@
     story.dataset.step=String(n);
     document.querySelectorAll('[data-ad-step]').forEach(panel=>{panel.hidden=Number(panel.dataset.adStep)!==n;});
     frame.style.visibility=n===0?'visible':'hidden';
-    document.querySelector('.scroll-cue').textContent=n===0?'Real site capture · Scroll to explore ↓':'Houston Echo campaign · Scroll to explore ↓';
+    document.querySelector('.scroll-cue').textContent=n===0?'Selected real posts · Authors hidden ↓':'Houston Echo campaign · Scroll to explore ↓';
   }
   function renderStory(){
     if(!story)return;
@@ -126,7 +126,7 @@
       link.innerHTML='<img src="images/monu-landscape.png" alt="MONU planner website hero, with promotional buttons removed" loading="lazy">';
     }else{
       const shot=document.createElement('img');
-      shot.src='images/'+(card.classList.contains('ai-chat-project')?'chat-landscape.png':card.classList.contains('merchant-dashboard-project')?'merchant-landscape.png':'memoria-real.png');
+      shot.src='images/'+(card.classList.contains('ai-chat-project')?'chat-landscape.png':card.classList.contains('merchant-dashboard-project')?'inventory-engine-landscape.png':'memoria-real.png');
       shot.alt=`Actual ${name} interface`;
       shot.loading='lazy';
       link.replaceChildren(shot);
